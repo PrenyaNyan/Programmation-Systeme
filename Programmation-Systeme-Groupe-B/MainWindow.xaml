@@ -6,7 +6,16 @@
         xmlns:local="clr-namespace:Programmation_Systeme_Groupe_B"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+	<Grid>
+		<Grid.Background>
+			<ImageBrush ImageSource="/fondMiA.jpg"/>
+		</Grid.Background>
+		<Button Content="Salut c'est moi" HorizontalAlignment="Center" VerticalAlignment="Center" Height="144" Width="226" Visibility="Visible" Click="Button_Click">
+			<Button.Effect>
+				<DropShadowEffect/>
+			</Button.Effect>
+		</Button>
+		<Label Content="Label" HorizontalAlignment="Left" Margin="201,52,0,0" VerticalAlignment="Top" Height="61" Width="312" AutomationProperties.Name="labelTest" BorderBrush="Black" Background="White"/>
 
-    </Grid>
+	</Grid>
 </Window>

@@ -7,4 +7,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="fondMiA.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="fondMiA.jpg" />
+  </ItemGroup>
+
 </Project>

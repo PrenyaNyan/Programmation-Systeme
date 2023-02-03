@@ -24,5 +24,10 @@ namespace Programmation_Systeme_Groupe_B
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
