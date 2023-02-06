@@ -10,7 +10,12 @@ namespace ProjetMVC.Model
 {
     class ModelClass
     {
+        Setting setting;
         public ModelClass()
+        {
+            
+        }
+        public void CheckSetting()
         {
             if (File.Exists("setting.json"))
             {
