@@ -8,26 +8,52 @@ namespace ProjetMVC.Model
 {
     class Progression
     {
-        // Remaining file amount
-        private int remainingFileAmount;
-        public int RemainingFileAmount
+        // File copied amount
+        private int copiedFiles;
+        public int CopiedFiles
 
         {
-            get { return remainingFileAmount; }
-            set { remainingFileAmount = value; }
+            get { return copiedFiles; }
+            set { copiedFiles = value; }
         }
-        // Remaining file size 
-        private int remainingFileSize;
-        public int RemainingFileSize
+        // Size file copied
+        private long filesSizeCopied;
+        public long FilesSizeCopied
         {
-            get { return remainingFileSize; }
-            set { remainingFileSize = value; }
+            get { return filesSizeCopied; }
+            set { filesSizeCopied = value; }
         }
 
-        public Progression(int remainingFileAmount, int remainingFileSize)
+        // Total file amount
+        private int fileAmount;
+        public int FileAmount
+
         {
-            this.remainingFileAmount = remainingFileAmount;
-            this.remainingFileSize = remainingFileSize;
+            get { return fileAmount; }
+            set { fileAmount = value; }
+        }
+
+        // Total file size 
+        private long fileSize;
+        public long FileSize
+        {
+            get { return fileSize; }
+            set { fileSize = value; }
+        }
+
+        public Progression(int copiedFiles, int fileAmount, long filesSizeCopied, long fileSize)
+        {
+            this.copiedFiles = copiedFiles;
+            this.fileAmount = fileAmount;
+            this.filesSizeCopied = filesSizeCopied;
+            this.fileSize = fileSize;
+        }
+        public Progression()
+        {
+            this.copiedFiles = 0;
+            this.fileAmount = 0;
+            this.filesSizeCopied = 0;
+            this.fileSize = 0;
         }
     }
 }
