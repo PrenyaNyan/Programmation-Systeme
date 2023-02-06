@@ -8,7 +8,6 @@ namespace ProjetMVC
         static void Main(string[] args)
         {
             ControllerClass controllerClass = new ControllerClass();
-
         }
     }
 }

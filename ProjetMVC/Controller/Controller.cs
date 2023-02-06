@@ -14,8 +14,6 @@ namespace ProjetMVC.Controller
     {
 
         ViewClass viewClass = new();
-        ModelLangage modelLangage = new();
-        ModelSave modelSave = new();
         ModelClass modelClass = new();
         public ControllerClass()
         {
