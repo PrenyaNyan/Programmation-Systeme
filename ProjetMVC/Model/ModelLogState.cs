@@ -15,22 +15,28 @@ namespace ProjetMVC
         public int fileAmount { get; set; }
 
         /* State log path */
-        public const string STATE_PATH = "Dailysave.json";
+        public const string STATE_PATH = "Statesave.json";
 
         /* States const */
         public const string STATE_END = "END";
         public const string STATE_ACTIVE = "ACTIVE";
         public const string STATE_ERROR = "ERROR";
 
-        public ModelLogState()
+        public ModelLogState(string name, string pathTarget, string pathSource)
         {
-            name = "logDaily";
-            pathTarget = "C:\\Users\\Public\\Documents\\logDaily.json";
-            pathSource = "C:\\Users\\Public\\Documents\\logDaily.json";
-            state = STATE_ACTIVE;
-            size = "0";
-            fileAmount = 0;
+            this.name = name;
+            this.pathTarget = pathTarget;
+            this.pathSource = pathSource;
+            setTime();
+        }
 
+        public void setTime()
+        {
+            this.time = DateTime.Now.ToString();
+        }
+
+        public void save()
+        {
             update(STATE_PATH, this);
         }
     }

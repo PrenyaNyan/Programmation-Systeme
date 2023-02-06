@@ -9,7 +9,7 @@ namespace ProjetMVC.Model
     class ModelSave
     {
         private List<SaveProject> projects;
-        private ModelLogDaily dailyLog;
+        private ModelLogState stateLog;
         private string saveFilePath = "projects.json";
         public List<SaveProject> Projects
         {
@@ -23,9 +23,10 @@ namespace ProjetMVC.Model
                 this.projects.Add(project);
                 // Ajout du projet au fichier de config
                 SaveProjectToFile(project, this.saveFilePath);
-
+                
                 //Log creation
-
+                this.stateLog = new ModelLogState(project.Name, project.PathSource, project.PathTarget);
+                this.stateLog.save();
 
             }
             else
