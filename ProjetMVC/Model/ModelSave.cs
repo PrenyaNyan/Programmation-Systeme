@@ -6,8 +6,18 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace ProjetMVC.Model
 {
+    //enum SaveType
+    //{
+    //    Differential,
+    //    Complete
+    //}
     class ModelSave
     {
+
+        //public string Name { get; set; }
+        //public string SourcePath { get; set; }
+        //public string DestPath { get; set; }
+        //public SaveType savetype { get; set; }
         private List<SaveProject> projects;
         private ModelLogState stateLog;
         private string saveFilePath = "projects.json";

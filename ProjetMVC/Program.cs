@@ -1,6 +1,7 @@
 ﻿using ProjetMVC.Model;
 using System;
 using System.Collections.Generic;
+using ProjetMVC.Controller;
 
 namespace ProjetMVC
 {
@@ -16,6 +17,7 @@ namespace ProjetMVC
             List<SaveProject> projects = model.Projects;
             foreach (SaveProject p in projects)
             Console.WriteLine(p.Name);*/
+            ControllerClass controllerClass = new ControllerClass();
         }
     }
 }

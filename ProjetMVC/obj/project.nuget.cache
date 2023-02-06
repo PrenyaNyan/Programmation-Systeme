@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "8C30xzKjPAcvVwrknRLuvSt0iPw/a0YnQ4uhV93ijTgYez1LIbg/6CZe83U+TniGvv5kCtA/nXyo270czsp+8g==",
+  "dgSpecHash": "G5XkGJpDylwS/bC28i+Ep7TefjR46BmhRDrq0MsAaOfrHh799DROq2xpe3+SRnJM0iqTarVuTmmwfJYwtAT7yQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\leroc\\Source\\Repos\\Programmation-Systeme-Groupe-B\\ProjetMVC\\ProjetMVC.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\ProjetMVC\\ProjetMVC.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lucie\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512"
+  ],
   "logs": []
 }
