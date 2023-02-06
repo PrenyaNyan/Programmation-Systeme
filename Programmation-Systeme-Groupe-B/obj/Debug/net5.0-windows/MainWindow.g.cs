@@ -53,7 +53,7 @@ namespace Programmation_Systeme_Groupe_B {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Programmation-Systeme-Groupe-B;component/mainwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Programmation-Systeme-Groupe-B_clzqmzxu_wpftmp;component/mainwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\MainWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
