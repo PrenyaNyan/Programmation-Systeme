@@ -22,21 +22,22 @@ namespace ProjetMVC.Model
 
         public void save(string path, string content)
         {
-            string jsonpath = path + ".json";
-            createJsonFile(jsonpath);
-            File.WriteAllText(jsonpath, content);
+            createJsonFile(path);
+            File.WriteAllText(path, content);
         }
 
-        public void update(Object ObjectContent)
+        public void update(string jsonpath, Object obj)
         {
-            var json = load("Dailysave");
+            createJsonFile(jsonpath);
+            var ObjectContent = jsonBuilder(obj);
+            var json = load(jsonpath);
             json.Add(ObjectContent);
-            save("Dailysave", json.ToString());
+            save(jsonpath, json.ToString());
         }
 
         public JArray load(string path)
         {
-            string Stringjson = File.ReadAllText("Dailysave.json");
+            string Stringjson = File.ReadAllText(path);
             var json = JsonConvert.DeserializeObject<JArray>(Stringjson);
             return json;
         }
@@ -48,6 +49,13 @@ namespace ProjetMVC.Model
                 File.Create(path).Close();
                 File.WriteAllText(path, "[]");
             }
+        }
+
+        public object jsonBuilder(object obj)
+        {
+            string StringObjectContent = JsonSerializer.Serialize(obj);
+            var ObjectContent = JsonConvert.DeserializeObject<JObject>(StringObjectContent);
+            return ObjectContent;
         }
     }
 }

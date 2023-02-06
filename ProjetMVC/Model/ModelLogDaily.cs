@@ -14,33 +14,21 @@ namespace ProjetMVC.Model
     class ModelLogDaily : ModelLogTemplate
     {
         public string time { get;}
-        public string state { get; set; }
         public string size { get; set; }
-        public int fileAmount { get; set; }
+
+        /* Dailysave log path */
+        public const string DAILY_PATH = "Dailysave.json";
 
         /* States const */
         public const string STATE_END = "END";
         public const string STATE_ACTIVE = "ACTIVE";
         public const string STATE_ERROR = "ERROR";
-
-        /* time setter */
+        
+        
+        
         public ModelLogDaily()
         {
-            name = "logDaily";
-            pathTarget = "C:\\Users\\Public\\Documents\\logDaily.json";
-            pathSource = "C:\\Users\\Public\\Documents\\logDaily.json";
-            state = STATE_ACTIVE;
-            size = "0";
-            fileAmount = 0;
 
-            update(jsonBuilder());
-        }
-
-        public object jsonBuilder()
-        {
-            string StringObjectContent = JsonSerializer.Serialize(this);
-            var ObjectContent = JsonConvert.DeserializeObject<JObject>(StringObjectContent);
-            return ObjectContent;
         }
     }
 }
