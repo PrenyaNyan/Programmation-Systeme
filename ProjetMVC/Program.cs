@@ -1,4 +1,5 @@
 ﻿using System;
+using ProjetMVC.Controller;
 
 namespace ProjetMVC
 {
@@ -6,7 +7,8 @@ namespace ProjetMVC
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ControllerClass controllerClass = new ControllerClass();
+
         }
     }
 }
