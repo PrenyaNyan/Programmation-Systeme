@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using ProjetMVC.View;
+using ProjetMVC.Model;
 using System.Text.Json;
 
 namespace ProjetMVC.Controller
@@ -13,44 +14,37 @@ namespace ProjetMVC.Controller
     {
 
         ViewClass viewClass = new();
+        ModelLangage modelLangage = new();
+        ModelSave modelSave = new();
+        ModelClass modelClass = new();
         public ControllerClass()
         {
-            if (File.Exists("setting.json"))
-            {
-                Console.WriteLine("vrai");
-            }
-            else
-            {
 
-                Console.WriteLine("false");
-                var file = File.Create("setting.json");
-                file.Close();
-                bool valeur = true;
-                string lang = "";
-                while (valeur)
-                {
-                    viewClass.WriteLine("Choissez votre langue entre fr et en\nChoose your langage between fr and en");
-                    lang = viewClass.ReadLine();
-                    if (lang =="fr" ||lang =="en")
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        viewClass.WriteLine("Erreur!\nError!\nRecommencez !\nTry again !");
-                    }
-
-                }
-                var texte = new {Langue = lang };
-                File.WriteAllText("setting.json", JsonSerializer.Serialize(texte));
-            }
         }
 
         public void run()
         {
             while (true)
             {
-                
+                //ModelLangue.MenuTask();
+                //Ask what to do
+                    //Create a savework
+                        //ask for name
+                        //ask path
+                        //ask new path
+                    //modifié un projet existant 
+                        //ask which one
+                        //which param
+                        //new value
+                    //Lister les projets existant
+                        //list all
+                    //faire un travail de save
+                        //Ask one or all
+                            //
+                        //Ask which project to do 
+                            //
+                        //Do
+                            //
             }
         }
     }
