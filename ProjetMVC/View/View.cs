@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace ProjetMVC.View
 {
-    class View
+    class ViewClass
     {
+        public void WriteLine(string str)
+        {
+            Console.WriteLine(str);
+        }
+        public string ReadLine()
+        {
+            return Console.ReadLine();
+        }
     }
 }
