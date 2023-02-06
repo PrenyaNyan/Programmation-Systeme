@@ -9,6 +9,9 @@ namespace ProjetMVC.Model
 {
     class SaveProject
     {
+
+        
+
         // Project Name
         private string name;
         public string Name
@@ -68,7 +71,6 @@ namespace ProjetMVC.Model
             this.pathTarget = pathTarget;
             this.saveType = saveType;
             this.progression = new Progression();
-
         }
 
         // TODO: Méthode pour démarrer le processus de sauvegarde, définir : fileSize et la progression 
@@ -217,6 +219,11 @@ namespace ProjetMVC.Model
                 size += DirSize(di);
             }
             return size;
+        }
+
+        public string ToString()
+        {
+            return this.name;
         }
 
     }
