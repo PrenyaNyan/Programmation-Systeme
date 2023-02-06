@@ -17,6 +17,9 @@ namespace ProjetMVC.Model
         }
         public void CheckSetting()
         {
+
+            ModelLangage modelLangage;
+            ModelSave modelSave;
             if (File.Exists("setting.json"))
             {
                 Console.WriteLine("vrai");
@@ -47,6 +50,21 @@ namespace ProjetMVC.Model
                 File.WriteAllText("setting.json", JsonSerializer.Serialize(texte));
                 file.Close();
             }
+        }
+        public string GetAppBanner()
+        {
+            string text = "";
+            text += "     ┌─────────────────────────────────────────────────────────┐\n";
+            text += "     │     ______                   _____                      │\n";
+            text += "     │    |  ____|                 / ____|                     │\n";
+            text += "     │    | |__   __ _ ___ _   _  | (___   __ ___   _____      │\n";
+            text += "     │    |  __| / _` / __| | | |  \\___ \\ / _` \\ \\ / / _ \\     │\n";
+            text += "     │    | |___| (_| \\__ \\ |_| |  ____) | (_| |\\ V /  __/     │\n";
+            text += "     │    |______\\__,_|___/\\__, | |_____/ \\__,_| \\_/ \\___|     │\n";
+            text += "     │                      __/ |                              │\n";
+            text += "     │                     |___/                               │\n";
+            text += "     └─────────────────────────────────────────────────────────┘\n";
+            return text;
         }
     }
 }
