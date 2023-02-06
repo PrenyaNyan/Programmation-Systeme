@@ -6,7 +6,8 @@ namespace ProjetMVC
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string text = "";
+            Console.WriteLine(text);
         }
     }
 }
