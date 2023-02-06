@@ -17,7 +17,8 @@ namespace ProjetMVC.Controller
         ModelClass modelClass = new();
         public ControllerClass()
         {
-
+            viewClass.WriteLine(modelClass.GetAppBanner());
+            modelClass.CheckSetting();
         }
         
         public void run()

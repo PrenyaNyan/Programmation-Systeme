@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProjetMVC.Model
 {
-    struct Setting
+    class Setting
     {
-        string Langue;
+        public string Langue { get; set; }
     }
 }

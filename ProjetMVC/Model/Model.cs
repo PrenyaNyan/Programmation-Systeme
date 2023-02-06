@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text.Json;
+using ProjetMVC.Model.Langage;
 
 namespace ProjetMVC.Model
 {
@@ -20,7 +21,8 @@ namespace ProjetMVC.Model
 
             ModelLangage modelLangage;
             ModelSave modelSave;
-            if (File.Exists("setting.json"))
+            string setfile = "setting.json";
+            if (File.Exists(setfile))
             {
                 Console.WriteLine("vrai");
             }
@@ -28,11 +30,10 @@ namespace ProjetMVC.Model
             {
 
                 Console.WriteLine("false");
-                var file = File.Create("setting.json");
+                var file = File.Create(setfile);
                 file.Close();
-                bool valeur = true;
                 string lang = "";
-                while (valeur)
+                while (true)
                 {
                     Console.WriteLine("Choissez votre langue entre fr et en\nChoose your langage between fr and en");
                     lang = Console.ReadLine();
@@ -47,9 +48,12 @@ namespace ProjetMVC.Model
 
                 }
                 var texte = new { Langue = lang };
-                File.WriteAllText("setting.json", JsonSerializer.Serialize(texte));
+                File.WriteAllText(setfile, JsonSerializer.Serialize(texte));
                 file.Close();
             }
+            // Get settings from settings file
+            setting = JsonSerializer.Deserialize<Setting>(File.ReadAllText(setfile));
+            Console.Write(setting.Langue);
         }
         public string GetAppBanner()
         {
