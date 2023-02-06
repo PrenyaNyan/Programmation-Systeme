@@ -1,5 +1,6 @@
 ﻿using ProjetMVC.Model;
 using System;
+using System.Collections.Generic;
 
 namespace ProjetMVC
 {
@@ -7,13 +8,14 @@ namespace ProjetMVC
     {
         static void Main(string[] args)
         {
-            SaveProject saveProject = new SaveProject("test", "C:\\Users\\leroc\\Desktop\\sourceTest", "C:\\Users\\leroc\\Desktop\\targetTest", SaveTypeEnum.Complete);
-            saveProject.Save();
-            int copiedFile = saveProject.Progression.CopiedFiles;
-            long fileSizeCopied = saveProject.Progression.FilesSizeCopied;
-           
-            Console.WriteLine("fichiers totaux : " + saveProject.Progression.FileAmount + " taille totale: " + saveProject.Progression.FileSize);
-            Console.WriteLine("fichiers copiés : " + copiedFile + " taille des trucs copiés: " + fileSizeCopied);
+            ModelSave model = new ModelSave();
+            /*SaveProject project = new SaveProject("Test", "aaa", "eee", SaveTypeEnum.Complete);
+            SaveProject project2 = new SaveProject("TOTO", "AAAEE", "EEE", SaveTypeEnum.Differential);
+            model.addProject(project);
+            model.addProject(project2);
+            List<SaveProject> projects = model.Projects;
+            foreach (SaveProject p in projects)
+            Console.WriteLine(p.Name);*/
         }
     }
 }
