@@ -25,25 +25,32 @@ namespace ProjetMVC.Controller
         {
             while (true)
             {
-                //ModelLangue.MenuTask();
-                //Ask what to do
-                    //Create a savework
-                        //ask for name
-                        //ask path
-                        //ask new path
-                    //modifié un projet existant 
-                        //ask which one
-                        //which param
-                        //new value
-                    //Lister les projets existant
-                        //list all
-                    //faire un travail de save
-                        //Ask one or all
-                            //
-                        //Ask which project to do 
-                            //
-                        //Do
-                            //
+                
+                string option = viewClass.ReadLine();
+                switch (option)
+                {
+                    case "1":
+                        // "1 : Create a new save project
+                        break;
+                    case "2":
+                        // "2 : Modify an existing project
+                        break;
+                    case "3":
+                        // "3 : List all existing projects
+                        break;
+                    case "4":
+                        // "4 : Start a save project
+                        break;
+                    case "5":
+                        // "5 : Start all save projects
+                        break;
+                    case "6":
+                        // "6 : Get the path of the log files
+                        break;
+                    default:
+                        break;
+                }
+
             }
         }
     }

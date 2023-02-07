@@ -7,4 +7,8 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = Programmation_Systeme_Groupe_B
+<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\
+=======
+build_property.ProjectDir = C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\
+>>>>>>> 17dbaee6fe1363340efde61b27e24d0d38069f9b

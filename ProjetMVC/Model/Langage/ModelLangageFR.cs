@@ -53,5 +53,17 @@ namespace ProjetMVC.Model.Langage
         {
             return "Veuillez saisir le nom du projet";
         }
+        public override string AskSettings()
+        {
+            return "";
+        }
+        public override string ErrorTooManyProject()
+        {
+            return "Il y a trop de projets déjà existant, il est impossible d'en créer un nouveau";
+        }
+        public override string GetGenericOkMsg()
+        {
+            return "Tâche effectuée avec succès !";
+        }
     }
 }

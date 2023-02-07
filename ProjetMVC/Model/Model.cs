@@ -12,6 +12,7 @@ namespace ProjetMVC.Model
     class ModelClass
     {
         Setting setting;
+        ModelLangage modelLangage1;
         public ModelClass()
         {
             
