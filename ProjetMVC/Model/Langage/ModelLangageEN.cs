@@ -65,5 +65,9 @@ namespace ProjetMVC.Model.Langage
         {
             return "Task done successfully !";
         }
+        public override string NotImplementedMsg()
+        {
+            return "Sorry ! This function is not already implemented";
+        }
     }
 }
