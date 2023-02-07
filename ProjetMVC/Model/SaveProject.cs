@@ -84,11 +84,13 @@ namespace ProjetMVC.Model
 
             if (this.saveType == SaveTypeEnum.Complete)
             {
+                GenerateStateLog(ModelLogState.STATE_ACTIVE);
                 CompleteSave(this.pathSource, this.pathTarget, this.progression);
 
             }
             else if (this.saveType == SaveTypeEnum.Differential)
             {
+                GenerateStateLog(ModelLogState.STATE_ACTIVE);
                 DifferentialSave(this.pathSource, this.pathTarget, this.progression);
 
             }
