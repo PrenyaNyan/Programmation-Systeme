@@ -90,6 +90,7 @@ namespace ProjetMVC.Controller
                         break;
                     case "6":
                         // "6 : Get the path of the log files
+                        viewClass.WriteLine(modelClass.modelLangage.GetLogPath());
                         break;
                     case "7":
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSave());

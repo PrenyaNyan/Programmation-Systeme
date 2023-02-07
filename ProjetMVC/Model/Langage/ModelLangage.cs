@@ -16,7 +16,7 @@ namespace ProjetMVC.Model
         virtual public string AskWhichSaveType() => "";
         virtual public string MenuTasks() => "";
         virtual public string AskProjectName() => "";
-        virtual public string AskSettings() => "";
+        virtual public string GetLogPath() => "";
         virtual public string ErrorTooManyProject() => "";
         virtual public string GetGenericOkMsg() => "";
         virtual public string NotImplementedMsg() => "";
