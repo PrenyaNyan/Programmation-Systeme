@@ -12,8 +12,8 @@ namespace ProjetMVC.Model.Langage
         public override string GetGenericErrorMsg()
         {
             string text = "";
-            text += " / \\ Erreur, la saisie est incorrecte / \\\n";
-            text += "/ ! \\      Veuillez recommencer      / ! \\";
+            text += "\t / \\ Erreur, la saisie est incorrecte / \\\n";
+            text += "\t/ ! \\      Veuillez recommencer      / ! \\";
             return text;
         }
         public override string AskPath(bool issourcepath)
@@ -27,59 +27,59 @@ namespace ProjetMVC.Model.Langage
             {
                 tpath = "de sortie";
             }
-            return "Veuillez saisir le chemin " + tpath + " pour le projet de sauvegarde.";
+            return "\tVeuillez saisir le chemin " + tpath + " pour le projet de sauvegarde.";
         }
         public override string AskWhichSaveType()
         {
-            return "Veuillez saisir quel type de sauvegarde choisir pour ce projet.\nSaisissez :\n\t1 : Sauvegarde Complète\n\t2 : Sauvegarde Différentielle";
+            return "\tVeuillez saisir quel type de sauvegarde choisir pour ce projet.\nSaisissez :\n\t0 : Sauvegarde Différentielle\n\t1 : Sauvegarde Complète";
         }
         public override string MenuTasks()
         {
-            string text = "Veuillez sélectionner quelle tâche vous voulez effectuer :\n";
-            text += "1 : Créer un nouveau projet de sauvegarde\n";
+            string text = "";
+            text += "\t┌────────────────────────────────────────────────────────────┐\n";
+            text += "\t│ Veuillez sélectionner quelle tâche vous voulez effectuer : │\n";
+            text += "\t│\t1 : Créer un nouveau projet de sauvegarde            │\n";
             //text += "2 : Modifier un projet existant\n";
-            text += "2 : Renvoyer les infos de tout les projets\n";
-            text += "3 : Lister les projets existants\n";
-            text += "4 : Lancer un projet de sauvegarde\n";
-            text += "5 : Lancer tout les projets de sauvegarde\n";
-            text += "6 : Renvoyer le chemin de sauvegarde\n";
-            text += "7 : Renvoyer les infos d'un projet\n";
+            text += "\t│\t2 : Renvoyer les infos de tout les projets           │\n";
+            text += "\t│\t3 : Lister les projets existants                     │\n";
+            text += "\t│\t4 : Lancer un projet de sauvegarde                   │\n";
+            text += "\t│\t5 : Lancer tout les projets de sauvegarde            │\n";
+            text += "\t│\t6 : Renvoyer le chemin de sauvegarde                 │\n";
+            text += "\t│\t7 : Renvoyer les infos d'un projet                   │\n";
+            text += "\t│\t8 : Quitter l'application                            │\n";
+            text += "\t└────────────────────────────────────────────────────────────┘";
             //text += "8 : Renvoyer les infos de tout les projets\n";
             return text;
         }
         public override string AskWhichSave()
         {
-            string text = "Veuillez choisir la sauvegarde que vous souhaitez";
+            string text = "\tVeuillez choisir le projet que vous souhaitez";
             // Read all existing save, then add into the string
             return text;
         }
         public override string AskProjectName()
         {
-            return "Veuillez saisir le nom du projet";
-        }
-        public override string GetLogPath()
-        {
-            return Path.GetFullPath("setting.json");
+            return "\tVeuillez saisir le nom du projet";
         }
         public override string ErrorTooManyProject()
         {
-            return "Il y a trop de projets déjà existant, il est impossible d'en créer un nouveau";
+            return "\tIl y a trop de projets déjà existant, il est impossible d'en créer un nouveau";
         }
         public override string GetGenericOkMsg()
         {
-            return "Tâche effectuée avec succès !";
+            return "\tTâche effectuée avec succès !";
         }
         public override string NotImplementedMsg()
         {
-            return "Désolé! Cette fonction n'est pas encore disponible";
+            return "\tDésolé! Cette fonction n'est pas encore disponible";
         }
         public override string GetProjectInfo(SaveProject project)
         {
             string text = "";
-            text += "Nom du projet : " + project.Name + "\n";
-            text += "Chemin source : " + project.PathSource + "\n";
-            text += "Chemin destination : " + project.PathTarget + "\n";
-            text += "Type de sauvegarde : " + project.SaveType + "\n";
+            text += "\tNom du projet : " + project.Name + "\n";
+            text += "\tChemin source : " + project.PathSource + "\n";
+            text += "\tChemin destination : " + project.PathTarget + "\n";
+            text += "\tType de sauvegarde : " + project.SaveType + "\n";
             return text;
         }
     }

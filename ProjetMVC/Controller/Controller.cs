@@ -20,7 +20,7 @@ namespace ProjetMVC.Controller
             viewClass.WriteLine(modelClass.GetAppBanner());
             modelClass.CheckSetting();
         }
-        
+
         public void run()
         {
             int saveTypenum;
@@ -43,28 +43,35 @@ namespace ProjetMVC.Controller
                         }
                         viewClass.WriteLine(modelClass.modelLangage.AskProjectName());
                         name = viewClass.ReadLine();
-                        viewClass.WriteLine(modelClass.modelLangage.AskPath(false));
-                        pathT = viewClass.ReadLine();
-                        viewClass.WriteLine(modelClass.modelLangage.AskPath(true));
+                        viewClass.WriteLine(modelClass.modelLangage.AskPath(issourcepath: true));
                         pathS = viewClass.ReadLine();
+                        viewClass.WriteLine(modelClass.modelLangage.AskPath(issourcepath: false));
+                        pathT = viewClass.ReadLine();
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSaveType());
                         saveTypenum = Convert.ToInt32(viewClass.ReadLine());
                         SaveTypeEnum saveType;
                         switch (saveTypenum)
                         {
+                            case 0:
+                                saveType = SaveTypeEnum.Differential;
+                                break;
                             case 1:
                                 saveType = SaveTypeEnum.Complete;
-                                break;
-                            case 2:
-                                saveType = SaveTypeEnum.Differential;
                                 break;
                             default:
                                 saveType = SaveTypeEnum.Complete;
                                 break;
                         }
-                        saveproject = new SaveProject(name,pathS,pathT,saveType );
+                        saveproject = new SaveProject(name, pathS, pathT, saveType);
                         modelClass.ModelSave.addProject(saveproject);
                         // "1 : Create a new save project
+                        break;
+
+                    case "2":
+                        foreach (SaveProject project in modelClass.ModelSave.Projects)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.GetProjectInfo(project));
+                        }
                         break;
                     //case "2":
                     //    // "2 : Modify an existing project
@@ -79,7 +86,7 @@ namespace ProjetMVC.Controller
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSave());
                         viewClass.WriteLine(modelClass.GetProjectList());
                         savenum = Convert.ToInt32(viewClass.ReadLine());
-                        if (savenum<0 | savenum > modelClass.ModelSave.Projects.Count - 1)
+                        if (savenum < 0 | savenum > modelClass.ModelSave.Projects.Count - 1)
                         {
                             viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
                             break;
@@ -105,12 +112,15 @@ namespace ProjetMVC.Controller
                         savenum = Convert.ToInt32(viewClass.ReadLine());
                         viewClass.WriteLine(modelClass.modelLangage.GetProjectInfo(modelClass.ModelSave.Projects[savenum]));
                         break;
-                    case "2":
-                        foreach (SaveProject project in modelClass.ModelSave.Projects)
-                        {
-                            viewClass.WriteLine(modelClass.modelLangage.GetProjectInfo(project));
-                        }
-                        break;
+                    case "8":
+                        return;
+
+                    //case "9":
+                    //    foreach (SaveProject project in modelClass.ModelSave.Projects)
+                    //    {
+                    //        viewClass.WriteLine(modelClass.modelLangage.GetProjectInfo(project));
+                    //    }
+                    //    break;
                     default:
                         viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
                         break;

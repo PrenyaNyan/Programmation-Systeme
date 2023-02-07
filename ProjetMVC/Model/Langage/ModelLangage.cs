@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ProjetMVC.Model
 {
@@ -16,7 +17,7 @@ namespace ProjetMVC.Model
         virtual public string AskWhichSaveType() => "";
         virtual public string MenuTasks() => "";
         virtual public string AskProjectName() => "";
-        virtual public string GetLogPath() => "";
+        virtual public string GetLogPath() => Path.GetFullPath("setting.json");
         virtual public string ErrorTooManyProject() => "";
         virtual public string GetGenericOkMsg() => "";
         virtual public string NotImplementedMsg() => "";

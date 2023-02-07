@@ -12,6 +12,7 @@ namespace ProjetMVC.Model
 
         // State log object
         private ModelLogState stateLog;
+        private ModelLogDaily dailyLog;
         // Project Name
         private string name;
         public string Name
@@ -73,6 +74,7 @@ namespace ProjetMVC.Model
             this.progression = new Progression();
             this.startTime = DateTime.Now;
             this.stateLog = new ModelLogState(this.name, this.pathSource, this.pathTarget);
+            this.dailyLog = new ModelLogDaily(this.name, this.pathSource, this.pathTarget);
         }
 
         // TODO: Méthode pour démarrer le processus de sauvegarde, définir : fileSize et la progression 
@@ -84,11 +86,15 @@ namespace ProjetMVC.Model
 
             if (this.saveType == SaveTypeEnum.Complete)
             {
+                GenerateStateLog(ModelLogState.STATE_ACTIVE);
+                GenerateDailyLog();
                 CompleteSave(this.pathSource, this.pathTarget, this.progression);
 
             }
             else if (this.saveType == SaveTypeEnum.Differential)
             {
+                GenerateStateLog(ModelLogState.STATE_ACTIVE);
+                GenerateDailyLog();
                 DifferentialSave(this.pathSource, this.pathTarget, this.progression);
 
             }
@@ -225,7 +231,7 @@ namespace ProjetMVC.Model
 
         public string ToString()
         {
-            return this.name;
+            return this.name + " " + this.PathSource + " " + this.PathTarget + " " + this.SaveType;
         }
 
         // Generate active state log
@@ -235,6 +241,12 @@ namespace ProjetMVC.Model
             this.stateLog.setSize(this.progression.FileSize.ToString());
             this.stateLog.setState(state);
             this.stateLog.save();
+        }
+
+        public void GenerateDailyLog()
+        {
+            this.dailyLog.setSize(this.progression.FileSize.ToString());
+            this.dailyLog.save();
         }
     }
 }
