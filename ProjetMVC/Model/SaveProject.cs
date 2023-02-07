@@ -71,6 +71,8 @@ namespace ProjetMVC.Model
             this.pathTarget = pathTarget;
             this.saveType = saveType;
             this.progression = new Progression();
+            this.startTime = DateTime.Now;
+            this.stateLog = new ModelLogState(this.name, this.pathSource, this.pathTarget);
         }
 
         // TODO: Méthode pour démarrer le processus de sauvegarde, définir : fileSize et la progression 
@@ -97,13 +99,6 @@ namespace ProjetMVC.Model
         {
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
             DirectoryInfo[] subDirectory = mainDirectory.GetDirectories();
-
-            // Generate active state log
-            this.stateLog = new ModelLogState(this.name, this.pathSource, this.pathTarget);
-            this.stateLog.setFileAmount(this.progression.FileAmount);
-            this.stateLog.setSize(this.progression.FileSize.ToString());
-            this.stateLog.setState(ModelLogState.STATE_ACTIVE);
-            this.stateLog.save();
 
 
 
@@ -134,16 +129,7 @@ namespace ProjetMVC.Model
                 file.CopyTo(temppath, true);
                 progression.CopiedFiles += 1;
                 progression.FilesSizeCopied += file.Length;
-
             }
-
-            // Generate END state log
-            this.stateLog.setState(ModelLogState.STATE_END);
-            this.stateLog.setFileAmount(this.progression.FileAmount);
-            this.stateLog.setSize(this.progression.FileSize.ToString());
-            this.stateLog.save();
-
-
 
             foreach (DirectoryInfo subdir in subDirectory)
             {
@@ -159,13 +145,6 @@ namespace ProjetMVC.Model
         {
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
             DirectoryInfo[] subDirectory = mainDirectory.GetDirectories();
-
-            // Generate active state log
-            this.stateLog = new ModelLogState(this.name, this.pathSource, this.pathTarget);
-            this.stateLog.setFileAmount(this.progression.FileAmount);
-            this.stateLog.setSize(this.progression.FileSize.ToString());
-            this.stateLog.setState(ModelLogState.STATE_ACTIVE);
-            this.stateLog.save();
 
 
             // If the source directory does not exist, throw an exception. //TODO Message d'erreur
@@ -206,17 +185,11 @@ namespace ProjetMVC.Model
                     if (fileSourceDate.CompareTo(fileTargetDate) < 0)
                     {
                         file.CopyTo(temppath, true);
-                        progression.CopiedFiles += 1;
-                        progression.FilesSizeCopied += file.Length;
                     }
+                    progression.CopiedFiles += 1;
+                    progression.FilesSizeCopied += file.Length;
                 }
             }
-
-            // Generate END state log
-            this.stateLog.setState(ModelLogState.STATE_END);
-            this.stateLog.setFileAmount(this.progression.FileAmount);
-            this.stateLog.setSize(this.progression.FileSize.ToString());
-            this.stateLog.save();
 
             foreach (DirectoryInfo subdir in subDirectory)
             {
@@ -255,5 +228,13 @@ namespace ProjetMVC.Model
             return this.name;
         }
 
+        // Generate active state log
+        public void GenerateStateLog(string state)
+        {
+            this.stateLog.setFileAmount(this.progression.FileAmount);
+            this.stateLog.setSize(this.progression.FileSize.ToString());
+            this.stateLog.setState(state);
+            this.stateLog.save();
+        }
     }
 }

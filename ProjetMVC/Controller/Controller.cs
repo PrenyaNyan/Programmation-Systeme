@@ -23,6 +23,11 @@ namespace ProjetMVC.Controller
         
         public void run()
         {
+            int saveTypenum;
+            string pathS;
+            string pathT;
+            string name;
+            SaveProject saveproject;
             int savenum;
             while (true)
             {
@@ -37,13 +42,13 @@ namespace ProjetMVC.Controller
                             break;
                         }
                         viewClass.WriteLine(modelClass.modelLangage.AskProjectName());
-                        string name = viewClass.ReadLine();
-                        viewClass.WriteLine(modelClass.modelLangage.AskPath(false));
-                        string pathT = viewClass.ReadLine();
+                        name = viewClass.ReadLine();
                         viewClass.WriteLine(modelClass.modelLangage.AskPath(true));
-                        string pathS = viewClass.ReadLine();
+                        pathS = viewClass.ReadLine();
+                        viewClass.WriteLine(modelClass.modelLangage.AskPath(false));
+                        pathT = viewClass.ReadLine();
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSaveType());
-                        int saveTypenum = Convert.ToInt32(viewClass.ReadLine());
+                        saveTypenum = Convert.ToInt32(viewClass.ReadLine());
                         SaveTypeEnum saveType;
                         switch (saveTypenum)
                         {
@@ -57,7 +62,7 @@ namespace ProjetMVC.Controller
                                 saveType = SaveTypeEnum.Complete;
                                 break;
                         }
-                        SaveProject saveproject = new SaveProject(name,pathS,pathT,saveType );
+                        saveproject = new SaveProject(name,pathS,pathT,saveType );
                         modelClass.ModelSave.addProject(saveproject);
                         // "1 : Create a new save project
                         break;
@@ -79,7 +84,9 @@ namespace ProjetMVC.Controller
                             viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
                             break;
                         }
-                        modelClass.ModelSave.Projects[savenum].Save();
+                        SaveProject selectedProject = modelClass.ModelSave.Projects[savenum];
+                        selectedProject.Save();
+                        selectedProject.GenerateStateLog(ModelLogState.STATE_END);
                         break;
                     case "5":
                         // "5 : Start all save projects
