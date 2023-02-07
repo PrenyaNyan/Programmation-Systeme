@@ -62,12 +62,16 @@ namespace ProjetMVC.Controller
                         break;
                     case "2":
                         // "2 : Modify an existing project
+                        viewClass.WriteLine(modelClass.modelLangage.NotImplementedMsg());
                         break;
                     case "3":
                         // "3 : List all existing projects
                         break;
                     case "4":
                         // "4 : Start a save project
+                        viewClass.WriteLine(modelClass.modelLangage.AskWhichSave());
+                        int savenum = Convert.ToInt32(viewClass.ReadLine());
+                        modelClass.ModelSave.Projects[savenum].Save();
                         break;
                     case "5":
                         // "5 : Start all save projects
