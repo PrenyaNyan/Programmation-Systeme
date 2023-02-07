@@ -12,7 +12,7 @@ namespace ProjetMVC.Model.Langage
         {
             string text = "";
             text += " / \\ Erreur, la saisie est incorrecte / \\\n";
-            text += "/ ! \\      Veuillez recommancer      / ! \\";
+            text += "/ ! \\      Veuillez recommencer      / ! \\";
             return text;
         }
         public override string AskPath(bool issourcepath)
