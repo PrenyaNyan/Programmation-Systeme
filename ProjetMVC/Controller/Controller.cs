@@ -30,6 +30,8 @@ namespace ProjetMVC.Controller
                 switch (option)
                 {
                     case "1":
+                       
+                        
                         // "1 : Create a new save project
                         break;
                     case "2":
