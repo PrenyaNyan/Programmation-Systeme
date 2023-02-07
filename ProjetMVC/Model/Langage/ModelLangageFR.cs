@@ -65,5 +65,9 @@ namespace ProjetMVC.Model.Langage
         {
             return "Tâche effectuée avec succès !";
         }
+        public override string NotImplementedMsg()
+        {
+            return "Désolé! Cette fonction n'est pas encore disponible";
+        }
     }
 }
