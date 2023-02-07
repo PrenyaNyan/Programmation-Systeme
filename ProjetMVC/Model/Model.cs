@@ -53,7 +53,21 @@ namespace ProjetMVC.Model
             }
             // Get settings from settings file
             setting = JsonSerializer.Deserialize<Setting>(File.ReadAllText(setfile));
-            Console.Write(setting.Langue);
+            switch (setting.Langue)
+            {
+                case "fr":
+                    modelLangage = new ModelLangageFR();
+                    break;
+                case "en":
+                    modelLangage = new ModelLangageEN();
+                    break;
+                default:
+                    break;
+            }
+        }
+        public string GetLogPath()
+        {
+            return "";
         }
         public string GetAppBanner()
         {
