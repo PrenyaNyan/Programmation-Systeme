@@ -35,6 +35,21 @@ namespace ProjetMVC
             this.time = DateTime.Now.ToString();
         }
 
+        public void setSize(string size)
+        {
+            this.size = size;
+        }
+
+        public void setState(string state)
+        {
+            this.state = state;
+        }
+
+        public void setFileAmount(int fileAmount)
+        {
+            this.fileAmount = fileAmount;
+        }
+
         public void save()
         {
             update(STATE_PATH, this);
