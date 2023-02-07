@@ -12,6 +12,7 @@ namespace ProjetMVC.Model
     class ModelClass
     {
         Setting setting;
+        ModelLangage modelLangage1;
         public ModelClass()
         {
             
@@ -64,10 +65,6 @@ namespace ProjetMVC.Model
                 default:
                     break;
             }
-        }
-        public string GetLogPath()
-        {
-            return "";
         }
         public string GetAppBanner()
         {
