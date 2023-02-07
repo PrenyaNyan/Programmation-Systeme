@@ -19,16 +19,25 @@ namespace ProjetMVC.Model
         /* Dailysave log path */
         public const string DAILY_PATH = "Dailysave.json";
 
-        /* States const */
-        public const string STATE_END = "END";
-        public const string STATE_ACTIVE = "ACTIVE";
-        public const string STATE_ERROR = "ERROR";
-        
-        
-        
-        public ModelLogDaily()
-        {
 
+        public ModelLogDaily(string name, string pathTarget, string pathSource)
+        {
+            this.name = name;
+            this.pathTarget = pathTarget;
+            this.pathSource = pathSource;
+            this.size = size;
+            this.time = DateTime.Now.ToString();
+        }
+
+        public void setTime() {
+            /*this.time = DateTime.Now.ToString();*/
+        }
+
+
+
+        public void save()
+        {
+            update(DAILY_PATH, this);
         }
     }
 }

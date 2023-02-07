@@ -5,10 +5,14 @@
       "Newtonsoft.Json/13.0.2": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         }
       }
     }
@@ -51,19 +55,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lucie\\.nuget\\packages\\": {}
+    "C:\\Users\\alexa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\ProjetMVC\\ProjetMVC.csproj",
+      "projectUniqueName": "C:\\Users\\alexa\\source\\repos\\Programmation-Systeme-Groupe-B\\ProjetMVC\\ProjetMVC.csproj",
       "projectName": "ProjetMVC",
-      "projectPath": "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\ProjetMVC\\ProjetMVC.csproj",
-      "packagesPath": "C:\\Users\\lucie\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\ProjetMVC\\obj\\",
+      "projectPath": "C:\\Users\\alexa\\source\\repos\\Programmation-Systeme-Groupe-B\\ProjetMVC\\ProjetMVC.csproj",
+      "packagesPath": "C:\\Users\\alexa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\alexa\\source\\repos\\Programmation-Systeme-Groupe-B\\ProjetMVC\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\lucie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\alexa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -100,7 +104,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -109,7 +114,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
