@@ -76,5 +76,15 @@ namespace ProjetMVC.Model
             InitializeJsonFile(this.saveFilePath);
         }
 
+        public bool NameAlreadyExist(SaveProject project)
+        {
+            bool isPresent = false;
+            foreach(SaveProject p in this.Projects)
+            {
+                if (p.Name.Equals(project.Name)) isPresent = true;
+            }
+            return isPresent;
+        }
+
     }
 }
