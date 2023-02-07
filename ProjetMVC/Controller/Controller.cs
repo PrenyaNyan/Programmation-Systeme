@@ -20,7 +20,7 @@ namespace ProjetMVC.Controller
             viewClass.WriteLine(modelClass.GetAppBanner());
             modelClass.CheckSetting();
         }
-        
+
         public void run()
         {
             int saveTypenum;
@@ -62,7 +62,7 @@ namespace ProjetMVC.Controller
                                 saveType = SaveTypeEnum.Complete;
                                 break;
                         }
-                        saveproject = new SaveProject(name,pathS,pathT,saveType );
+                        saveproject = new SaveProject(name, pathS, pathT, saveType);
                         modelClass.ModelSave.addProject(saveproject);
                         // "1 : Create a new save project
                         break;
@@ -79,7 +79,7 @@ namespace ProjetMVC.Controller
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSave());
                         viewClass.WriteLine(modelClass.GetProjectList());
                         savenum = Convert.ToInt32(viewClass.ReadLine());
-                        if (savenum<0 | savenum > modelClass.ModelSave.Projects.Count - 1)
+                        if (savenum < 0 | savenum > modelClass.ModelSave.Projects.Count - 1)
                         {
                             viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
                             break;
