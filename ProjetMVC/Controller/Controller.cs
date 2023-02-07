@@ -78,6 +78,7 @@ namespace ProjetMVC.Controller
                         break;
                     case "6":
                         // "6 : Get the path of the log files
+                        viewClass.WriteLine(modelClass.modelLangage.GetLogPath());
                         break;
                     default:
                         viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ProjetMVC.Model.Langage
 {
@@ -53,9 +54,9 @@ namespace ProjetMVC.Model.Langage
         {
             return "Type the name for this project";
         }
-        public override string AskSettings()
+        public override string GetLogPath()
         {
-            return "";
+            return Path.GetFullPath("setting.json");
         }
         public override string ErrorTooManyProject()
         {
