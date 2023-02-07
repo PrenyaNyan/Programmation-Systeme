@@ -13,7 +13,7 @@ namespace ProjetMVC.Model
 {
     class ModelLogDaily : ModelLogTemplate
     {
-        public string time { get;}
+        public string time { get; set; }
         public string size { get; set; }
 
         /* Dailysave log path */
@@ -25,12 +25,16 @@ namespace ProjetMVC.Model
             this.name = name;
             this.pathTarget = pathTarget;
             this.pathSource = pathSource;
-            this.size = size;
             this.time = DateTime.Now.ToString();
         }
 
         public void setTime() {
-            /*this.time = DateTime.Now.ToString();*/
+            this.time = DateTime.Now.ToString();
+        }
+
+        public void setSize(string size)
+        {
+            this.size = size;
         }
 
 
