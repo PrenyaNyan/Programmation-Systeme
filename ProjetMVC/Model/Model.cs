@@ -77,6 +77,7 @@ namespace ProjetMVC.Model
             foreach (SaveProject project in this.ModelSave.Projects)
             {
                 text += "\t" + i + " : " + project.Name + "\n";
+                i++;
             }
             return text;
         }
