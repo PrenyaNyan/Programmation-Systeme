@@ -12,7 +12,7 @@ namespace ProjetMVC.Model
     class ModelClass
     {
         Setting setting;
-        ModelLangage modelLangage1;
+        public ModelLangage modelLangage;
         public ModelClass()
         {
             
@@ -20,7 +20,6 @@ namespace ProjetMVC.Model
         public void CheckSetting()
         {
 
-            ModelLangage modelLangage;
             ModelSave modelSave;
             string setfile = "setting.json";
             if (File.Exists(setfile))
@@ -54,7 +53,17 @@ namespace ProjetMVC.Model
             }
             // Get settings from settings file
             setting = JsonSerializer.Deserialize<Setting>(File.ReadAllText(setfile));
-            Console.Write(setting.Langue);
+            switch (setting.Langue)
+            {
+                case "fr":
+                    modelLangage = new ModelLangageFR();
+                    break;
+                case "en":
+                    modelLangage = new ModelLangageEN();
+                    break;
+                default:
+                    break;
+            }
         }
         public string GetAppBanner()
         {

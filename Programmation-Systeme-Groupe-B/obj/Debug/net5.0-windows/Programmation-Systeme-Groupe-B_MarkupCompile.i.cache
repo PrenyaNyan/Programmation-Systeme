@@ -4,25 +4,17 @@
 winexe
 C#
 .cs
-<<<<<<< HEAD
-C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\
-=======
 C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\
->>>>>>> 17dbaee6fe1363340efde61b27e24d0d38069f9b
 Programmation_Systeme_Groupe_B
 none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
-<<<<<<< HEAD
-C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\App.xaml
-=======
 C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\App.xaml
->>>>>>> 17dbaee6fe1363340efde61b27e24d0d38069f9b
 11407045341
 
 5-775312334
 193-1891726104
 MainWindow.xaml;
 
-False
+True
 

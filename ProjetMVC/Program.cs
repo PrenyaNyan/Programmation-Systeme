@@ -9,7 +9,6 @@ namespace ProjetMVC
     {
         static void Main(string[] args)
         {
-            ModelSave model = new ModelSave();
             /*SaveProject project = new SaveProject("Test", "aaa", "eee", SaveTypeEnum.Complete);
             SaveProject project2 = new SaveProject("TOTO", "AAAEE", "EEE", SaveTypeEnum.Differential);
             model.addProject(project);
@@ -18,6 +17,7 @@ namespace ProjetMVC
             foreach (SaveProject p in projects)
             Console.WriteLine(p.Name);*/
             ControllerClass controllerClass = new ControllerClass();
+            controllerClass.run();
         }
     }
 }
