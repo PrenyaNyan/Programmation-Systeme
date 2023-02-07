@@ -21,14 +21,8 @@ namespace ProjetMVC.Model
         public void CheckSetting()
         {
             string setfile = "setting.json";
-            if (File.Exists(setfile))
+            if (!File.Exists(setfile))
             {
-                Console.WriteLine("vrai");
-            }
-            else
-            {
-
-                Console.WriteLine("false");
                 var file = File.Create(setfile);
                 file.Close();
                 string lang = "";
