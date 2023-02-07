@@ -5,6 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>Programmation_Systeme_Groupe_B</RootNamespace>
     <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="fondMiA.jpg" />
+    <Resource Include="View\fondMiA.jpg" />
   </ItemGroup>
 
 </Project>
