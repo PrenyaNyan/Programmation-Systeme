@@ -37,11 +37,14 @@ namespace ProjetMVC.Model.Langage
         {
             string text = "Veuillez sélectionner quelle tâche vous voulez effectuer :\n";
             text += "1 : Créer un nouveau projet de sauvegarde\n";
-            text += "2 : Modifier un projet existant\n";
+            //text += "2 : Modifier un projet existant\n";
+            text += "2 : Renvoyer les infos de tout les projets\n";
             text += "3 : Lister les projets existants\n";
             text += "4 : Lancer un projet de sauvegarde\n";
             text += "5 : Lancer tout les projets de sauvegarde\n";
             text += "6 : Renvoyer le chemin de sauvegarde\n";
+            text += "7 : Renvoyer les infos d'un projet\n";
+            //text += "8 : Renvoyer les infos de tout les projets\n";
             return text;
         }
         public override string AskWhichSave()
@@ -69,6 +72,15 @@ namespace ProjetMVC.Model.Langage
         public override string NotImplementedMsg()
         {
             return "Désolé! Cette fonction n'est pas encore disponible";
+        }
+        public override string GetProjectInfo(SaveProject project)
+        {
+            string text = "";
+            text += "Nom du projet : " + project.Name + "\n";
+            text += "Chemin source : " + project.PathSource + "\n";
+            text += "Chemin destination : " + project.PathTarget + "\n";
+            text += "Type de sauvegarde : " + project.SaveType + "\n";
+            return text;
         }
     }
 }

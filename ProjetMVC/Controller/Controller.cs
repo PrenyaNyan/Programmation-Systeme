@@ -28,6 +28,7 @@ namespace ProjetMVC.Controller
             string pathT;
             string name;
             SaveProject saveproject;
+            int savenum;
             while (true)
             {
                 viewClass.WriteLine(modelClass.modelLangage.MenuTasks());
@@ -65,10 +66,10 @@ namespace ProjetMVC.Controller
                         modelClass.ModelSave.addProject(saveproject);
                         // "1 : Create a new save project
                         break;
-                    case "2":
-                        // "2 : Modify an existing project
-                        viewClass.WriteLine(modelClass.modelLangage.NotImplementedMsg());
-                        break;
+                    //case "2":
+                    //    // "2 : Modify an existing project
+                    //    viewClass.WriteLine(modelClass.modelLangage.NotImplementedMsg());
+                    //    break;
                     case "3":
                         // "3 : List all existing projects
                         viewClass.WriteLine(modelClass.GetProjectList());
@@ -77,7 +78,7 @@ namespace ProjetMVC.Controller
                         // "4 : Start a save project
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSave());
                         viewClass.WriteLine(modelClass.GetProjectList());
-                        int savenum = Convert.ToInt32(viewClass.ReadLine());
+                        savenum = Convert.ToInt32(viewClass.ReadLine());
                         if (savenum<0 | savenum > modelClass.ModelSave.Projects.Count - 1)
                         {
                             viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
@@ -95,6 +96,18 @@ namespace ProjetMVC.Controller
                     case "6":
                         // "6 : Get the path of the log files
                         viewClass.WriteLine(modelClass.modelLangage.GetLogPath());
+                        break;
+                    case "7":
+                        viewClass.WriteLine(modelClass.modelLangage.AskWhichSave());
+                        viewClass.WriteLine(modelClass.GetProjectList());
+                        savenum = Convert.ToInt32(viewClass.ReadLine());
+                        viewClass.WriteLine(modelClass.modelLangage.GetProjectInfo(modelClass.ModelSave.Projects[savenum]));
+                        break;
+                    case "2":
+                        foreach (SaveProject project in modelClass.ModelSave.Projects)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.GetProjectInfo(project));
+                        }
                         break;
                     default:
                         viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());

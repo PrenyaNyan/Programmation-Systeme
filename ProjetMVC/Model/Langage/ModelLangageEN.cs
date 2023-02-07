@@ -37,11 +37,14 @@ namespace ProjetMVC.Model.Langage
         {
             string text = "Please select what you want to do :\n";
             text += "1 : Create a new save project\n";
-            text += "2 : Modify an existing project\n";
+            text += "2 : Get info of all project\n";
+            //text += "2 : Modify an existing project\n";
             text += "3 : List all existing projects\n";
             text += "4 : Start a save project\n";
             text += "5 : Start all save projects\n";
             text += "6 : Get the path of the log files\n";
+            text += "7 : Get info about a project\n";
+            //text += "8 : Get info of all project\n";
             return text;
         }
         public override string AskWhichSave()
@@ -69,6 +72,15 @@ namespace ProjetMVC.Model.Langage
         public override string NotImplementedMsg()
         {
             return "Sorry ! This function is not already implemented";
+        }
+        public override string GetProjectInfo(SaveProject project)
+        {
+            string text = "";
+            text += "Project Name : " + project.Name + "\n";
+            text += "SourcePath : " + project.PathSource + "\n";
+            text += "TargetPath : " + project.PathTarget + "\n";
+            text += "Save Type : " + project.SaveType + "\n";
+            return text;
         }
     }
 }

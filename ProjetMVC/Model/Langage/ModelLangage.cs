@@ -20,5 +20,6 @@ namespace ProjetMVC.Model
         virtual public string ErrorTooManyProject() => "";
         virtual public string GetGenericOkMsg() => "";
         virtual public string NotImplementedMsg() => "";
+        virtual public string GetProjectInfo(SaveProject project) => "";
     }
 }
