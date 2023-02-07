@@ -52,11 +52,11 @@ namespace ProjetMVC.Controller
                         SaveTypeEnum saveType;
                         switch (saveTypenum)
                         {
+                            case 0:
+                                saveType = SaveTypeEnum.Differential;
+                                break;
                             case 1:
                                 saveType = SaveTypeEnum.Complete;
-                                break;
-                            case 2:
-                                saveType = SaveTypeEnum.Differential;
                                 break;
                             default:
                                 saveType = SaveTypeEnum.Complete;
@@ -65,6 +65,13 @@ namespace ProjetMVC.Controller
                         saveproject = new SaveProject(name, pathS, pathT, saveType);
                         modelClass.ModelSave.addProject(saveproject);
                         // "1 : Create a new save project
+                        break;
+
+                    case "2":
+                        foreach (SaveProject project in modelClass.ModelSave.Projects)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.GetProjectInfo(project));
+                        }
                         break;
                     //case "2":
                     //    // "2 : Modify an existing project
@@ -105,12 +112,15 @@ namespace ProjetMVC.Controller
                         savenum = Convert.ToInt32(viewClass.ReadLine());
                         viewClass.WriteLine(modelClass.modelLangage.GetProjectInfo(modelClass.ModelSave.Projects[savenum]));
                         break;
-                    case "2":
-                        foreach (SaveProject project in modelClass.ModelSave.Projects)
-                        {
-                            viewClass.WriteLine(modelClass.modelLangage.GetProjectInfo(project));
-                        }
-                        break;
+                    case "8":
+                        return;
+
+                    //case "9":
+                    //    foreach (SaveProject project in modelClass.ModelSave.Projects)
+                    //    {
+                    //        viewClass.WriteLine(modelClass.modelLangage.GetProjectInfo(project));
+                    //    }
+                    //    break;
                     default:
                         viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
                         break;
