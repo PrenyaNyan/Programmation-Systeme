@@ -70,6 +70,16 @@ namespace ProjetMVC.Model
             int count = this.ModelSave.Projects.Count();
             return 0<=count & count<5;
         }
+        public string GetProjectList()
+        {
+            string text = "";
+            int i = 0;
+            foreach (SaveProject project in this.ModelSave.Projects)
+            {
+                text += "\t" + i + " : " + project.Name + "\n";
+            }
+            return text;
+        }
         public string GetAppBanner()
         {
             string text = "";

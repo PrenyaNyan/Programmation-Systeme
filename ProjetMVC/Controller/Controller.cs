@@ -66,15 +66,26 @@ namespace ProjetMVC.Controller
                         break;
                     case "3":
                         // "3 : List all existing projects
+                        viewClass.WriteLine(modelClass.GetProjectList());
                         break;
                     case "4":
                         // "4 : Start a save project
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSave());
+                        viewClass.WriteLine(modelClass.GetProjectList());
                         int savenum = Convert.ToInt32(viewClass.ReadLine());
+                        if (savenum<0 | savenum > modelClass.ModelSave.Projects.Count - 1)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
+                            break;
+                        }
                         modelClass.ModelSave.Projects[savenum].Save();
                         break;
                     case "5":
                         // "5 : Start all save projects
+                        foreach (SaveProject project in this.modelClass.ModelSave.Projects)
+                        {
+                            project.Save();
+                        }
                         break;
                     case "6":
                         // "6 : Get the path of the log files
@@ -83,7 +94,6 @@ namespace ProjetMVC.Controller
                         viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
                         break;
                 }
-
             }
         }
     }
