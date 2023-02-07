@@ -10,8 +10,8 @@ namespace ProjetMVC.Model
     class SaveProject
     {
 
-        
-
+        // State log object
+        private ModelLogState stateLog;
         // Project Name
         private string name;
         public string Name
@@ -93,10 +93,19 @@ namespace ProjetMVC.Model
 
         }
 
-        private static void CompleteSave(string source, string target, Progression progression)
+        private void CompleteSave(string source, string target, Progression progression)
         {
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
             DirectoryInfo[] subDirectory = mainDirectory.GetDirectories();
+
+            // Generate active state log
+            this.stateLog = new ModelLogState(this.name, this.pathSource, this.pathTarget);
+            this.stateLog.setFileAmount(this.progression.FileAmount);
+            this.stateLog.setSize(this.progression.FileSize.ToString());
+            this.stateLog.setState(ModelLogState.STATE_ACTIVE);
+            this.stateLog.save();
+
+
 
             // If the source directory does not exist, throw an exception. //TODO Message d'erreur
             if (!mainDirectory.Exists)
@@ -128,6 +137,12 @@ namespace ProjetMVC.Model
 
             }
 
+            // Generate END state log
+            this.stateLog.setState(ModelLogState.STATE_END);
+            this.stateLog.setFileAmount(this.progression.FileAmount);
+            this.stateLog.setSize(this.progression.FileSize.ToString());
+            this.stateLog.save();
+
 
 
             foreach (DirectoryInfo subdir in subDirectory)
@@ -140,10 +155,18 @@ namespace ProjetMVC.Model
             }
         }
 
-        private static void DifferentialSave(string source, string target, Progression progression)
+        private void DifferentialSave(string source, string target, Progression progression)
         {
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
             DirectoryInfo[] subDirectory = mainDirectory.GetDirectories();
+
+            // Generate active state log
+            this.stateLog = new ModelLogState(this.name, this.pathSource, this.pathTarget);
+            this.stateLog.setFileAmount(this.progression.FileAmount);
+            this.stateLog.setSize(this.progression.FileSize.ToString());
+            this.stateLog.setState(ModelLogState.STATE_ACTIVE);
+            this.stateLog.save();
+
 
             // If the source directory does not exist, throw an exception. //TODO Message d'erreur
             if (!mainDirectory.Exists)
@@ -188,6 +211,12 @@ namespace ProjetMVC.Model
                     }
                 }
             }
+
+            // Generate END state log
+            this.stateLog.setState(ModelLogState.STATE_END);
+            this.stateLog.setFileAmount(this.progression.FileAmount);
+            this.stateLog.setSize(this.progression.FileSize.ToString());
+            this.stateLog.save();
 
             foreach (DirectoryInfo subdir in subDirectory)
             {
