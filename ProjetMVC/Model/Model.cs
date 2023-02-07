@@ -66,6 +66,12 @@ namespace ProjetMVC.Model
                     break;
             }
         }
+
+        public bool CheckNumProject()
+        {
+            int count = this.ModelSave.Projects.Count();
+            return 0<=count & count<5;
+        }
         public string GetAppBanner()
         {
             string text = "";

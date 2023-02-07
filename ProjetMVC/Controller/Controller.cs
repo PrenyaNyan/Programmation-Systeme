@@ -30,7 +30,11 @@ namespace ProjetMVC.Controller
                 switch (option)
                 {
                     case "1":
-                       
+                        if (!modelClass.CheckNumProject())
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.ErrorTooManyProject());
+                            break;
+                        }
                         
                         // "1 : Create a new save project
                         break;
