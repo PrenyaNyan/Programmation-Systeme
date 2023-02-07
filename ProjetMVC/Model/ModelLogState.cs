@@ -21,6 +21,7 @@ namespace ProjetMVC
         public const string STATE_END = "END";
         public const string STATE_ACTIVE = "ACTIVE";
         public const string STATE_ERROR = "ERROR";
+        public const string STATE_CREATED = "CREATED";
 
         public ModelLogState(string name, string pathTarget, string pathSource)
         {
