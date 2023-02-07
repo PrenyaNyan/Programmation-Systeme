@@ -43,9 +43,9 @@ namespace ProjetMVC.Controller
                         }
                         viewClass.WriteLine(modelClass.modelLangage.AskProjectName());
                         name = viewClass.ReadLine();
-                        viewClass.WriteLine(modelClass.modelLangage.AskPath(true));
+                        viewClass.WriteLine(modelClass.modelLangage.AskPath(issourcepath: true));
                         pathS = viewClass.ReadLine();
-                        viewClass.WriteLine(modelClass.modelLangage.AskPath(false));
+                        viewClass.WriteLine(modelClass.modelLangage.AskPath(issourcepath: false));
                         pathT = viewClass.ReadLine();
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSaveType());
                         saveTypenum = Convert.ToInt32(viewClass.ReadLine());
