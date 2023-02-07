@@ -84,6 +84,11 @@ namespace ProjetMVC.Controller
                         break;
 
                     case "2":
+                        if (modelClass.ModelSave.Projects.Count == 0)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.NoProject());
+                            break;
+                        }
                         foreach (SaveProject project in modelClass.ModelSave.Projects)
                         {
                             viewClass.WriteLine(modelClass.modelLangage.GetProjectInfo(project));
@@ -95,10 +100,20 @@ namespace ProjetMVC.Controller
                     //    break;
                     case "3":
                         // "3 : List all existing projects
+                        if (modelClass.ModelSave.Projects.Count == 0)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.NoProject());
+                            break;
+                        }
                         viewClass.WriteLine(modelClass.GetProjectList());
                         break;
                     case "4":
                         // "4 : Start a save project
+                        if (modelClass.ModelSave.Projects.Count == 0)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.NoProject());
+                            break;
+                        }
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSave());
                         viewClass.WriteLine(modelClass.GetProjectList());
                         try
@@ -121,6 +136,11 @@ namespace ProjetMVC.Controller
                         break;
                     case "5":
                         // "5 : Start all save projects
+                        if (modelClass.ModelSave.Projects.Count == 0)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.NoProject());
+                            break;
+                        }
                         foreach (SaveProject project in this.modelClass.ModelSave.Projects)
                         {
                             project.Save();
@@ -131,6 +151,11 @@ namespace ProjetMVC.Controller
                         viewClass.WriteLine(modelClass.modelLangage.GetLogPath());
                         break;
                     case "7":
+                        if (modelClass.ModelSave.Projects.Count == 0)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.NoProject());
+                            break;
+                        }
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSave());
                         viewClass.WriteLine(modelClass.GetProjectList());
                         try
