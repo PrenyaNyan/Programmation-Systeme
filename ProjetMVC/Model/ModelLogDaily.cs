@@ -17,7 +17,7 @@ namespace ProjetMVC.Model
         public string size { get; set; }
 
         /* Dailysave log path */
-        public const string DAILY_PATH = "Dailysave.json";
+        public string DAILY_PATH = DateTime.Now.ToString("dd-MM-yyyy") + ".json";
 
 
         public ModelLogDaily(string name, string pathTarget, string pathSource)
@@ -26,9 +26,11 @@ namespace ProjetMVC.Model
             this.pathTarget = pathTarget;
             this.pathSource = pathSource;
             this.time = DateTime.Now.ToString();
+            setTime();
         }
 
-        public void setTime() {
+        public void setTime()
+        {
             this.time = DateTime.Now.ToString();
         }
 
