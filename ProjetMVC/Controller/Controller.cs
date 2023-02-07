@@ -35,7 +35,28 @@ namespace ProjetMVC.Controller
                             viewClass.WriteLine(modelClass.modelLangage.ErrorTooManyProject());
                             break;
                         }
-                        
+                        viewClass.WriteLine(modelClass.modelLangage.AskProjectName());
+                        string name = viewClass.ReadLine();
+                        viewClass.WriteLine(modelClass.modelLangage.AskPath(false));
+                        string pathT = viewClass.ReadLine();
+                        viewClass.WriteLine(modelClass.modelLangage.AskPath(true));
+                        string pathS = viewClass.ReadLine();
+                        viewClass.WriteLine(modelClass.modelLangage.AskWhichSaveType());
+                        int saveTypenum = Convert.ToInt32(viewClass.ReadLine());
+                        SaveTypeEnum saveType;
+                        switch (saveTypenum)
+                        {
+                            case 1:
+                                saveType = SaveTypeEnum.Complete;
+                                break;
+                            case 2:
+                                saveType = SaveTypeEnum.Differential;
+                                break;
+                            default:
+                                saveType = SaveTypeEnum.Complete;
+                                break;
+                        }
+                        SaveProject saveproject = new SaveProject(name,pathS,pathT,saveType );
                         // "1 : Create a new save project
                         break;
                     case "2":
