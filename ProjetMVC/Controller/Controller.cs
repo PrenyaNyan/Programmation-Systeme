@@ -25,11 +25,17 @@ namespace ProjetMVC.Controller
         {
             while (true)
             {
-                
+                viewClass.WriteLine(modelClass.modelLangage.MenuTasks());
                 string option = viewClass.ReadLine();
                 switch (option)
                 {
                     case "1":
+                        if (!modelClass.CheckNumProject())
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.ErrorTooManyProject());
+                            break;
+                        }
+                        
                         // "1 : Create a new save project
                         break;
                     case "2":
@@ -48,6 +54,7 @@ namespace ProjetMVC.Controller
                         // "6 : Get the path of the log files
                         break;
                     default:
+                        viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
                         break;
                 }
 

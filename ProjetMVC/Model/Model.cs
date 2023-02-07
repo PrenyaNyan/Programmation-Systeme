@@ -12,7 +12,8 @@ namespace ProjetMVC.Model
     class ModelClass
     {
         Setting setting;
-        ModelLangage modelLangage1;
+        public ModelLangage modelLangage;
+        public ModelSave ModelSave;
         public ModelClass()
         {
             
@@ -20,7 +21,6 @@ namespace ProjetMVC.Model
         public void CheckSetting()
         {
 
-            ModelLangage modelLangage;
             ModelSave modelSave;
             string setfile = "setting.json";
             if (File.Exists(setfile))
@@ -65,6 +65,12 @@ namespace ProjetMVC.Model
                 default:
                     break;
             }
+        }
+
+        public bool CheckNumProject()
+        {
+            int count = this.ModelSave.Projects.Count();
+            return 0<=count & count<5;
         }
         public string GetAppBanner()
         {
