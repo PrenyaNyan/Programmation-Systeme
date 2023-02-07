@@ -13,15 +13,13 @@ namespace ProjetMVC.Model
     {
         Setting setting;
         public ModelLangage modelLangage;
-        public ModelSave ModelSave;
+        public ModelSave ModelSave = new();
         public ModelClass()
         {
             
         }
         public void CheckSetting()
         {
-
-            ModelSave modelSave;
             string setfile = "setting.json";
             if (File.Exists(setfile))
             {

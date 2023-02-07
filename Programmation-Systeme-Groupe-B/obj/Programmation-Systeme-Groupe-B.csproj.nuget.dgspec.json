@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\thefr\\Source\\Repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj": {}
+    "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj": {}
   },
   "projects": {
-    "C:\\Users\\thefr\\Source\\Repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj": {
+    "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thefr\\Source\\Repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj",
+        "projectUniqueName": "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj",
         "projectName": "Programmation-Systeme-Groupe-B",
-        "projectPath": "C:\\Users\\thefr\\Source\\Repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj",
-        "packagesPath": "C:\\Users\\thefr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thefr\\Source\\Repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\obj\\",
+        "projectPath": "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj",
+        "packagesPath": "C:\\Users\\lucie\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\thefr\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\lucie\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
