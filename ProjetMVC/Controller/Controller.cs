@@ -84,7 +84,9 @@ namespace ProjetMVC.Controller
                             viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
                             break;
                         }
-                        modelClass.ModelSave.Projects[savenum].Save();
+                        SaveProject selectedProject = modelClass.ModelSave.Projects[savenum];
+                        selectedProject.Save();
+                        selectedProject.GenerateStateLog(ModelLogState.STATE_END);
                         break;
                     case "5":
                         // "5 : Start all save projects

@@ -33,10 +33,9 @@ namespace ProjetMVC.Model
                 this.projects.Add(project);
                 // Ajout du projet au fichier de config
                 SaveProjectToFile(project, this.saveFilePath);
-                
+
                 //Log creation
-                this.stateLog = new ModelLogState(project.Name, project.PathSource, project.PathTarget);
-                this.stateLog.save();
+                project.GenerateStateLog(ModelLogState.STATE_ACTIVE);
 
             }
             else
