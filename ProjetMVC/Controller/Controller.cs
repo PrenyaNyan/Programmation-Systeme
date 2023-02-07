@@ -42,7 +42,15 @@ namespace ProjetMVC.Controller
                             break;
                         }
                         viewClass.WriteLine(modelClass.modelLangage.AskProjectName());
-                        name = viewClass.ReadLine();
+                        while (true)
+                        {
+                            name = viewClass.ReadLine();
+                            if (!modelClass.ModelSave.NameAlreadyExist(name))
+                            {
+                                break;
+                            }
+                            viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
+                        }
                         viewClass.WriteLine(modelClass.modelLangage.AskPath(issourcepath: true));
                         pathS = viewClass.ReadLine();
                         viewClass.WriteLine(modelClass.modelLangage.AskPath(issourcepath: false));
