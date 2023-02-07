@@ -36,6 +36,7 @@ namespace ProjetMVC.Controller
                 switch (option)
                 {
                     case "1":
+                        // "1 : Create a new save project
                         if (!modelClass.CheckNumProject())
                         {
                             viewClass.WriteLine(modelClass.modelLangage.ErrorTooManyProject());
@@ -56,7 +57,15 @@ namespace ProjetMVC.Controller
                         viewClass.WriteLine(modelClass.modelLangage.AskPath(issourcepath: false));
                         pathT = viewClass.ReadLine();
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSaveType());
-                        saveTypenum = Convert.ToInt32(viewClass.ReadLine());
+                        try
+                        {
+                            saveTypenum = Convert.ToInt32(viewClass.ReadLine());
+                        }
+                        catch (Exception)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
+                            break;
+                        }
                         SaveTypeEnum saveType;
                         switch (saveTypenum)
                         {
@@ -72,7 +81,6 @@ namespace ProjetMVC.Controller
                         }
                         saveproject = new SaveProject(name, pathS, pathT, saveType);
                         modelClass.ModelSave.addProject(saveproject);
-                        // "1 : Create a new save project
                         break;
 
                     case "2":
@@ -93,7 +101,15 @@ namespace ProjetMVC.Controller
                         // "4 : Start a save project
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSave());
                         viewClass.WriteLine(modelClass.GetProjectList());
-                        savenum = Convert.ToInt32(viewClass.ReadLine());
+                        try
+                        {
+                            savenum = Convert.ToInt32(viewClass.ReadLine());
+                        }
+                        catch (Exception)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
+                            break;
+                        }
                         if (savenum < 0 | savenum > modelClass.ModelSave.Projects.Count - 1)
                         {
                             viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
@@ -117,7 +133,15 @@ namespace ProjetMVC.Controller
                     case "7":
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSave());
                         viewClass.WriteLine(modelClass.GetProjectList());
-                        savenum = Convert.ToInt32(viewClass.ReadLine());
+                        try
+                        {
+                            savenum = Convert.ToInt32(viewClass.ReadLine());
+                        }
+                        catch (Exception)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
+                            break;
+                        }
                         viewClass.WriteLine(modelClass.modelLangage.GetProjectInfo(modelClass.ModelSave.Projects[savenum]));
                         break;
                     case "8":
