@@ -240,12 +240,14 @@ namespace ProjetMVC.Model
             this.stateLog.setFileAmount(this.progression.FileAmount);
             this.stateLog.setSize(this.progression.FileSize.ToString());
             this.stateLog.setState(state);
+            this.stateLog.setTime();
             this.stateLog.save();
         }
 
         public void GenerateDailyLog()
         {
             this.dailyLog.setSize(this.progression.FileSize.ToString());
+            this.dailyLog.setTime();
             this.dailyLog.save();
         }
     }
