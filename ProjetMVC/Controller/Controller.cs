@@ -36,19 +36,36 @@ namespace ProjetMVC.Controller
                 switch (option)
                 {
                     case "1":
+                        // "1 : Create a new save project
                         if (!modelClass.CheckNumProject())
                         {
                             viewClass.WriteLine(modelClass.modelLangage.ErrorTooManyProject());
                             break;
                         }
                         viewClass.WriteLine(modelClass.modelLangage.AskProjectName());
-                        name = viewClass.ReadLine();
+                        while (true)
+                        {
+                            name = viewClass.ReadLine();
+                            if (!modelClass.ModelSave.NameAlreadyExist(name))
+                            {
+                                break;
+                            }
+                            viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
+                        }
                         viewClass.WriteLine(modelClass.modelLangage.AskPath(issourcepath: true));
                         pathS = viewClass.ReadLine();
                         viewClass.WriteLine(modelClass.modelLangage.AskPath(issourcepath: false));
                         pathT = viewClass.ReadLine();
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSaveType());
-                        saveTypenum = Convert.ToInt32(viewClass.ReadLine());
+                        try
+                        {
+                            saveTypenum = Convert.ToInt32(viewClass.ReadLine());
+                        }
+                        catch (Exception)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
+                            break;
+                        }
                         SaveTypeEnum saveType;
                         switch (saveTypenum)
                         {
@@ -64,10 +81,14 @@ namespace ProjetMVC.Controller
                         }
                         saveproject = new SaveProject(name, pathS, pathT, saveType);
                         modelClass.ModelSave.addProject(saveproject);
-                        // "1 : Create a new save project
                         break;
 
                     case "2":
+                        if (modelClass.ModelSave.Projects.Count == 0)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.NoProject());
+                            break;
+                        }
                         foreach (SaveProject project in modelClass.ModelSave.Projects)
                         {
                             viewClass.WriteLine(modelClass.modelLangage.GetProjectInfo(project));
@@ -79,13 +100,31 @@ namespace ProjetMVC.Controller
                     //    break;
                     case "3":
                         // "3 : List all existing projects
+                        if (modelClass.ModelSave.Projects.Count == 0)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.NoProject());
+                            break;
+                        }
                         viewClass.WriteLine(modelClass.GetProjectList());
                         break;
                     case "4":
                         // "4 : Start a save project
+                        if (modelClass.ModelSave.Projects.Count == 0)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.NoProject());
+                            break;
+                        }
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSave());
                         viewClass.WriteLine(modelClass.GetProjectList());
-                        savenum = Convert.ToInt32(viewClass.ReadLine());
+                        try
+                        {
+                            savenum = Convert.ToInt32(viewClass.ReadLine());
+                        }
+                        catch (Exception)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
+                            break;
+                        }
                         if (savenum < 0 | savenum > modelClass.ModelSave.Projects.Count - 1)
                         {
                             viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
@@ -97,6 +136,11 @@ namespace ProjetMVC.Controller
                         break;
                     case "5":
                         // "5 : Start all save projects
+                        if (modelClass.ModelSave.Projects.Count == 0)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.NoProject());
+                            break;
+                        }
                         foreach (SaveProject project in this.modelClass.ModelSave.Projects)
                         {
                             project.Save();
@@ -107,9 +151,22 @@ namespace ProjetMVC.Controller
                         viewClass.WriteLine(modelClass.modelLangage.GetLogPath());
                         break;
                     case "7":
+                        if (modelClass.ModelSave.Projects.Count == 0)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.NoProject());
+                            break;
+                        }
                         viewClass.WriteLine(modelClass.modelLangage.AskWhichSave());
                         viewClass.WriteLine(modelClass.GetProjectList());
-                        savenum = Convert.ToInt32(viewClass.ReadLine());
+                        try
+                        {
+                            savenum = Convert.ToInt32(viewClass.ReadLine());
+                        }
+                        catch (Exception)
+                        {
+                            viewClass.WriteLine(modelClass.modelLangage.GetGenericErrorMsg());
+                            break;
+                        }
                         viewClass.WriteLine(modelClass.modelLangage.GetProjectInfo(modelClass.ModelSave.Projects[savenum]));
                         break;
                     case "8":

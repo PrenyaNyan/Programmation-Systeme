@@ -82,5 +82,9 @@ namespace ProjetMVC.Model.Langage
             text += "\tSave Type : " + project.SaveType + "\n";
             return text;
         }
+        public override string NoProject()
+        {
+            return "\tThere's no project created, please make one before executing that function\n";
+        }
     }
 }

@@ -76,12 +76,12 @@ namespace ProjetMVC.Model
             InitializeJsonFile(this.saveFilePath);
         }
 
-        public bool NameAlreadyExist(SaveProject project)
+        public bool NameAlreadyExist(string name)
         {
             bool isPresent = false;
             foreach(SaveProject p in this.Projects)
             {
-                if (p.Name.Equals(project.Name)) isPresent = true;
+                if (p.Name.Equals(name)) isPresent = true;
             }
             return isPresent;
         }
