@@ -8,18 +8,41 @@
         mc:Ignorable="d"
         Height="450" Width="800">
     <UserControl.Resources>
-        <vm:ViewModel x:Key="VM"/> 
+        <vm:ViewModel x:Key="VM"/>
     </UserControl.Resources>
     <Grid DataContext="{Binding Source={StaticResource VM}}">
         <Grid.Background>
             <ImageBrush ImageSource="/View/fondMiA.jpg"/>
         </Grid.Background>
-        <Button Content="Salut c'est moi" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding OpenBrowser}" Height="144" Width="226" Visibility="Visible" Click="Button_Click">
-			<Button.Effect>
-				<DropShadowEffect/>
-			</Button.Effect>
-		</Button>
-		<Label Content="Label" HorizontalAlignment="Left" Margin="201,52,0,0" VerticalAlignment="Top" Height="61" Width="312" AutomationProperties.Name="labelTest" BorderBrush="Black" Background="White"/>
+        <Button Content="Salut c'est moi" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding OpenBrowser}" Height="48" Width="125" Visibility="Visible" Click="Button_Click" Margin="614,142,0,0">
+            <UIElement.RenderTransform>
+                <MatrixTransform/>
+            </UIElement.RenderTransform>
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="201,52,0,0" VerticalAlignment="Top" Height="61" Width="312" AutomationProperties.Name="labelTest" BorderBrush="Black" Background="White"/>
+        <TabControl>
+            <TabItem Header="TabItem">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/View/fondMiA.jpg"/>
+                    </Grid.Background>
+                    <Button Content="Salut c'est moi" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding OpenBrowser}" Height="48" Width="125" Visibility="Visible" Click="Button_Click" Margin="614,142,0,0">
+                        <UIElement.RenderTransform>
+                            <MatrixTransform/>
+                        </UIElement.RenderTransform>
+                        <Button.Effect>
+                            <DropShadowEffect/>
+                        </Button.Effect>
+                    </Button>
+                  </Grid>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
 
-	</Grid>
+    </Grid>
 </UserControl>
