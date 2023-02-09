@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="la variable &quot;projects&quot; est une liste de SaveProject">
+    <Position X="6.946" Y="8.556" Height="0.75" Width="1.7" />
+  </Comment>
+  <Class Name="ProjetMVC.ModelLogState" Collapsed="true">
+    <Position X="9.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAARAAAAACCAAAgABIAAAACAAAAAAAAEAAiAgAAQAAQ=</HashCode>
+      <FileName>Model\ModelLogState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetMVC.Program">
+    <Position X="0.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetMVC.Controller.ControllerClass">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controller\Controller.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="modelClass" />
+      <Field Name="viewClass" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ProjetMVC.Model.ModelLangage" Collapsed="true">
+    <Position X="3.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAADAAgAABAEIAAEIAAEAAAAAAAAAAAgAAAgA=</HashCode>
+      <FileName>Model\Langage\ModelLangage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetMVC.Model.ModelClass">
+    <Position X="6.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEgAABAAAAAAAEAAAAAAAAAAAAAAAQAAACAAAAAAQAA=</HashCode>
+      <FileName>Model\Model.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="modelLangage" />
+      <Field Name="ModelSave" />
+      <Field Name="setting" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ProjetMVC.Model.ModelLogDaily" Collapsed="true">
+    <Position X="12" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAACAAAgAAIAAAAAAAAACAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Model\ModelLogDaily.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetMVC.Model.ModelLogTemplate" Collapsed="true">
+    <Position X="10.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgEAAAICAAAAAAAAAAAAABAAEAAAAAEAAAAAEAAA=</HashCode>
+      <FileName>Model\ModelLogTemplate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetMVC.Model.ModelSave">
+    <Position X="7" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAABAAQAAAAAAAAAAAAIAAAAABMBAAAYA=</HashCode>
+      <FileName>Model\ModelSave.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="stateLog" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ProjetMVC.Model.Progression" Collapsed="true">
+    <Position X="13.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAABAAAgBAAAAAQAAAAAAAAgAAAAIAAA=</HashCode>
+      <FileName>Model\Progression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetMVC.Model.SaveProject">
+    <Position X="11" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAMAAAERAEBBEABAgAAQAIQAVQEAAAEAAAgAAAAA=</HashCode>
+      <FileName>Model\SaveProject.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dailyLog" />
+      <Field Name="stateLog" />
+      <Field Name="saveType" />
+      <Field Name="progression" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ProjetMVC.Model.Setting">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Model\Setting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetMVC.Model.Langage.ModelLangageEN">
+    <Position X="2.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAACAAgAABAEIAAEIAAEAAAAAAAAAAAgAAAgA=</HashCode>
+      <FileName>Model\Langage\ModelLangageEN.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetMVC.Model.Langage.ModelLangageFR">
+    <Position X="4.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAACAAgAABAEIAAEIAAEAAAAAAAAAAAgAAAgA=</HashCode>
+      <FileName>Model\Langage\ModelLangageFR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetMVC.View.ViewClass">
+    <Position X="12" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\View.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="ProjetMVC.Model.SaveTypeEnum">
+    <Position X="13.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\SaveTypeEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

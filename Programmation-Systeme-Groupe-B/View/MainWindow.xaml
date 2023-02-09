@@ -6,20 +6,31 @@
         xmlns:local="clr-namespace:Programmation_Systeme_Groupe_B"
         xmlns:vm="clr-namespace:Programmation_Systeme_Groupe_B.ViewModels"
         mc:Ignorable="d"
-        Height="450" Width="800">
+        Height="450" Width="836">
     <UserControl.Resources>
-        <vm:ViewModel x:Key="VM"/> 
+        <vm:ViewModel x:Key="VM"/>
+        <Style x:Key="GridStyle1" TargetType="{x:Type Grid}"/>
     </UserControl.Resources>
-    <Grid DataContext="{Binding Source={StaticResource VM}}">
+    <Grid Style="{DynamicResource GridStyle1}" DataContext="{Binding Source={StaticResource VM}}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="/View/fondMiA.jpg"/>
         </Grid.Background>
-        <Button Content="Salut c'est moi" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding OpenBrowser}" Height="144" Width="226" Visibility="Visible" Click="Button_Click">
-			<Button.Effect>
-				<DropShadowEffect/>
-			</Button.Effect>
-		</Button>
-		<Label Content="Label" HorizontalAlignment="Left" Margin="201,52,0,0" VerticalAlignment="Top" Height="61" Width="312" AutomationProperties.Name="labelTest" BorderBrush="Black" Background="White"/>
+        <Button Content="Salut c'est moi" Command="{Binding OpenBrowser}" Visibility="Visible" Click="Button_Click" Grid.Column="1" Grid.Row="1" Margin="38,24,38,24">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Label Content="Label" HorizontalAlignment="Center" VerticalAlignment="Center" Height="54" Width="187" AutomationProperties.Name="labelTest" BorderBrush="Black" Background="White"/>
 
-	</Grid>
+    </Grid>
 </UserControl>
