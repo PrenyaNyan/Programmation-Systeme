@@ -7,15 +7,12 @@ using ProjetMVC.Model;
 
 namespace ProjetMVC
 {
-    class ModelLogState : ModelLogTemplate
+    public class ModelLogState : ModelLogTemplate
     {
         public string time { get; set; }
         public string size { get; set; }
         public string state { get; set; }
         public int fileAmount { get; set; }
-
-        /* State log path */
-        public const string STATE_PATH = "Statesave.json";
 
         /* States const */
         public const string STATE_END = "END";
@@ -23,11 +20,10 @@ namespace ProjetMVC
         public const string STATE_ERROR = "ERROR";
         public const string STATE_CREATED = "CREATED";
 
-        public ModelLogState(string name, string pathTarget, string pathSource)
+        public ModelLogState()
         {
-            this.name = name;
-            this.pathTarget = pathTarget;
-            this.pathSource = pathSource;
+            this.logPath = "Statesave";
+            setLogType();
             setTime();
         }
 
@@ -53,7 +49,7 @@ namespace ProjetMVC
 
         public void save()
         {
-            update(STATE_PATH, this);
+            update(this.logPath, this);
         }
     }
 }

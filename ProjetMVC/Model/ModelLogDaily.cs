@@ -11,21 +11,15 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace ProjetMVC.Model
 {
-    class ModelLogDaily : ModelLogTemplate
+    public class ModelLogDaily : ModelLogTemplate
     {
         public string time { get; set; }
         public string size { get; set; }
 
-        /* Dailysave log path */
-        public string DAILY_PATH = DateTime.Now.ToString("dd-MM-yyyy") + ".json";
-
-
-        public ModelLogDaily(string name, string pathTarget, string pathSource)
+        public ModelLogDaily()
         {
-            this.name = name;
-            this.pathTarget = pathTarget;
-            this.pathSource = pathSource;
-            this.time = DateTime.Now.ToString();
+            this.logPath = DateTime.Now.ToString("dd-MM-yyyy");
+            setLogType();
             setTime();
         }
 
@@ -34,16 +28,9 @@ namespace ProjetMVC.Model
             this.time = DateTime.Now.ToString();
         }
 
-        public void setSize(string size)
-        {
-            this.size = size;
-        }
-
-
-
         public void save()
         {
-            update(DAILY_PATH, this);
+            update(this.logPath, this);
         }
     }
 }

@@ -9,5 +9,6 @@ namespace ProjetMVC.Model
     class Setting
     {
         public string Langue { get; set; }
+        public string logType { get; set; }
     }
 }

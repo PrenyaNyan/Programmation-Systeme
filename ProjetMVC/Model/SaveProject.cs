@@ -11,8 +11,8 @@ namespace ProjetMVC.Model
     {
 
         // State log object
-        private ModelLogState stateLog;
-        private ModelLogDaily dailyLog;
+        public ModelLogState stateLog;
+        public ModelLogDaily dailyLog;
         // Project Name
         private string name;
         public string Name
@@ -73,8 +73,8 @@ namespace ProjetMVC.Model
             this.saveType = saveType;
             this.progression = new Progression();
             this.startTime = DateTime.Now;
-            this.stateLog = new ModelLogState(this.name, this.pathSource, this.pathTarget);
-            this.dailyLog = new ModelLogDaily(this.name, this.pathSource, this.pathTarget);
+            this.stateLog = new ModelLogState();
+            this.dailyLog = new ModelLogDaily();
         }
 
         // TODO: Méthode pour démarrer le processus de sauvegarde, définir : fileSize et la progression 
@@ -237,8 +237,12 @@ namespace ProjetMVC.Model
         // Generate active state log
         public void GenerateStateLog(string state)
         {
-            this.stateLog.setFileAmount(this.progression.FileAmount);
-            this.stateLog.setSize(this.progression.FileSize.ToString());
+            /*this.name, this.pathSource, this.pathTarget*/
+            this.stateLog.name = this.name;
+            this.stateLog.pathSource = this.pathSource;
+            this.stateLog.pathTarget = this.pathTarget;
+            this.stateLog.fileAmount = this.progression.FileAmount;
+            this.stateLog.size = this.progression.FileSize.ToString();
             this.stateLog.setState(state);
             this.stateLog.setTime();
             this.stateLog.save();
@@ -246,7 +250,10 @@ namespace ProjetMVC.Model
 
         public void GenerateDailyLog()
         {
-            this.dailyLog.setSize(this.progression.FileSize.ToString());
+            this.dailyLog.name = this.name;
+            this.dailyLog.pathSource = this.pathSource;
+            this.dailyLog.pathTarget = this.pathTarget;
+            this.dailyLog.size = this.progression.FileSize.ToString();
             this.dailyLog.setTime();
             this.dailyLog.save();
         }

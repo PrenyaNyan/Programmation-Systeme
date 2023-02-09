@@ -20,12 +20,13 @@ namespace ProjetMVC.Model
         }
         public void CheckSetting()
         {
-            string setfile = "setting.json";
+            string setfile = "settings.json";
             if (!File.Exists(setfile))
             {
                 var file = File.Create(setfile);
                 file.Close();
                 string lang = "";
+                string logType = "";
                 while (true)
                 {
                     Console.WriteLine("Choissez votre langue entre fr et en\nChoose your langage between fr and en");
@@ -34,13 +35,29 @@ namespace ProjetMVC.Model
                     {
                         break;
                     }
+                }
+                while (true)
+                {
+                    if (lang == "fr")
+                    {
+                        Console.WriteLine("Choissez votre format de log entre json et xml");
+                    
+                    }
+                    else
+                    {
+                        Console.WriteLine("Choose your log format between json and xml");
+                    }
+                    logType = Console.ReadLine();
+                    if (logType == "json" || logType == "xml")
+                    {
+                        break;
+                    }
                     else
                     {
                         Console.WriteLine("Erreur!\nError!\nRecommencez !\nTry again !");
                     }
-
                 }
-                var texte = new { Langue = lang };
+                var texte = new { Langue = lang, logType = logType };
                 File.WriteAllText(setfile, JsonSerializer.Serialize(texte));
                 file.Close();
             }
@@ -57,6 +74,7 @@ namespace ProjetMVC.Model
                 default:
                     break;
             }
+           
         }
 
         public bool CheckNumProject()
