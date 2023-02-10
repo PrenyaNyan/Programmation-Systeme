@@ -10,9 +10,11 @@
 
   <ItemGroup>
     <None Remove="fondMiA.jpg" />
+    <None Remove="View\Fifi.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="View\Fifi.png" />
     <Resource Include="View\fondMiA.jpg" />
   </ItemGroup>
 
