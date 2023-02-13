@@ -24,7 +24,7 @@ namespace ProjetMVC.Model
             SaveProjectToFile(project, this.saveFilePath);
 
             //Log creation
-            project.GenerateStateLog(ModelLogState.STATE_CREATED)
+            project.GenerateStateLog(ModelLogState.STATE_CREATED);
         }
 
         public void RetrieveProject(string path)

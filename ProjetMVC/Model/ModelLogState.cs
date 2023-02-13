@@ -19,12 +19,14 @@ namespace ProjetMVC
         public const string STATE_ACTIVE = "ACTIVE";
         public const string STATE_ERROR = "ERROR";
         public const string STATE_CREATED = "CREATED";
+        public const string STATE_START = "START";
+        
 
         private ModelLogState()
         {
             this.logPath = "Statesave";
             setLogType();
-            setTime();
+            setTime(DateTime.Now.ToString());
         }
 
         private static ModelLogState instance;
@@ -39,9 +41,9 @@ namespace ProjetMVC
         }
 
 
-        public void setTime()
+        public void setTime(string time)
         {
-            this.time = DateTime.Now.ToString();
+            this.time = time;
         }
 
         public void setSize(string size)

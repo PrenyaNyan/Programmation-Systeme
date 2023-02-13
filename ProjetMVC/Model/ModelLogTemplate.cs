@@ -15,6 +15,7 @@ namespace ProjetMVC.Model
         public string pathTarget { get; set; }
         public string pathSource { get; set; }
         public string logType { get; set; }
+        public long progression { get; set; }
 
         public const string JSONLOG = "json";
         public const string XMLLOG = "xml";

@@ -13,6 +13,7 @@ namespace ProjetMVC.Model
         // State log object
         public ModelLogState stateLog;
         public ModelLogDaily dailyLog;
+        public DateTime logStart;
         // Project Name
         private string name;
         public string Name
@@ -80,8 +81,12 @@ namespace ProjetMVC.Model
         // TODO: Méthode pour démarrer le processus de sauvegarde, définir : fileSize et la progression 
         public void Save()
         {
+            this.progression.FilesSizeCopied = 0;
+            this.progression.CopiedFiles = 0;
             this.progression.FileSize = DirSize(new DirectoryInfo(this.pathSource));
             this.progression.FileAmount = Directory.GetFiles(this.pathSource, "*", SearchOption.AllDirectories).Length;
+            this.logStart = DateTime.Now;
+            GenerateStateLog(ModelLogState.STATE_START);
 
 
             if (this.saveType == SaveTypeEnum.Complete)
@@ -135,6 +140,14 @@ namespace ProjetMVC.Model
                 file.CopyTo(temppath, true);
                 progression.CopiedFiles += 1;
                 progression.FilesSizeCopied += file.Length;
+                /*Percentage*/
+
+                if (getPercentage() > this.stateLog.progression)
+                {
+                    GenerateStateLog(ModelLogState.STATE_ACTIVE);
+                }
+
+
             }
 
             foreach (DirectoryInfo subdir in subDirectory)
@@ -146,6 +159,7 @@ namespace ProjetMVC.Model
                 CompleteSave(subdir.FullName, temppath, progression);
             }
         }
+
 
         private void DifferentialSave(string source, string target, Progression progression)
         {
@@ -180,8 +194,7 @@ namespace ProjetMVC.Model
                 if (!File.Exists(temppath))
                 {
                     file.CopyTo(temppath, false);
-                    progression.CopiedFiles += 1;
-                    progression.FilesSizeCopied += file.Length;
+
                 }
                 else
                 {
@@ -192,8 +205,12 @@ namespace ProjetMVC.Model
                     {
                         file.CopyTo(temppath, true);
                     }
-                    progression.CopiedFiles += 1;
-                    progression.FilesSizeCopied += file.Length;
+                }
+                progression.CopiedFiles += 1;
+                progression.FilesSizeCopied += file.Length;
+                if (getPercentage() > this.stateLog.progression)
+                {
+                    GenerateStateLog(ModelLogState.STATE_ACTIVE);
                 }
             }
 
@@ -206,6 +223,15 @@ namespace ProjetMVC.Model
                 DifferentialSave(subdir.FullName, temppath, progression);
             }
         }
+        private long getPercentage()
+        {
+            if(this.progression.FileSize <= 0)
+            {
+                return 0;
+            }
+            return (this.progression.FilesSizeCopied * 100) / this.progression.FileSize;
+        }
+
         public SaveProject GetInfo()
         {
             return this;
@@ -243,8 +269,17 @@ namespace ProjetMVC.Model
             this.stateLog.pathTarget = this.pathTarget;
             this.stateLog.fileAmount = this.progression.FileAmount;
             this.stateLog.size = this.progression.FileSize.ToString();
+            this.stateLog.progression = getPercentage();
             this.stateLog.setState(state);
-            this.stateLog.setTime();
+            if (this.stateLog.state == ModelLogState.STATE_ACTIVE)
+            {
+                this.stateLog.setTime((this.logStart - DateTime.Now).ToString());
+            }
+            else
+            {
+                this.stateLog.setTime(DateTime.Now.ToString());
+            }
+
             this.stateLog.save();
         }
 
