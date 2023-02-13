@@ -16,12 +16,24 @@ namespace ProjetMVC.Model
         public string time { get; set; }
         public string size { get; set; }
 
-        public ModelLogDaily()
+        private ModelLogDaily()
         {
             this.logPath = DateTime.Now.ToString("dd-MM-yyyy");
             setLogType();
             setTime();
         }
+
+        private static ModelLogDaily instance;
+
+        public static ModelLogDaily GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new ModelLogDaily();
+            }
+            return instance;
+        }
+
 
         public void setTime()
         {

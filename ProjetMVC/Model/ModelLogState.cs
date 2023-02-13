@@ -20,12 +20,24 @@ namespace ProjetMVC
         public const string STATE_ERROR = "ERROR";
         public const string STATE_CREATED = "CREATED";
 
-        public ModelLogState()
+        private ModelLogState()
         {
             this.logPath = "Statesave";
             setLogType();
             setTime();
         }
+
+        private static ModelLogState instance;
+
+        public static ModelLogState GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new ModelLogState();
+            }
+            return instance;
+        }
+
 
         public void setTime()
         {

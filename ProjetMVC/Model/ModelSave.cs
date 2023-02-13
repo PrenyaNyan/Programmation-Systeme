@@ -18,21 +18,13 @@ namespace ProjetMVC.Model
 
         public void addProject(SaveProject project)
         {
-            if (this.projects.Count < 5)
-            {
-                this.projects.Add(project);
-                // Ajout du projet au fichier de config
-                SaveProjectToFile(project, this.saveFilePath);
 
-                //Log creation
-                project.GenerateStateLog(ModelLogState.STATE_CREATED);
+            this.projects.Add(project);
+            // Ajout du projet au fichier de config
+            SaveProjectToFile(project, this.saveFilePath);
 
-            }
-            else
-            {
-                // Message d'erreur nombre maximal de travaux atteint
-                return;
-            }
+            //Log creation
+            project.GenerateStateLog(ModelLogState.STATE_CREATED)
         }
 
         public void RetrieveProject(string path)
@@ -79,7 +71,7 @@ namespace ProjetMVC.Model
         public bool NameAlreadyExist(string name)
         {
             bool isPresent = false;
-            foreach(SaveProject p in this.Projects)
+            foreach (SaveProject p in this.Projects)
             {
                 if (p.Name.Equals(name)) isPresent = true;
             }

@@ -73,8 +73,8 @@ namespace ProjetMVC.Model
             this.saveType = saveType;
             this.progression = new Progression();
             this.startTime = DateTime.Now;
-            this.stateLog = new ModelLogState();
-            this.dailyLog = new ModelLogDaily();
+            this.stateLog = ModelLogState.GetInstance();
+            this.dailyLog = ModelLogDaily.GetInstance();
         }
 
         // TODO: Méthode pour démarrer le processus de sauvegarde, définir : fileSize et la progression 
@@ -229,7 +229,7 @@ namespace ProjetMVC.Model
             return size;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return this.name + " " + this.PathSource + " " + this.PathTarget + " " + this.SaveType;
         }
