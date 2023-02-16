@@ -32,6 +32,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             openFolderDirectory = new(this);
             openWindow = new(this);
             closeWindow = new(this);
+            getProjects = new(this);
             changeLanguage = new ChangeLanguage(this);
             buttonImageString = "/View/Drapeau-France.png";
         }
@@ -196,7 +197,7 @@ public string NewTargetPath
         }
         internal void GetProjectsCommand()
         {
-
+            
         }
     #endregion
     }
