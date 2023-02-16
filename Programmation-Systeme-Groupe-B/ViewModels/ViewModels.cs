@@ -16,6 +16,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
     #region Private Fields
         private OpenFileBrowser openFileBrowser;
         private ChangeLanguage changeLanguage;
+        private GetProjects getProjects;
         private string buttonImageString;
         private string newSourcePath;
         private string newTargetPath;
@@ -81,6 +82,14 @@ public string NewTargetPath
         
     #endregion
     #region Model
+        public ICommand GetProjects
+        {
+            get
+            {
+                return getProjects;
+            }
+        }
+
         public ICommand OpenBrowser
         {
             get
@@ -121,7 +130,7 @@ public string NewTargetPath
     #endregion
 
     #region Method
-    internal void OpenFileBrowserCommand()
+        internal void OpenFileBrowserCommand()
         {
             var dialog = new Microsoft.Win32.OpenFileDialog();
             dialog.FileName = "Document"; // Default file name
@@ -138,7 +147,7 @@ public string NewTargetPath
             }
         }
 
-    internal void OpenFolderDirectoryCommand(object parameter)
+        internal void OpenFolderDirectoryCommand(object parameter)
         {
             var dialog = new FolderBrowserDialog();
             string value = parameter.ToString();
@@ -156,7 +165,7 @@ public string NewTargetPath
             }
             
         }
-    internal void OpenWindowCommand()
+        internal void OpenWindowCommand()
         {
             windowCreateSave = new WindowCreateSave();
             annulbouton = new Button();
@@ -167,7 +176,7 @@ public string NewTargetPath
             }
             
         }
-    internal void ChangeLanguageCommand()
+        internal void ChangeLanguageCommand()
         {
             if (BoutonImagePath == "/View/Drapeau-France.png")
             {
@@ -181,10 +190,14 @@ public string NewTargetPath
             }
             Console.WriteLine("NON");
         }
-    internal void CloseWindowCommand()
+        internal void CloseWindowCommand()
         {
             
         }
+        internal void GetProjectsCommand()
+        {
+
+        }
     #endregion
-}
+    }
 }
