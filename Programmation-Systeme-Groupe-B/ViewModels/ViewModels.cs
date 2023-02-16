@@ -16,6 +16,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         #region Private Fields
         private OpenFileBrowser openFileBrowser;
         private ChangeLanguage changeLanguage;
+        private GetProjects getProjects;
         private string buttonImageString;
         private string newSourcePath;
         private string newTargetPath;
@@ -122,9 +123,17 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 OnPropertyChanged("NewTargetPath");
             }
         }
+        
+    #endregion
+    #region Model
+        public ICommand GetProjects
+        {
+            get
+            {
+                return getProjects;
+            }
+        }
 
-        #endregion
-        #region Model
         public ICommand OpenBrowser
         {
             get
@@ -164,7 +173,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
         #endregion
 
-        #region Method
+    #region Method
         internal void OpenFileBrowserCommand()
         {
             var dialog = new Microsoft.Win32.OpenFileDialog();
@@ -229,6 +238,10 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         {
 
         }
-        #endregion
+        internal void GetProjectsCommand()
+        {
+
+        }
+    #endregion
     }
 }
