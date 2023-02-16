@@ -22,7 +22,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Créer une Sauvegarde" Margin="42,174,42,85" FontSize="8" Command="{Binding OpenBrowser}">
+            <Button Content="Créer une Sauvegarde" Margin="42,174,42,85" FontSize="8" Command="{Binding OpenWindow}">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -42,7 +42,13 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Image HorizontalAlignment="Left" Height="100" Margin="42,46,0,0" VerticalAlignment="Top" Width="100" OpacityMask="White" Source="/View/Fifi.png"/>
+            <Image Height="100" Margin="34,46,34,0" VerticalAlignment="Top" OpacityMask="White" Source="/View/Fifi.png"/>
+            <Rectangle Height="16" Stroke="Black" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Fill="#FFA0A0A0" Margin="0,0,0,258"/>
+            <Button  Command="{Binding ChangeLanguage}"   Grid.Column="1" HorizontalAlignment="Left" Height="14" Margin="312,1,0,0" VerticalAlignment="Top" Width="23" FontSize="9" FontFamily="Candara" BorderThickness="0,0,0,0" AutomationProperties.Name="BoutonLangue">
+                <Button.Background>
+                    <ImageBrush ImageSource="{Binding BoutonImagePath}"/>
+                </Button.Background>
+            </Button>
 
         </Grid>
     </Viewbox>

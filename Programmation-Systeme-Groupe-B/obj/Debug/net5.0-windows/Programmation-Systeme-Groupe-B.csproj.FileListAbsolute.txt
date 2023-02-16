@@ -43,3 +43,5 @@ C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme
 C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\MainWindow.baml
 C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\Programmation-Systeme-Groupe-B_MarkupCompile.lref
+C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\WindowCreateSave.g.cs
+C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\WindowCreateSave.baml

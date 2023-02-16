@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Programmation_Systeme_Groupe_B.ViewModels;
 using System.Windows.Input;
+using Programmation_Systeme_Groupe_B.ViewModels;
 
 namespace Programmation_Systeme_Groupe_B.Model.Specific
 {
-    class OpenFileBrowser : ICommand
+    class OpenWindow : ICommand
     {
         private ViewModel viewModel;
 
-        public OpenFileBrowser(ViewModel vm)
+        public OpenWindow(ViewModel vm)
         {
             viewModel = vm;
 
@@ -25,7 +25,7 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
 
         public void Execute(object parameter)
         {
-            viewModel.OpenFolderDirectoryCommand(parameter);
+            viewModel.OpenWindowCommand();
         }
         public event EventHandler CanExecuteChanged;
     }

@@ -10,10 +10,14 @@
 
   <ItemGroup>
     <None Remove="fondMiA.jpg" />
+    <None Remove="View\Drapeau-France.png" />
+    <None Remove="View\DrapeauR-U.png" />
     <None Remove="View\Fifi.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="View\Drapeau-France.png" />
+    <Resource Include="View\DrapeauR-U.png" />
     <Resource Include="View\Fifi.png" />
     <Resource Include="View\fondMiA.jpg" />
   </ItemGroup>
