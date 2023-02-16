@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Programmation-Systeme-Group
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetMVC", "ProjetMVC\ProjetMVC.csproj", "{BE44986C-5446-46DD-AC1A-71667BD26F28}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryptosoft", "Cryptosoft\Cryptosoft.csproj", "{3CF3AC14-95A3-4F0B-9D2F-BA86ACDFAF94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BE44986C-5446-46DD-AC1A-71667BD26F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE44986C-5446-46DD-AC1A-71667BD26F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE44986C-5446-46DD-AC1A-71667BD26F28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CF3AC14-95A3-4F0B-9D2F-BA86ACDFAF94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CF3AC14-95A3-4F0B-9D2F-BA86ACDFAF94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CF3AC14-95A3-4F0B-9D2F-BA86ACDFAF94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CF3AC14-95A3-4F0B-9D2F-BA86ACDFAF94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
