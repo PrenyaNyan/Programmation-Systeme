@@ -8,11 +8,11 @@ using System.Windows.Input;
 
 namespace Programmation_Systeme_Groupe_B.Model.Specific
 {
-    class OpenFileBrowser : ICommand
+    class OpenFolderDirectory : ICommand
     {
         private ViewModel viewModel;
 
-        public OpenFileBrowser(ViewModel vm)
+        public OpenFolderDirectory(ViewModel vm)
         {
             viewModel = vm;
 
@@ -30,3 +30,4 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
         public event EventHandler CanExecuteChanged;
     }
 }
+

@@ -8,11 +8,11 @@ using System.Windows.Input;
 
 namespace Programmation_Systeme_Groupe_B.Model.Specific
 {
-    class OpenFileBrowser : ICommand
+    class ChangeLanguage : ICommand
     {
         private ViewModel viewModel;
 
-        public OpenFileBrowser(ViewModel vm)
+        public ChangeLanguage(ViewModel vm)
         {
             viewModel = vm;
 
@@ -25,7 +25,7 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
 
         public void Execute(object parameter)
         {
-            viewModel.OpenFolderDirectoryCommand(parameter);
+            viewModel.ChangeLanguageCommand();
         }
         public event EventHandler CanExecuteChanged;
     }
