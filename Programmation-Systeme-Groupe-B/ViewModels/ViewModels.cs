@@ -13,7 +13,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 {
     class ViewModel : ViewModelBase
     {
-    #region Private Fields
+        #region Private Fields
         private OpenFileBrowser openFileBrowser;
         private ChangeLanguage changeLanguage;
         private GetProjects getProjects;
@@ -25,8 +25,12 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private WindowCreateSave windowCreateSave;
         private CloseWindow closeWindow;
         private Button annulbouton;
-    #endregion
-    public ViewModel()
+        #endregion
+        #region Private Fields Lang
+        private bool langue;//if true then french
+        private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave;
+        #endregion
+        public ViewModel()
         {
             openFileBrowser = new OpenFileBrowser(this);
             openFolderDirectory = new(this);
@@ -35,16 +39,54 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             getProjects = new(this);
             changeLanguage = new ChangeLanguage(this);
             buttonImageString = "/View/Drapeau-France.png";
+            Langue = true;
         }
-    #region Public Properties
-public Button AnnulButton
+        #region Public Properties
+        public bool Langue
+        {
+            get
+            {
+                return langue;
+            }
+            set
+            {
+                langue = value;
+                if (langue) // If FR bro he is like us
+                {
+                    boutonLancerSave = "Lancer toutes les sauvegardes";
+                    boutonCreate = "Créer une sauvegarde";
+                }
+                else // He's not FR like us
+                {
+                    boutonLancerSave = "Start all save";
+                    boutonCreate = "Create a new save";
+                }
+                OnPropertyChanged("BoutonLancerSave");
+                OnPropertyChanged("BoutonCreate");
+            }
+        }
+        public string BoutonLancerSave
+        {
+            get
+            {
+                return boutonLancerSave;
+            }
+        }
+        public string BoutonCreate
+        {
+            get
+            {
+                return boutonCreate;
+            }
+        }
+        public Button AnnulButton
         {
             get
             {
                 return annulbouton;
             }
         }
- public string BoutonImagePath
+        public string BoutonImagePath
         {
             get
             {
@@ -56,7 +98,7 @@ public Button AnnulButton
                 OnPropertyChanged("ButtonImageString");
             }
         }
-public string NewSourcePath
+        public string NewSourcePath
         {
             get
             {
@@ -68,7 +110,7 @@ public string NewSourcePath
                 OnPropertyChanged("NewSourcePath");
             }
         }
-public string NewTargetPath
+        public string NewTargetPath
         {
             get
             {
@@ -128,7 +170,7 @@ public string NewTargetPath
             }
         }
 
-    #endregion
+        #endregion
 
     #region Method
         internal void OpenFileBrowserCommand()
@@ -152,7 +194,6 @@ public string NewTargetPath
         {
             var dialog = new FolderBrowserDialog();
             string value = parameter.ToString();
-            MessageBox.Show(value);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 if (value == "Source")
@@ -164,7 +205,7 @@ public string NewTargetPath
                     NewTargetPath = dialog.SelectedPath.ToString();
                 }
             }
-            
+
         }
         internal void OpenWindowCommand()
         {
@@ -175,10 +216,11 @@ public string NewTargetPath
             {
                 windowCreateSave.Close();
             }
-            
+
         }
         internal void ChangeLanguageCommand()
         {
+            Langue = !Langue;
             if (BoutonImagePath == "/View/Drapeau-France.png")
             {
                 BoutonImagePath = "/View/DrapeauR-U.png";
@@ -186,14 +228,14 @@ public string NewTargetPath
             }
             else
             {
-                    
-            BoutonImagePath = "/View/Drapeau-France.png";
+
+                BoutonImagePath = "/View/Drapeau-France.png";
             }
             Console.WriteLine("NON");
         }
         internal void CloseWindowCommand()
         {
-            
+
         }
         internal void GetProjectsCommand()
         {

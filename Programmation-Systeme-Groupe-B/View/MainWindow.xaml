@@ -22,7 +22,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Créer une Sauvegarde" Margin="42,174,42,85" FontSize="8" Command="{Binding OpenWindow}">
+            <Button Content="{Binding BoutonCreate}" Margin="42,174,42,85" FontSize="8" Command="{Binding OpenWindow}">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
