@@ -6,11 +6,9 @@ C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme
 C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\bin\Debug\net5.0-windows\ref\Programmation-Systeme-Groupe-B.dll
 C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\bin\Debug\net5.0-windows\Programmation-Systeme-Groupe-B.pdb
 C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\Programmation-Systeme-Groupe-B.csproj.AssemblyReference.cache
-C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\MainWindow.g.cs
 C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\App.g.cs
 C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\Programmation-Systeme-Groupe-B_MarkupCompile.cache
 C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\Programmation-Systeme-Groupe-B_MarkupCompile.lref
-C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\MainWindow.baml
 C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\Programmation-Systeme-Groupe-B.g.resources
 C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\Programmation-Systeme-Groupe-B.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\Programmation-Systeme-Groupe-B.AssemblyInfoInputs.cache
@@ -45,3 +43,12 @@ C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme
 C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\Programmation-Systeme-Groupe-B_MarkupCompile.lref
 C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\WindowCreateSave.g.cs
 C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\WindowCreateSave.baml
+C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\MainWindow.g.cs
+C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\NewProject.g.cs
+C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\ProjectInfo.g.cs
+C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\WindowCreateSave.g.cs
+C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\MainWindow.baml
+C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\NewProject.baml
+C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\ProjectInfo.baml
+C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\WindowCreateSave.baml
