@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProjetMVC.Model
@@ -19,6 +20,14 @@ namespace ProjetMVC.Model
         {
             get { return name; }
             set { name = value; }
+        }
+
+        // Project State
+        private string state;
+        public string State
+        {
+            get { return state; }
+            set { state = value; }
         }
         // Project repertory source
         private string pathSource;
@@ -65,6 +74,17 @@ namespace ProjetMVC.Model
             set { saveType = value; }
         }
 
+        // Save Thread 
+        private Thread thread;
+        public Thread Thread
+        {
+            get { return thread; }
+            set { thread = value; }
+        }
+
+        ManualResetEvent mrse = new(false);
+
+
         public SaveProject(string name, string pathSource, string pathTarget, SaveTypeEnum saveType)
         {
             this.name = name;
@@ -75,9 +95,9 @@ namespace ProjetMVC.Model
             this.startTime = DateTime.Now;
             this.stateLog = new ModelLogState(this.name, this.pathSource, this.pathTarget);
             this.dailyLog = new ModelLogDaily(this.name, this.pathSource, this.pathTarget);
+            this.state = ModelLogState.STATE_CREATED;
         }
 
-        // TODO: Méthode pour démarrer le processus de sauvegarde, définir : fileSize et la progression 
         public void Save()
         {
             this.progression.FileSize = DirSize(new DirectoryInfo(this.pathSource));
@@ -88,15 +108,33 @@ namespace ProjetMVC.Model
             {
                 GenerateStateLog(ModelLogState.STATE_ACTIVE);
                 GenerateDailyLog();
-                CompleteSave(this.pathSource, this.pathTarget, this.progression);
+                this.state = ModelLogState.STATE_ACTIVE;
+                // Thread
+                Thread thread = new Thread(() =>
+                {
+                    while (true)
+                    {
+                        mrse.WaitOne();
+                        CompleteSave(this.pathSource, this.pathTarget, this.progression);
+                    }
+                });
+
 
             }
             else if (this.saveType == SaveTypeEnum.Differential)
             {
                 GenerateStateLog(ModelLogState.STATE_ACTIVE);
                 GenerateDailyLog();
-                DifferentialSave(this.pathSource, this.pathTarget, this.progression);
-
+                this.state = ModelLogState.STATE_ACTIVE;
+                // Thread
+                Thread thread = new Thread(() =>
+                {
+                    while (true)
+                    {
+                        mrse.WaitOne();
+                        DifferentialSave(this.pathSource, this.pathTarget, this.progression);
+                    }
+                });
             }
 
         }
@@ -248,5 +286,9 @@ namespace ProjetMVC.Model
             this.dailyLog.setSize(this.progression.FileSize.ToString());
             this.dailyLog.save();
         }
+
+        public void ResumeThread() => mrse.Set();
+        public void PauseThread() => mrse.Reset();
+        public void DeleteThread() => thread.Abort();
     }
 }
