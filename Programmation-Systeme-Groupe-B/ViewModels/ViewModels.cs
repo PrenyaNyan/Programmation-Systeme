@@ -19,6 +19,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         #region Private Fields
         private OpenFileBrowser openFileBrowser;
         private ChangeLanguage changeLanguage;
+        private GetProjects getProjects;
         private string buttonImageString;
         private string newSourcePath;
         private string newTargetPath;
@@ -30,6 +31,12 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private CloseWindow closeWindow;
         private CreateProject createProject;
         private Button annulbouton;
+        #endregion
+        #region Private Fields Lang
+        private bool langue;//if true then french
+        private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave;
+        #endregion
+        public ViewModel()
         private SaveProject saveproject;
         ModelClass modelClass = new();
         #endregion
@@ -39,10 +46,141 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             openFolderDirectory = new(this);
             openWindow = new(this);
             closeWindow = new(this);
+            getProjects = new(this);
             createProject = new(this);
             changeLanguage = new ChangeLanguage(this);
             buttonImageString = "/View/Drapeau-France.png";
+            Langue = true;
         }
+        #region Public Properties
+        public bool Langue
+        {
+            get
+            {
+                return langue;
+            }
+            set
+            {
+                langue = value;
+                if (langue) // If FR bro he is like us
+                {
+                    boutonLancerSave = "Lancer toutes les sauvegardes";
+                    boutonCreate = "Créer une sauvegarde";
+                    titleCreateSave = "Rentrez les champs pour créer votre nouveau projet";
+                    textNameCreateSave = "Nom :";
+                    textPathSCreateSave = "Chemin d'entrée :";
+                    textPathTCreateSave = "Chemin de sortie :";
+                    textSaveTypeCreateSave = "Type de sauvegarde :";
+                    textTypeDCreateSave = "Différentiel";
+                    textTypeCCreateSave = "Complète";
+                    buttonAnnulCreateSave = "Annuler";
+                    buttonCreateCreateSave = "Valider";
+                }
+                else // He's not FR like us
+                {
+                    boutonLancerSave = "Start all save";
+                    boutonCreate = "Create a new save";
+                    titleCreateSave = "Fill the fields to create a new project";
+                    textNameCreateSave = "Name :";
+                    textPathSCreateSave = "Input Path :";
+                    textPathTCreateSave = "Output Path :";
+                    textSaveTypeCreateSave = "Type of Save :";
+                    textTypeDCreateSave = "Differential";
+                    textTypeCCreateSave = "Full";
+                    buttonAnnulCreateSave = "Cancel";
+                    buttonCreateCreateSave = "Accept";
+                }
+                OnPropertyChanged("BoutonLancerSave");
+                OnPropertyChanged("BoutonCreate");
+                OnPropertyChanged("TitleCreateSave");
+                OnPropertyChanged("TextNameCreateSave");
+                OnPropertyChanged("TextPathSCreateSave");
+                OnPropertyChanged("TextPathTCreateSave");
+                OnPropertyChanged("TextSaveTypeCreateSave");
+                OnPropertyChanged("TextTypeDCreateSave");
+                OnPropertyChanged("TextTypeCCreateSave");
+                OnPropertyChanged("ButtonAnnulCreateSave");
+                OnPropertyChanged("ButtonCreateCreateSave");
+            }
+        }
+        public string BoutonLancerSave
+        {
+            get
+            {
+                return boutonLancerSave;
+            }
+        }
+        public string BoutonCreate
+        {
+            get
+            {
+                return boutonCreate;
+            }
+        }
+        public string TitleCreateSave
+        {
+            get
+            {
+                return titleCreateSave;
+            }
+        }
+        public string TextNameCreateSave
+        {
+            get
+            {
+                return textNameCreateSave;
+            }
+        }
+        public string TextPathSCreateSave
+        {
+            get
+            {
+                return textPathSCreateSave;
+            }
+        }
+        public string TextPathTCreateSave
+        {
+            get
+            {
+                return textPathTCreateSave;
+            }
+        }
+        public string TextSaveTypeCreateSave
+        {
+            get
+            {
+                return textSaveTypeCreateSave;
+            }
+        }
+        public string TextTypeDCreateSave
+        {
+            get
+            {
+                return textTypeDCreateSave;
+            }
+        }
+        public string TextTypeCCreateSave
+        {
+            get
+            {
+                return textTypeCCreateSave;
+            }
+        }
+        public string ButtonAnnulCreateSave
+        {
+            get
+            {
+                return buttonAnnulCreateSave;
+            }
+        }
+        public string ButtonCreateCreateSave
+        {
+            get
+            {
+                return buttonCreateCreateSave;
+            }
+        }
+        public Button AnnulButton
         #region Public Properties
         public Button AnnulButton
         {
@@ -87,6 +225,17 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 OnPropertyChanged("NewTargetPath");
             }
         }
+        
+    #endregion
+    #region Model
+        public ICommand GetProjects
+        {
+            get
+            {
+                return getProjects;
+            }
+        }
+
 
         public string NewFileName
         {
@@ -153,6 +302,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             }
         }
 
+        #endregion
         public ICommand CreateProject
         {
             get
@@ -163,6 +313,8 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
         #endregion
 
+    #region Method
+        internal void OpenFileBrowserCommand()
         #region Method
         internal void OpenFileBrowserCommand()
         {
@@ -211,6 +363,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         }
         internal void ChangeLanguageCommand()
         {
+            Langue = !Langue;
             if (BoutonImagePath == "/View/Drapeau-France.png")
             {
                 BoutonImagePath = "/View/DrapeauR-U.png";
@@ -258,5 +411,11 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
 
         #endregion
+    }
+        internal void GetProjectsCommand()
+        {
+            
+        }
+    #endregion
     }
 }
