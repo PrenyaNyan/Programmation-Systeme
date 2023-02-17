@@ -100,43 +100,45 @@ namespace ProjetMVC.Model
 
         public void Save()
         {
-            this.progression.FileSize = DirSize(new DirectoryInfo(this.pathSource));
-            this.progression.FileAmount = Directory.GetFiles(this.pathSource, "*", SearchOption.AllDirectories).Length;
-
-
-            if (this.saveType == SaveTypeEnum.Complete)
+            if (this.state != ModelLogState.STATE_ACTIVE)
             {
-                GenerateStateLog(ModelLogState.STATE_ACTIVE);
-                GenerateDailyLog();
-                this.state = ModelLogState.STATE_ACTIVE;
-                // Thread
-                Thread thread = new Thread(() =>
+                this.progression.FileSize = DirSize(new DirectoryInfo(this.pathSource));
+                this.progression.FileAmount = Directory.GetFiles(this.pathSource, "*", SearchOption.AllDirectories).Length;
+
+
+                if (this.saveType == SaveTypeEnum.Complete)
                 {
-                    while (true)
+                    GenerateStateLog(ModelLogState.STATE_ACTIVE);
+                    GenerateDailyLog();
+                    this.state = ModelLogState.STATE_ACTIVE;
+                    // Thread
+                    Thread thread = new Thread(() =>
                     {
-                        mrse.WaitOne();
-                        CompleteSave(this.pathSource, this.pathTarget, this.progression);
-                    }
-                });
+                        while (true)
+                        {
+                            mrse.WaitOne();
+                            CompleteSave(this.pathSource, this.pathTarget, this.progression);
+                        }
+                    });
 
 
-            }
-            else if (this.saveType == SaveTypeEnum.Differential)
-            {
-                GenerateStateLog(ModelLogState.STATE_ACTIVE);
-                GenerateDailyLog();
-                this.state = ModelLogState.STATE_ACTIVE;
-                // Thread
-                Thread thread = new Thread(() =>
+                }
+                else if (this.saveType == SaveTypeEnum.Differential)
                 {
-                    while (true)
+                    GenerateStateLog(ModelLogState.STATE_ACTIVE);
+                    GenerateDailyLog();
+                    this.state = ModelLogState.STATE_ACTIVE;
+                    // Thread
+                    Thread thread = new Thread(() =>
                     {
-                        mrse.WaitOne();
-                        DifferentialSave(this.pathSource, this.pathTarget, this.progression);
-                    }
-                });
+                        while (true)
+                        {
+                            mrse.WaitOne();
+                            DifferentialSave(this.pathSource, this.pathTarget, this.progression);
+                        }
+                    });
+                }
             }
-
         }
 
         private void CompleteSave(string source, string target, Progression progression)
