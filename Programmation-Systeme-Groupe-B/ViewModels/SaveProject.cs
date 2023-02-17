@@ -75,14 +75,12 @@ namespace ProjetMVC.Model
         }
 
         // Save Thread 
-        private Thread thread;
+        private static Thread thread;
         public Thread Thread
         {
             get { return thread; }
             set { thread = value; }
         }
-
-        ManualResetEvent mrse = new(false);
 
 
         public SaveProject(string name, string pathSource, string pathTarget, SaveTypeEnum saveType)
@@ -114,12 +112,12 @@ namespace ProjetMVC.Model
                     // Thread
                     Thread thread = new Thread(() =>
                     {
-                        while (true)
-                        {
-                            mrse.WaitOne();
-                            CompleteSave(this.pathSource, this.pathTarget, this.progression);
-                        }
+
+                        CompleteSave(this.pathSource, this.pathTarget, this.progression);
+
                     });
+                    thread.Start();
+
 
 
                 }
@@ -131,12 +129,12 @@ namespace ProjetMVC.Model
                     // Thread
                     Thread thread = new Thread(() =>
                     {
-                        while (true)
-                        {
-                            mrse.WaitOne();
-                            DifferentialSave(this.pathSource, this.pathTarget, this.progression);
-                        }
+
+                        DifferentialSave(this.pathSource, this.pathTarget, this.progression);
+
                     });
+                    thread.Start();
+
                 }
             }
         }
@@ -289,8 +287,14 @@ namespace ProjetMVC.Model
             this.dailyLog.save();
         }
 
-        public void ResumeThread() => mrse.Set();
-        public void PauseThread() => mrse.Reset();
+        public void ResumeThread()
+        {
+            if (thread != null) thread.Resume();
+        }
+        public void PauseThread()
+        {
+            if (thread != null) thread.Suspend();
+        }
         public void DeleteThread() => thread.Abort();
     }
 }
