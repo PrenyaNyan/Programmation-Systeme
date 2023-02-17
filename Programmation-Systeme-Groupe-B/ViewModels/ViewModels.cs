@@ -36,10 +36,9 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private bool langue;//if true then french
         private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave;
         #endregion
-        public ViewModel()
+
         private SaveProject saveproject;
         ModelClass modelClass = new();
-        #endregion
         public ViewModel()
         {
             openFileBrowser = new OpenFileBrowser(this);
@@ -180,7 +179,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 return buttonCreateCreateSave;
             }
         }
-        public Button AnnulButton
         #region Public Properties
         public Button AnnulButton
         {
@@ -225,9 +223,9 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 OnPropertyChanged("NewTargetPath");
             }
         }
-        
-    #endregion
-    #region Model
+
+        #endregion
+        #region Model
         public ICommand GetProjects
         {
             get
@@ -313,8 +311,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
         #endregion
 
-    #region Method
-        internal void OpenFileBrowserCommand()
+        #region Method
         #region Method
         internal void OpenFileBrowserCommand()
         {
@@ -409,13 +406,14 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             }
         }
 
+        internal void GetProjectsCommand()
+        {
+
+        }
+
 
         #endregion
     }
-        internal void GetProjectsCommand()
-        {
-            
-        }
+
     #endregion
-    }
 }
