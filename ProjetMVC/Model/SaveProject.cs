@@ -12,8 +12,9 @@ namespace ProjetMVC.Model
     {
 
         // State log object
-        private ModelLogState stateLog;
-        private ModelLogDaily dailyLog;
+        public ModelLogState stateLog;
+        public ModelLogDaily dailyLog;
+        public DateTime logStart;
         // Project Name
         private string name;
         public string Name
@@ -21,7 +22,6 @@ namespace ProjetMVC.Model
             get { return name; }
             set { name = value; }
         }
-
         // Project State
         private string state;
         public string State
@@ -29,6 +29,7 @@ namespace ProjetMVC.Model
             get { return state; }
             set { state = value; }
         }
+
         // Project repertory source
         private string pathSource;
         public string PathSource
@@ -91,17 +92,24 @@ namespace ProjetMVC.Model
             this.saveType = saveType;
             this.progression = new Progression();
             this.startTime = DateTime.Now;
-            this.stateLog = new ModelLogState(this.name, this.pathSource, this.pathTarget);
-            this.dailyLog = new ModelLogDaily(this.name, this.pathSource, this.pathTarget);
+            this.stateLog = ModelLogState.GetInstance();
+            this.dailyLog = ModelLogDaily.GetInstance();
             this.state = ModelLogState.STATE_CREATED;
+
         }
 
+        // TODO: Méthode pour démarrer le processus de sauvegarde, définir : fileSize et la progression 
         public void Save()
         {
             if (this.state != ModelLogState.STATE_ACTIVE)
             {
+
+                this.progression.FilesSizeCopied = 0;
+                this.progression.CopiedFiles = 0;
                 this.progression.FileSize = DirSize(new DirectoryInfo(this.pathSource));
                 this.progression.FileAmount = Directory.GetFiles(this.pathSource, "*", SearchOption.AllDirectories).Length;
+                this.logStart = DateTime.Now;
+                GenerateStateLog(ModelLogState.STATE_START);
 
 
                 if (this.saveType == SaveTypeEnum.Complete)
@@ -114,10 +122,11 @@ namespace ProjetMVC.Model
                     {
 
                         CompleteSave(this.pathSource, this.pathTarget, this.progression);
+                        state = ModelLogState.STATE_END;
+                        GenerateStateLog(ModelLogState.STATE_END);
 
                     });
                     thread.Start();
-
 
 
                 }
@@ -131,12 +140,15 @@ namespace ProjetMVC.Model
                     {
 
                         DifferentialSave(this.pathSource, this.pathTarget, this.progression);
+                        state = ModelLogState.STATE_END;
+                        GenerateStateLog(ModelLogState.STATE_END);
 
                     });
                     thread.Start();
 
                 }
             }
+
         }
 
         private void CompleteSave(string source, string target, Progression progression)
@@ -173,6 +185,14 @@ namespace ProjetMVC.Model
                 file.CopyTo(temppath, true);
                 progression.CopiedFiles += 1;
                 progression.FilesSizeCopied += file.Length;
+                /*Percentage*/
+
+                if (getPercentage() > this.stateLog.progression)
+                {
+                    GenerateStateLog(ModelLogState.STATE_ACTIVE);
+                }
+
+
             }
 
             foreach (DirectoryInfo subdir in subDirectory)
@@ -184,6 +204,7 @@ namespace ProjetMVC.Model
                 CompleteSave(subdir.FullName, temppath, progression);
             }
         }
+
 
         private void DifferentialSave(string source, string target, Progression progression)
         {
@@ -218,8 +239,7 @@ namespace ProjetMVC.Model
                 if (!File.Exists(temppath))
                 {
                     file.CopyTo(temppath, false);
-                    progression.CopiedFiles += 1;
-                    progression.FilesSizeCopied += file.Length;
+
                 }
                 else
                 {
@@ -230,8 +250,12 @@ namespace ProjetMVC.Model
                     {
                         file.CopyTo(temppath, true);
                     }
-                    progression.CopiedFiles += 1;
-                    progression.FilesSizeCopied += file.Length;
+                }
+                progression.CopiedFiles += 1;
+                progression.FilesSizeCopied += file.Length;
+                if (getPercentage() > this.stateLog.progression)
+                {
+                    GenerateStateLog(ModelLogState.STATE_ACTIVE);
                 }
             }
 
@@ -244,6 +268,15 @@ namespace ProjetMVC.Model
                 DifferentialSave(subdir.FullName, temppath, progression);
             }
         }
+        private long getPercentage()
+        {
+            if (this.progression.FileSize <= 0)
+            {
+                return 0;
+            }
+            return (this.progression.FilesSizeCopied * 100) / this.progression.FileSize;
+        }
+
         public SaveProject GetInfo()
         {
             return this;
@@ -267,7 +300,7 @@ namespace ProjetMVC.Model
             return size;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return this.name + " " + this.PathSource + " " + this.PathTarget + " " + this.SaveType;
         }
@@ -275,15 +308,33 @@ namespace ProjetMVC.Model
         // Generate active state log
         public void GenerateStateLog(string state)
         {
-            this.stateLog.setFileAmount(this.progression.FileAmount);
-            this.stateLog.setSize(this.progression.FileSize.ToString());
+            /*this.name, this.pathSource, this.pathTarget*/
+            this.stateLog.name = this.name;
+            this.stateLog.pathSource = this.pathSource;
+            this.stateLog.pathTarget = this.pathTarget;
+            this.stateLog.fileAmount = this.progression.FileAmount;
+            this.stateLog.size = this.progression.FileSize.ToString();
+            this.stateLog.progression = getPercentage();
             this.stateLog.setState(state);
+            if (this.stateLog.state == ModelLogState.STATE_ACTIVE)
+            {
+                this.stateLog.setTime((this.logStart - DateTime.Now).ToString());
+            }
+            else
+            {
+                this.stateLog.setTime(DateTime.Now.ToString());
+            }
+
             this.stateLog.save();
         }
 
         public void GenerateDailyLog()
         {
-            this.dailyLog.setSize(this.progression.FileSize.ToString());
+            this.dailyLog.name = this.name;
+            this.dailyLog.pathSource = this.pathSource;
+            this.dailyLog.pathTarget = this.pathTarget;
+            this.dailyLog.size = this.progression.FileSize.ToString();
+            this.dailyLog.setTime();
             this.dailyLog.save();
         }
 
@@ -296,5 +347,6 @@ namespace ProjetMVC.Model
             if (thread != null) thread.Suspend();
         }
         public void DeleteThread() => thread.Abort();
+
     }
 }
