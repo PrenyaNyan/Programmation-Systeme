@@ -19,16 +19,23 @@
         <Label Content="Chemin d'entrée :" HorizontalAlignment="Left" Margin="27,202,0,0" VerticalAlignment="Top"/>
         <Label Content="Chemin de sortie :" HorizontalAlignment="Left" Margin="25,261,0,0" VerticalAlignment="Top"/>
         <Label Content="Type de sauvegarde :" HorizontalAlignment="Left" Margin="10,316,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Right" Margin="0,146,15,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" TextChanged="TextBox_TextChanged" Height="26" Grid.Column="1"/>
+        <TextBox HorizontalAlignment="Right" Margin="0,146,15,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" TextChanged="TextBox_TextChanged" Height="26" Grid.Column="1" Text="{Binding NewFileName, Mode=TwoWay}"/>
         <TextBox  HorizontalAlignment="Right" Margin="0,261,40,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="107" TextChanged="TextBox_TextChanged" Height="26" Grid.Column="1" Text="{Binding NewTargetPath, Mode=TwoWay}"/>
         <TextBox HorizontalAlignment="Right" Margin="0,202,40,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="107" TextChanged="TextBox_TextChanged" Height="26" Grid.Column="1" Text="{Binding NewSourcePath, Mode=TwoWay}" />
         <Button Command="{Binding OpenBrowser}" CommandParameter="Source" Content="..." HorizontalAlignment="Right" Margin="0,202,8,0" VerticalAlignment="Top" Height="26" Width="32" Grid.Column="1"/>
         <Button Command="{Binding OpenBrowser}" CommandParameter="Target" Content="..." HorizontalAlignment="Right" Margin="0,261,8,0" VerticalAlignment="Top" Height="26" Width="32" Grid.Column="1"/>
-        <RadioButton GroupName="SaveType" Content="Différentiel" HorizontalAlignment="Right" Margin="0,322,79,0" VerticalAlignment="Top" Height="25" RenderTransformOrigin="1.2,0.41" Grid.Column="1"/>
-        <RadioButton GroupName="SaveType" Content="Complète" HorizontalAlignment="Right" Margin="0,352,87,0" VerticalAlignment="Top" Height="25" Checked="RadioButton_Checked" Grid.Column="1"/>
+
+        <!-- 
+        <RadioButton GroupName="SaveType" Checked = "{Binding SetTypeEnum, Mode=TwoWay}" Content="Différentiel" HorizontalAlignment="Right" Margin="0,322,79,0" VerticalAlignment="Top" Height="25" RenderTransformOrigin="1.2,0.41" Grid.Column="1"/>
+        <RadioButton GroupName="SaveType" Checked = "{Binding SetTypeEnum, Mode=TwoWay}" Content="Complète" HorizontalAlignment="Right" Margin="0,352,87,0" VerticalAlignment="Top" Height="25" Grid.Column="1"/>
+        -->
+        <ComboBox x:Name = "comboBox" SelectedIndex="{Binding NewSaveType}" HorizontalAlignment="Right" Margin="0,323,8,0" VerticalAlignment="Top" Height="26" Width="139" Grid.Column="1">
+            <ComboBoxItem Content = "Complète" />
+            <ComboBoxItem Content = "Différentiel" />
+        </ComboBox>
         <Image Height="95" Margin="132,0,132,345" VerticalAlignment="Bottom" Source="/View/Fifi.png" Grid.ColumnSpan="2"/>
         <Label Content="Rentrez les champs pour créer votre nouveau projet&#xD;&#xA;" Margin="20,0,20,316" VerticalAlignment="Bottom" FontWeight="Bold" Grid.ColumnSpan="2" Height="29" HorizontalAlignment="Center"/>
         <Button Tag="{Binding AnnulButton}" Command="{Binding CloseWindow}" Content="Annuler" HorizontalAlignment="Left" Margin="10,384,0,0" VerticalAlignment="Top" Height="36" Width="120" Click="Button_Click"/>
-        <Button Content="Valider" HorizontalAlignment="Right" Margin="0,384,13,0" VerticalAlignment="Top" Height="36" Width="120" Grid.Column="1"/>
+        <Button Command="{Binding CreateProject}" Content="Valider" HorizontalAlignment="Right" Margin="0,384,13,0" VerticalAlignment="Top" Height="36" Width="120" Grid.Column="1"/>
     </Grid>
 </Window>

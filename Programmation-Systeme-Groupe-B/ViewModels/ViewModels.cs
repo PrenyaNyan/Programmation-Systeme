@@ -2,47 +2,56 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Forms;
 using Programmation_Systeme_Groupe_B.Model.Specific;
 using Programmation_Systeme_Groupe_B.View;
+using ProjetMVC.Model;
+using System.Xml.Linq;
 
 
 namespace Programmation_Systeme_Groupe_B.ViewModels
 {
     class ViewModel : ViewModelBase
     {
-    #region Private Fields
+        #region Private Fields
         private OpenFileBrowser openFileBrowser;
         private ChangeLanguage changeLanguage;
         private string buttonImageString;
         private string newSourcePath;
         private string newTargetPath;
+        private string newFileName;
+        private int newSaveType;
         private OpenFolderDirectory openFolderDirectory;
         private OpenWindow openWindow;
         private WindowCreateSave windowCreateSave;
         private CloseWindow closeWindow;
+        private CreateProject createProject;
         private Button annulbouton;
-    #endregion
-    public ViewModel()
+        private SaveProject saveproject;
+        ModelClass modelClass = new();
+        #endregion
+        public ViewModel()
         {
             openFileBrowser = new OpenFileBrowser(this);
             openFolderDirectory = new(this);
             openWindow = new(this);
             closeWindow = new(this);
+            createProject = new(this);
             changeLanguage = new ChangeLanguage(this);
             buttonImageString = "/View/Drapeau-France.png";
         }
-    #region Public Properties
-public Button AnnulButton
+        #region Public Properties
+        public Button AnnulButton
         {
             get
             {
                 return annulbouton;
             }
         }
- public string BoutonImagePath
+        public string BoutonImagePath
         {
             get
             {
@@ -54,7 +63,7 @@ public Button AnnulButton
                 OnPropertyChanged("ButtonImageString");
             }
         }
-public string NewSourcePath
+        public string NewSourcePath
         {
             get
             {
@@ -66,7 +75,7 @@ public string NewSourcePath
                 OnPropertyChanged("NewSourcePath");
             }
         }
-public string NewTargetPath
+        public string NewTargetPath
         {
             get
             {
@@ -78,9 +87,35 @@ public string NewTargetPath
                 OnPropertyChanged("NewTargetPath");
             }
         }
-        
-    #endregion
-    #region Model
+
+        public string NewFileName
+        {
+            get
+            {
+                return newFileName;
+            }
+            set
+            {
+                newFileName = value;
+                OnPropertyChanged("NewFileName");
+            }
+        }
+
+        public int NewSaveType
+        {
+            get
+            {
+                return newSaveType;
+            }
+            set
+            {
+                newSaveType = value;
+                OnPropertyChanged("NewFileName");
+            }
+        }
+
+        #endregion
+        #region Model
         public ICommand OpenBrowser
         {
             get
@@ -118,10 +153,18 @@ public string NewTargetPath
             }
         }
 
-    #endregion
+        public ICommand CreateProject
+        {
+            get
+            {
+                return createProject;
+            }
+        }
 
-    #region Method
-    internal void OpenFileBrowserCommand()
+        #endregion
+
+        #region Method
+        internal void OpenFileBrowserCommand()
         {
             var dialog = new Microsoft.Win32.OpenFileDialog();
             dialog.FileName = "Document"; // Default file name
@@ -138,11 +181,10 @@ public string NewTargetPath
             }
         }
 
-    internal void OpenFolderDirectoryCommand(object parameter)
+        internal void OpenFolderDirectoryCommand(object parameter)
         {
             var dialog = new FolderBrowserDialog();
             string value = parameter.ToString();
-            MessageBox.Show(value);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 if (value == "Source")
@@ -154,9 +196,9 @@ public string NewTargetPath
                     NewTargetPath = dialog.SelectedPath.ToString();
                 }
             }
-            
+
         }
-    internal void OpenWindowCommand()
+        internal void OpenWindowCommand()
         {
             windowCreateSave = new WindowCreateSave();
             annulbouton = new Button();
@@ -165,9 +207,9 @@ public string NewTargetPath
             {
                 windowCreateSave.Close();
             }
-            
+
         }
-    internal void ChangeLanguageCommand()
+        internal void ChangeLanguageCommand()
         {
             if (BoutonImagePath == "/View/Drapeau-France.png")
             {
@@ -176,15 +218,45 @@ public string NewTargetPath
             }
             else
             {
-                    
-            BoutonImagePath = "/View/Drapeau-France.png";
+
+                BoutonImagePath = "/View/Drapeau-France.png";
             }
             Console.WriteLine("NON");
         }
-    internal void CloseWindowCommand()
+        internal void CloseWindowCommand()
         {
-            
+
         }
-    #endregion
-}
+
+        public void NewProject()
+        {
+            SaveTypeEnum saveType;
+            switch (NewSaveType)
+            {
+                case 0:
+                    saveType = SaveTypeEnum.Complete;
+                    break;
+                case 1:
+                    saveType = SaveTypeEnum.Differential;
+                    break;
+                default:
+                    saveType = SaveTypeEnum.Complete;
+                    break;
+            }
+
+            if (NewFileName != null && NewSourcePath != null && NewTargetPath != null)
+            {
+                saveproject = new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType);
+                modelClass.ModelSave.addProject(saveproject);
+                windowCreateSave.Close();
+            }
+            else
+            {
+                MessageBox.Show("Veuillez remplir tous les champs");
+            }
+        }
+
+
+        #endregion
+    }
 }
