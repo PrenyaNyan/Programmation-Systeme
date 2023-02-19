@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "2v9F9pR2+Ymhy4Tr14R/5i3VUpCZ/m8/YM4C8N0NXgVUUDLqmByIfNRPi58aQmfmYFELt0LbctjUtO1Y7bK+Zg==",
+  "dgSpecHash": "+KRK3aK01Ef1KId00VdQOjXD0dIbhbVsnqaOgIFI5pYY74Nu8/ZRYEh6NIM2jjRGh2WamYLqOfPLwqf6I0Q26Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\lucie\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512"
+  ],
   "logs": []
 }

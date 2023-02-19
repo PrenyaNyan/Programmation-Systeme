@@ -85,6 +85,5 @@ namespace ProjetMVC.Model
             }
             return isPresent;
         }
-
     }
 }

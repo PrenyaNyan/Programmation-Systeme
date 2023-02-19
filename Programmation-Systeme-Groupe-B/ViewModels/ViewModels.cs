@@ -38,7 +38,9 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         #endregion
 
         private SaveProject saveproject;
+        private readonly List<SaveProject> saveProjects;
         ModelClass modelClass = new();
+
         public ViewModel()
         {
             openFileBrowser = new OpenFileBrowser(this);
@@ -49,6 +51,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             createProject = new(this);
             changeLanguage = new ChangeLanguage(this);
             buttonImageString = "/View/Drapeau-France.png";
+            saveProjects = modelClass.ModelSave.Projects;
             Langue = true;
         }
         #region Public Properties
@@ -308,7 +311,13 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 return createProject;
             }
         }
-
+        public ICommand GetProject
+        {
+            get
+            {
+                return getProjects;
+            }
+        }
         #endregion
 
         #region Method
@@ -398,6 +407,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             {
                 saveproject = new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType);
                 modelClass.ModelSave.addProject(saveproject);
+                saveProjects.Add(saveproject);
             }
             else
             {
@@ -409,7 +419,10 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         {
 
         }
-
+        public List<SaveProject> SaveProjects
+        {
+            get { return this.saveProjects; }
+        }
 
         #endregion
     }
