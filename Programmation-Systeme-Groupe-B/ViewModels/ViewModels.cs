@@ -10,7 +10,7 @@ using Programmation_Systeme_Groupe_B.Model.Specific;
 using Programmation_Systeme_Groupe_B.View;
 using ProjetMVC.Model;
 using System.Xml.Linq;
-
+using System.Collections.ObjectModel;
 
 namespace Programmation_Systeme_Groupe_B.ViewModels
 {
@@ -38,7 +38,14 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         #endregion
 
         private SaveProject saveproject;
-        private readonly List<SaveProject> saveProjects;
+        private ObservableCollection<SaveProject> _saveProjects = new ObservableCollection<SaveProject>();
+        public ObservableCollection<SaveProject> saveProjects
+        {
+            get
+            {
+                return _saveProjects;
+            }
+        }
         ModelClass modelClass = new();
 
         public ViewModel()
@@ -51,7 +58,10 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             createProject = new(this);
             changeLanguage = new ChangeLanguage(this);
             buttonImageString = "/View/Drapeau-France.png";
-            saveProjects = modelClass.ModelSave.Projects;
+            foreach (var item in modelClass.ModelSave.Projects)
+            {
+                saveProjects.Add(item);
+            }
             Langue = true;
         }
         #region Public Properties
@@ -418,10 +428,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         internal void GetProjectsCommand()
         {
 
-        }
-        public List<SaveProject> SaveProjects
-        {
-            get { return this.saveProjects; }
         }
 
         #endregion

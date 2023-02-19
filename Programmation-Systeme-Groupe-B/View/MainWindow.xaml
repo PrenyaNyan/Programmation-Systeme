@@ -49,7 +49,7 @@
                     <ImageBrush ImageSource="{Binding BoutonImagePath}"/>
                 </Button.Background>
             </Button>
-            <ListView Name="ListViewProjects" ItemsSource="{Binding SaveProjects}" Grid.Column="1" Margin="0,16,0,0">
+            <ListView Name="ListViewProjects" ItemsSource="{Binding saveProjects}" Grid.Column="1" Margin="0,16,0,0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
