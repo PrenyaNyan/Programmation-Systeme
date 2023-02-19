@@ -19,7 +19,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         #region Private Fields
         private OpenFileBrowser openFileBrowser;
         private ChangeLanguage changeLanguage;
-        private GetProjects getProjects;
         private string buttonImageString;
         private string newSourcePath;
         private string newTargetPath;
@@ -54,7 +53,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             openFolderDirectory = new(this);
             openWindow = new(this);
             closeWindow = new(this);
-            getProjects = new(this);
             createProject = new(this);
             changeLanguage = new ChangeLanguage(this);
             buttonImageString = "/View/Drapeau-France.png";
@@ -239,13 +237,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
         #endregion
         #region Model
-        public ICommand GetProjects
-        {
-            get
-            {
-                return getProjects;
-            }
-        }
 
 
         public string NewFileName
@@ -319,13 +310,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             get
             {
                 return createProject;
-            }
-        }
-        public ICommand GetProject
-        {
-            get
-            {
-                return getProjects;
             }
         }
         #endregion
@@ -423,11 +407,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             {
                 MessageBox.Show("Veuillez remplir tous les champs");
             }
-        }
-
-        internal void GetProjectsCommand()
-        {
-
         }
 
         #endregion

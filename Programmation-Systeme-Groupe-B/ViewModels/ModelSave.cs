@@ -18,21 +18,13 @@ namespace ProjetMVC.Model
 
         public void addProject(SaveProject project)
         {
-            if (this.projects.Count < 5)
-            {
-                this.projects.Add(project);
-                // Ajout du projet au fichier de config
-                SaveProjectToFile(project, this.saveFilePath);
+            this.projects.Add(project);
+            // Ajout du projet au fichier de config
+            SaveProjectToFile(project, this.saveFilePath);
 
-                //Log creation
-                project.GenerateStateLog(ModelLogState.STATE_CREATED);
+            //Log creation
+            project.GenerateStateLog(ModelLogState.STATE_CREATED);
 
-            }
-            else
-            {
-                // Message d'erreur nombre maximal de travaux atteint
-                return;
-            }
         }
 
         public void RetrieveProject(string path)
