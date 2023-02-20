@@ -46,7 +46,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         {
             get
             {
-                return _saveProjects;
+                return this._saveProjects;
             }
         }
         ModelClass modelClass = new();
@@ -432,7 +432,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             {
                 saveproject = new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType);
                 modelClass.ModelSave.addProject(saveproject);
-                saveProjects.Add(saveproject);
+                saveProjects.Add(new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType));
             }
             else
             {
