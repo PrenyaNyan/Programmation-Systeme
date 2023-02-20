@@ -14,6 +14,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         public string state { get; set; }
         public int fileAmount { get; set; }
         public List<string> priorityExtension { get; set; }
+        public long maxFileSize { get; set; }
 
 
         /* States const */
