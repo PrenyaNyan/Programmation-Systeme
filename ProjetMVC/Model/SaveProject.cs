@@ -83,6 +83,11 @@ namespace ProjetMVC.Model
             set { thread = value; }
         }
 
+        // Priority files
+        private List<string> priorityExtension = new() { };
+
+
+
 
         public SaveProject(string name, string pathSource, string pathTarget, SaveTypeEnum saveType)
         {
@@ -95,6 +100,7 @@ namespace ProjetMVC.Model
             this.stateLog = ModelLogState.GetInstance();
             this.dailyLog = ModelLogDaily.GetInstance();
             this.state = ModelLogState.STATE_CREATED;
+            this.priorityExtension.Add(".bat");
 
         }
 
@@ -114,16 +120,31 @@ namespace ProjetMVC.Model
 
                 if (this.saveType == SaveTypeEnum.Complete)
                 {
-                    GenerateStateLog(ModelLogState.STATE_ACTIVE);
-                    GenerateDailyLog();
                     this.state = ModelLogState.STATE_ACTIVE;
+                    GenerateDailyLog();
+
                     // Thread
                     Thread thread = new Thread(() =>
                     {
+                        // Priority File Handle
+                        if (this.priorityExtension.Count == 0)
+                        {
+                            CompleteSave(this.pathSource, this.pathTarget, this.progression, "");
 
-                        CompleteSave(this.pathSource, this.pathTarget, this.progression);
+                        }
+                        else
+                        {
+                            foreach (string extension in this.priorityExtension)
+                            {
+                                CompleteSave(this.pathSource, this.pathTarget, this.progression, extension);
+
+                            }
+                            CompleteSave(this.pathSource, this.pathTarget, this.progression, "");
+
+                        }
                         state = ModelLogState.STATE_END;
                         GenerateStateLog(ModelLogState.STATE_END);
+
 
                     });
                     thread.Start();
@@ -132,14 +153,28 @@ namespace ProjetMVC.Model
                 }
                 else if (this.saveType == SaveTypeEnum.Differential)
                 {
-                    GenerateStateLog(ModelLogState.STATE_ACTIVE);
-                    GenerateDailyLog();
                     this.state = ModelLogState.STATE_ACTIVE;
+                    GenerateDailyLog();
+
                     // Thread
                     Thread thread = new Thread(() =>
                     {
+                        if (this.priorityExtension.Count == 0)
+                        {
 
-                        DifferentialSave(this.pathSource, this.pathTarget, this.progression);
+                            DifferentialSave(this.pathSource, this.pathTarget, this.progression, "");
+
+                        }
+                        else
+                        {
+                            foreach (string extension in this.priorityExtension)
+                            {
+                                DifferentialSave(this.pathSource, this.pathTarget, this.progression, extension);
+
+                            }
+                            DifferentialSave(this.pathSource, this.pathTarget, this.progression, "");
+
+                        }
                         state = ModelLogState.STATE_END;
                         GenerateStateLog(ModelLogState.STATE_END);
 
@@ -151,7 +186,7 @@ namespace ProjetMVC.Model
 
         }
 
-        private void CompleteSave(string source, string target, Progression progression)
+        private void CompleteSave(string source, string target, Progression progression, string extension)
         {
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
             DirectoryInfo[] subDirectory = mainDirectory.GetDirectories();
@@ -182,15 +217,19 @@ namespace ProjetMVC.Model
                 string temppath = Path.Combine(target, file.Name);
 
                 // Copy the file.
-                file.CopyTo(temppath, true);
-                progression.CopiedFiles += 1;
-                progression.FilesSizeCopied += file.Length;
-                /*Percentage*/
-
-                if (getPercentage() > this.stateLog.progression)
+                if (extension.Equals("") || extension.Equals(file.Extension))
                 {
-                    GenerateStateLog(ModelLogState.STATE_ACTIVE);
+                    file.CopyTo(temppath, true);
+                    progression.CopiedFiles += 1;
+                    progression.FilesSizeCopied += file.Length;
+                    /*Percentage*/
+
+                    if (getPercentage() > this.stateLog.progression)
+                    {
+                        GenerateStateLog(ModelLogState.STATE_ACTIVE);
+                    }
                 }
+
 
 
             }
@@ -201,12 +240,12 @@ namespace ProjetMVC.Model
                 string temppath = Path.Combine(target, subdir.Name);
 
                 // Copy the subdirectories.
-                CompleteSave(subdir.FullName, temppath, progression);
+                CompleteSave(subdir.FullName, temppath, progression, extension);
             }
         }
 
 
-        private void DifferentialSave(string source, string target, Progression progression)
+        private void DifferentialSave(string source, string target, Progression progression, string extension)
         {
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
             DirectoryInfo[] subDirectory = mainDirectory.GetDirectories();
@@ -238,18 +277,26 @@ namespace ProjetMVC.Model
                 // Copy the file. If it already exists, keep the most recent one.
                 if (!File.Exists(temppath))
                 {
-                    file.CopyTo(temppath, false);
+                    // Copy the file.
+                    if (extension.Equals("") || extension.Equals(file.Extension))
+                    {
+                        file.CopyTo(temppath, false);
+                    }
 
                 }
                 else
                 {
-                    FileInfo fileInfoSource = new FileInfo(temppath);
-                    DateTime fileSourceDate = file.CreationTime;
-                    DateTime fileTargetDate = fileInfoSource.CreationTime;
-                    if (fileSourceDate.CompareTo(fileTargetDate) < 0)
+                    if (extension.Equals("") || extension.Equals(file.Extension))
                     {
-                        file.CopyTo(temppath, true);
+                        FileInfo fileInfoSource = new FileInfo(temppath);
+                        DateTime fileSourceDate = file.CreationTime;
+                        DateTime fileTargetDate = fileInfoSource.CreationTime;
+                        if (fileSourceDate.CompareTo(fileTargetDate) < 0)
+                        {
+                            file.CopyTo(temppath, true);
+                        }
                     }
+
                 }
                 progression.CopiedFiles += 1;
                 progression.FilesSizeCopied += file.Length;
@@ -265,7 +312,7 @@ namespace ProjetMVC.Model
                 string temppath = Path.Combine(target, subdir.Name);
 
                 // Copy the subdirectories.
-                DifferentialSave(subdir.FullName, temppath, progression);
+                DifferentialSave(subdir.FullName, temppath, progression, extension);
             }
         }
         private long getPercentage()
@@ -314,6 +361,7 @@ namespace ProjetMVC.Model
             this.stateLog.pathTarget = this.pathTarget;
             this.stateLog.fileAmount = this.progression.FileAmount;
             this.stateLog.size = this.progression.FileSize.ToString();
+            this.stateLog.priorityExtension = this.priorityExtension;
             this.stateLog.progression = getPercentage();
             this.stateLog.setState(state);
             if (this.stateLog.state == ModelLogState.STATE_ACTIVE)
@@ -347,6 +395,20 @@ namespace ProjetMVC.Model
             if (thread != null) thread.Suspend();
         }
         public void DeleteThread() => thread.Abort();
+
+        public bool RemovePriorityExtension(string extension)
+        {
+            return this.priorityExtension.Remove(extension);
+        }
+        public void AddPriorityExtension(string extension)
+        {
+            this.priorityExtension.Add(extension);
+        }
+
+        public List<string> GetPriorityExtension()
+        {
+            return this.priorityExtension;
+        }
 
     }
 }

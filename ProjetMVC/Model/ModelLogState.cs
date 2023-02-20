@@ -14,6 +14,8 @@ namespace ProjetMVC
         public string state { get; set; }
         public int fileAmount { get; set; }
 
+        public List<string> priorityExtension { get; set; }
+
         /* States const */
         public const string STATE_END = "END";
         public const string STATE_ACTIVE = "ACTIVE";
