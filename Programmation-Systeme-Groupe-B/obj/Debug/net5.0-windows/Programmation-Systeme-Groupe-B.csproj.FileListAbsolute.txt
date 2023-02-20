@@ -52,5 +52,9 @@ C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme
 C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\NewProject.baml
 C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\ProjectInfo.baml
 C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\WindowCreateSave.baml
-C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
-C:\Users\lucie\source\repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\Programmation-Systeme-Groupe-B.csproj.CopyComplete
+C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\NewProject.g.cs
+C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\ProjectInfo.g.cs
+C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
+C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\NewProject.baml
+C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\View\ProjectInfo.baml
+C:\Users\thefr\Source\Repos\Programmation-Systeme-Groupe-B\Programmation-Systeme-Groupe-B\obj\Debug\net5.0-windows\Programmation-Systeme-Groupe-B.csproj.CopyComplete
