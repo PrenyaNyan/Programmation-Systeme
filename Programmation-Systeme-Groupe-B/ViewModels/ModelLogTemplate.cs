@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 using System.Xml.Serialization;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using Newtonsoft.Json.Linq;
-using ProjetMVC.Model.Langage;
+using Programmation_Systeme_Groupe_B.ViewModels.Langage;
 
-namespace ProjetMVC.Model
+namespace Programmation_Systeme_Groupe_B.ViewModels
 {
     public class ModelLogTemplate
     {

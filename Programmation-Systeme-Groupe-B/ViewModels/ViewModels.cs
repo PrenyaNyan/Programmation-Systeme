@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Forms;
 using Programmation_Systeme_Groupe_B.Model.Specific;
 using Programmation_Systeme_Groupe_B.View;
-using ProjetMVC.Model;
+using Programmation_Systeme_Groupe_B.ViewModels;
 using System.Xml.Linq;
 
 
@@ -413,6 +413,13 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             {
                 MessageBox.Show("Veuillez remplir tous les champs");
             }
+        }
+
+        public void SaveProject()
+        {
+            SaveProject selectedProject = modelClass.ModelSave.Projects[savenum];
+            selectedProject.Save();
+            selectedProject.GenerateStateLog(ModelLogState.STATE_END);
         }
 
         internal void GetProjectsCommand()

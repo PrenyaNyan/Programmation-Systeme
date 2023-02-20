@@ -7,9 +7,10 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using Programmation_Systeme_Groupe_B.ViewModels;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace ProjetMVC.Model
+namespace Programmation_Systeme_Groupe_B.ViewModels
 {
     public class ModelLogDaily : ModelLogTemplate
     {

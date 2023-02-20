@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProjetMVC.Model;
+using Programmation_Systeme_Groupe_B.ViewModels;
 
-namespace ProjetMVC
+namespace Programmation_Systeme_Groupe_B.ViewModels
 {
     public class ModelLogState : ModelLogTemplate
     {
