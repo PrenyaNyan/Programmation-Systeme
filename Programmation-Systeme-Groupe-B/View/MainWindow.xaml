@@ -61,8 +61,9 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Text="{Binding Name}"></TextBlock>
-                            <Button Grid.Column="0" Grid.Row="1" Content="Sauvegarder" Command="{Binding ElementName=ListViewProjects, Path=ViewModel.SaveOneProject}"></Button>
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding PercentProgression}" Grid.Column="1" Grid.Row="0"/>
+                            <Button Grid.Column="0" Grid.Row="1" Content="Sauvegarder" Command="{Binding ElementName=ListViewProjects, Path=DataContext.SaveOneProject}" CommandParameter="{Binding Name}"></Button>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

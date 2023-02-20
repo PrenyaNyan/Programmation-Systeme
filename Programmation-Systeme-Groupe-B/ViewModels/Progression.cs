@@ -40,7 +40,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             get { return fileSize; }
             set { fileSize = value; }
         }
-
+        
         public Progression(int copiedFiles, int fileAmount, long filesSizeCopied, long fileSize)
         {
             this.copiedFiles = copiedFiles;

@@ -340,7 +340,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         {
             get
             {
-                MessageBox.Show("SaveOneProject");
                 return saveOneProject;
             }
         }
@@ -441,12 +440,15 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             }
         }
 
-        public void SaveProject()
+        public void SaveProject(object parameter)
         {
-            /*            int index = 0;
-                        SaveProject selectedProject = modelClass.ModelSave.Projects[index];
-                        selectedProject.Save();
-                        selectedProject.GenerateStateLog(ModelLogState.STATE_END);*/
+            foreach (SaveProject project in this.modelClass.ModelSave.Projects)
+            {
+                if (project.Name == parameter.ToString())
+                {
+                    project.Save();
+                }
+            }
             MessageBox.Show("Sauvegarde effectuée");
         }
 
@@ -455,6 +457,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             {
                 project.Save();
             }
+            MessageBox.Show("Sauvegarde effectuée");
         }
 
         internal void GetProjectsCommand()
