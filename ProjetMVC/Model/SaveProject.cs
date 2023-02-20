@@ -86,6 +86,17 @@ namespace ProjetMVC.Model
         // Priority files
         private List<string> priorityExtension = new() { };
 
+        // Max file Size
+        private long maxFileSize;
+        public long MaxFileSize
+        {
+            get { return maxFileSize; }
+            set { maxFileSize = value; }
+        }
+
+        // Uncounted copied files
+        private long uncountedCopiedFiles;
+
 
 
 
@@ -100,6 +111,7 @@ namespace ProjetMVC.Model
             this.stateLog = ModelLogState.GetInstance();
             this.dailyLog = ModelLogDaily.GetInstance();
             this.state = ModelLogState.STATE_CREATED;
+            this.maxFileSize = 99999999999999999;
         }
 
         // TODO: Méthode pour démarrer le processus de sauvegarde, définir : fileSize et la progression 
@@ -110,6 +122,7 @@ namespace ProjetMVC.Model
 
                 this.progression.FilesSizeCopied = 0;
                 this.progression.CopiedFiles = 0;
+                this.uncountedCopiedFiles = 0;
                 this.progression.FileSize = DirSize(new DirectoryInfo(this.pathSource));
                 this.progression.FileAmount = Directory.GetFiles(this.pathSource, "*", SearchOption.AllDirectories).Length;
                 this.logStart = DateTime.Now;
@@ -217,9 +230,17 @@ namespace ProjetMVC.Model
                 // Copy the file.
                 if (extension.Equals("") || extension.Equals(file.Extension))
                 {
-                    file.CopyTo(temppath, true);
+                    if (file.Length * 1024 < this.maxFileSize)
+                    {
+                        file.CopyTo(temppath, true);
+                    }
+                    else
+                    {
+                        this.uncountedCopiedFiles++;
+                    }
                     progression.CopiedFiles += 1;
                     progression.FilesSizeCopied += file.Length;
+
                     /*Percentage*/
 
                     if (getPercentage() > this.stateLog.progression)
@@ -271,31 +292,38 @@ namespace ProjetMVC.Model
             {
                 // Create the path to the new copy of the file.
                 string temppath = Path.Combine(target, file.Name);
-
-                // Copy the file. If it already exists, keep the most recent one.
-                if (!File.Exists(temppath))
+                if (file.Length * 1024 < this.maxFileSize)
                 {
-                    // Copy the file.
-                    if (extension.Equals("") || extension.Equals(file.Extension))
+                    // Copy the file. If it already exists, keep the most recent one.
+                    if (!File.Exists(temppath))
                     {
-                        file.CopyTo(temppath, false);
-                    }
+                        // Copy the file.
+                        if (extension.Equals("") || extension.Equals(file.Extension))
+                        {
+                            file.CopyTo(temppath, false);
+                        }
 
+                    }
+                    else
+                    {
+                        if (extension.Equals("") || extension.Equals(file.Extension))
+                        {
+                            FileInfo fileInfoSource = new FileInfo(temppath);
+                            DateTime fileSourceDate = file.CreationTime;
+                            DateTime fileTargetDate = fileInfoSource.CreationTime;
+                            if (fileSourceDate.CompareTo(fileTargetDate) < 0)
+                            {
+                                file.CopyTo(temppath, true);
+                            }
+                        }
+
+                    }
                 }
                 else
                 {
-                    if (extension.Equals("") || extension.Equals(file.Extension))
-                    {
-                        FileInfo fileInfoSource = new FileInfo(temppath);
-                        DateTime fileSourceDate = file.CreationTime;
-                        DateTime fileTargetDate = fileInfoSource.CreationTime;
-                        if (fileSourceDate.CompareTo(fileTargetDate) < 0)
-                        {
-                            file.CopyTo(temppath, true);
-                        }
-                    }
-
+                    this.uncountedCopiedFiles++;
                 }
+
                 progression.CopiedFiles += 1;
                 progression.FilesSizeCopied += file.Length;
                 if (getPercentage() > this.stateLog.progression)
@@ -319,7 +347,7 @@ namespace ProjetMVC.Model
             {
                 return 0;
             }
-            return (this.progression.FilesSizeCopied * 100) / this.progression.FileSize;
+            return ((this.progression.FilesSizeCopied + this.uncountedCopiedFiles) * 100) / this.progression.FileSize;
         }
 
         public SaveProject GetInfo()
@@ -359,6 +387,7 @@ namespace ProjetMVC.Model
             this.stateLog.pathTarget = this.pathTarget;
             this.stateLog.fileAmount = this.progression.FileAmount;
             this.stateLog.size = this.progression.FileSize.ToString();
+            this.stateLog.maxFileSize = this.maxFileSize;
             this.stateLog.priorityExtension = this.priorityExtension;
             this.stateLog.progression = getPercentage();
             this.stateLog.setState(state);

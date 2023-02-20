@@ -15,6 +15,7 @@ namespace ProjetMVC
         public int fileAmount { get; set; }
 
         public List<string> priorityExtension { get; set; }
+        public long maxFileSize { get; set; }
 
         /* States const */
         public const string STATE_END = "END";
