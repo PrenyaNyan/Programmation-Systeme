@@ -2,9 +2,10 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
+using Programmation_Systeme_Groupe_B.ViewModels;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace ProjetMVC.Model
+namespace Programmation_Systeme_Groupe_B.ViewModels
 {
     class ModelSave
     {
@@ -85,6 +86,5 @@ namespace ProjetMVC.Model
             }
             return isPresent;
         }
-
     }
 }

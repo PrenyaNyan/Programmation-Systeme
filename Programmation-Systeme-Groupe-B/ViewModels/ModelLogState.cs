@@ -3,37 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProjetMVC.Model;
+using Programmation_Systeme_Groupe_B.ViewModels;
 
-namespace ProjetMVC
+namespace Programmation_Systeme_Groupe_B.ViewModels
 {
-    class ModelLogState : ModelLogTemplate
+    public class ModelLogState : ModelLogTemplate
     {
         public string time { get; set; }
         public string size { get; set; }
         public string state { get; set; }
         public int fileAmount { get; set; }
+        public List<string> priorityExtension { get; set; }
 
-        /* State log path */
-        public const string STATE_PATH = "Statesave.json";
 
         /* States const */
         public const string STATE_END = "END";
         public const string STATE_ACTIVE = "ACTIVE";
         public const string STATE_ERROR = "ERROR";
         public const string STATE_CREATED = "CREATED";
+        public const string STATE_START = "START";
 
-        public ModelLogState(string name, string pathTarget, string pathSource)
+
+        private ModelLogState()
         {
-            this.name = name;
-            this.pathTarget = pathTarget;
-            this.pathSource = pathSource;
-            setTime();
+            this.logPath = "Statesave";
+            setLogType();
+            setTime(DateTime.Now.ToString());
         }
 
-        public void setTime()
+        private static ModelLogState instance;
+
+        public static ModelLogState GetInstance()
         {
-            this.time = DateTime.Now.ToString();
+            if (instance == null)
+            {
+                instance = new ModelLogState();
+            }
+            return instance;
+        }
+
+
+        public void setTime(string time)
+        {
+            this.time = time;
         }
 
         public void setSize(string size)
@@ -53,7 +65,7 @@ namespace ProjetMVC
 
         public void save()
         {
-            update(STATE_PATH, this);
+            update(this.logPath, this);
         }
     }
 }

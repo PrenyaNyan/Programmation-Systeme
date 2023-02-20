@@ -132,7 +132,6 @@ namespace ProjetMVC.Controller
                         }
                         SaveProject selectedProject = modelClass.ModelSave.Projects[savenum];
                         selectedProject.Save();
-                        selectedProject.GenerateStateLog(ModelLogState.STATE_END);
                         break;
                     case "5":
                         // "5 : Start all save projects

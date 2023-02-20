@@ -6,14 +6,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ProjetMVC.Model
+namespace Programmation_Systeme_Groupe_B.ViewModels
 {
     class SaveProject
     {
 
         // State log object
-        private ModelLogState stateLog;
-        private ModelLogDaily dailyLog;
+        public ModelLogState stateLog;
+        public ModelLogDaily dailyLog;
+        public DateTime logStart;
         // Project Name
         private string name;
         public string Name
@@ -21,7 +22,6 @@ namespace ProjetMVC.Model
             get { return name; }
             set { name = value; }
         }
-
         // Project State
         private string state;
         public string State
@@ -29,6 +29,7 @@ namespace ProjetMVC.Model
             get { return state; }
             set { state = value; }
         }
+
         // Project repertory source
         private string pathSource;
         public string PathSource
@@ -82,6 +83,11 @@ namespace ProjetMVC.Model
             set { thread = value; }
         }
 
+        // Priority files
+        private List<string> priorityExtension = new() { };
+
+
+
 
         public SaveProject(string name, string pathSource, string pathTarget, SaveTypeEnum saveType)
         {
@@ -91,55 +97,94 @@ namespace ProjetMVC.Model
             this.saveType = saveType;
             this.progression = new Progression();
             this.startTime = DateTime.Now;
-            this.stateLog = new ModelLogState(this.name, this.pathSource, this.pathTarget);
-            this.dailyLog = new ModelLogDaily(this.name, this.pathSource, this.pathTarget);
+            this.stateLog = ModelLogState.GetInstance();
+            this.dailyLog = ModelLogDaily.GetInstance();
             this.state = ModelLogState.STATE_CREATED;
         }
 
+        // TODO: Méthode pour démarrer le processus de sauvegarde, définir : fileSize et la progression 
         public void Save()
         {
             if (this.state != ModelLogState.STATE_ACTIVE)
             {
+
+                this.progression.FilesSizeCopied = 0;
+                this.progression.CopiedFiles = 0;
                 this.progression.FileSize = DirSize(new DirectoryInfo(this.pathSource));
                 this.progression.FileAmount = Directory.GetFiles(this.pathSource, "*", SearchOption.AllDirectories).Length;
+                this.logStart = DateTime.Now;
+                GenerateStateLog(ModelLogState.STATE_START);
 
 
                 if (this.saveType == SaveTypeEnum.Complete)
                 {
-                    GenerateStateLog(ModelLogState.STATE_ACTIVE);
-                    GenerateDailyLog();
                     this.state = ModelLogState.STATE_ACTIVE;
+                    GenerateDailyLog();
+
                     // Thread
                     Thread thread = new Thread(() =>
                     {
+                        // Priority File Handle
+                        if (this.priorityExtension.Count == 0)
+                        {
+                            CompleteSave(this.pathSource, this.pathTarget, this.progression, "");
 
-                        CompleteSave(this.pathSource, this.pathTarget, this.progression);
+                        }
+                        else
+                        {
+                            foreach (string extension in this.priorityExtension)
+                            {
+                                CompleteSave(this.pathSource, this.pathTarget, this.progression, extension);
+
+                            }
+                            CompleteSave(this.pathSource, this.pathTarget, this.progression, "");
+
+                        }
+                        state = ModelLogState.STATE_END;
+                        GenerateStateLog(ModelLogState.STATE_END);
+
 
                     });
                     thread.Start();
 
 
-
                 }
                 else if (this.saveType == SaveTypeEnum.Differential)
                 {
-                    GenerateStateLog(ModelLogState.STATE_ACTIVE);
-                    GenerateDailyLog();
                     this.state = ModelLogState.STATE_ACTIVE;
+                    GenerateDailyLog();
+
                     // Thread
                     Thread thread = new Thread(() =>
                     {
+                        if (this.priorityExtension.Count == 0)
+                        {
 
-                        DifferentialSave(this.pathSource, this.pathTarget, this.progression);
+                            DifferentialSave(this.pathSource, this.pathTarget, this.progression, "");
+
+                        }
+                        else
+                        {
+                            foreach (string extension in this.priorityExtension)
+                            {
+                                DifferentialSave(this.pathSource, this.pathTarget, this.progression, extension);
+
+                            }
+                            DifferentialSave(this.pathSource, this.pathTarget, this.progression, "");
+
+                        }
+                        state = ModelLogState.STATE_END;
+                        GenerateStateLog(ModelLogState.STATE_END);
 
                     });
                     thread.Start();
 
                 }
             }
+
         }
 
-        private void CompleteSave(string source, string target, Progression progression)
+        private void CompleteSave(string source, string target, Progression progression, string extension)
         {
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
             DirectoryInfo[] subDirectory = mainDirectory.GetDirectories();
@@ -170,9 +215,21 @@ namespace ProjetMVC.Model
                 string temppath = Path.Combine(target, file.Name);
 
                 // Copy the file.
-                file.CopyTo(temppath, true);
-                progression.CopiedFiles += 1;
-                progression.FilesSizeCopied += file.Length;
+                if (extension.Equals("") || extension.Equals(file.Extension))
+                {
+                    file.CopyTo(temppath, true);
+                    progression.CopiedFiles += 1;
+                    progression.FilesSizeCopied += file.Length;
+                    /*Percentage*/
+
+                    if (getPercentage() > this.stateLog.progression)
+                    {
+                        GenerateStateLog(ModelLogState.STATE_ACTIVE);
+                    }
+                }
+
+
+
             }
 
             foreach (DirectoryInfo subdir in subDirectory)
@@ -181,11 +238,12 @@ namespace ProjetMVC.Model
                 string temppath = Path.Combine(target, subdir.Name);
 
                 // Copy the subdirectories.
-                CompleteSave(subdir.FullName, temppath, progression);
+                CompleteSave(subdir.FullName, temppath, progression, extension);
             }
         }
 
-        private void DifferentialSave(string source, string target, Progression progression)
+
+        private void DifferentialSave(string source, string target, Progression progression, string extension)
         {
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
             DirectoryInfo[] subDirectory = mainDirectory.GetDirectories();
@@ -217,21 +275,32 @@ namespace ProjetMVC.Model
                 // Copy the file. If it already exists, keep the most recent one.
                 if (!File.Exists(temppath))
                 {
-                    file.CopyTo(temppath, false);
-                    progression.CopiedFiles += 1;
-                    progression.FilesSizeCopied += file.Length;
+                    // Copy the file.
+                    if (extension.Equals("") || extension.Equals(file.Extension))
+                    {
+                        file.CopyTo(temppath, false);
+                    }
+
                 }
                 else
                 {
-                    FileInfo fileInfoSource = new FileInfo(temppath);
-                    DateTime fileSourceDate = file.CreationTime;
-                    DateTime fileTargetDate = fileInfoSource.CreationTime;
-                    if (fileSourceDate.CompareTo(fileTargetDate) < 0)
+                    if (extension.Equals("") || extension.Equals(file.Extension))
                     {
-                        file.CopyTo(temppath, true);
+                        FileInfo fileInfoSource = new FileInfo(temppath);
+                        DateTime fileSourceDate = file.CreationTime;
+                        DateTime fileTargetDate = fileInfoSource.CreationTime;
+                        if (fileSourceDate.CompareTo(fileTargetDate) < 0)
+                        {
+                            file.CopyTo(temppath, true);
+                        }
                     }
-                    progression.CopiedFiles += 1;
-                    progression.FilesSizeCopied += file.Length;
+
+                }
+                progression.CopiedFiles += 1;
+                progression.FilesSizeCopied += file.Length;
+                if (getPercentage() > this.stateLog.progression)
+                {
+                    GenerateStateLog(ModelLogState.STATE_ACTIVE);
                 }
             }
 
@@ -241,9 +310,18 @@ namespace ProjetMVC.Model
                 string temppath = Path.Combine(target, subdir.Name);
 
                 // Copy the subdirectories.
-                DifferentialSave(subdir.FullName, temppath, progression);
+                DifferentialSave(subdir.FullName, temppath, progression, extension);
             }
         }
+        private long getPercentage()
+        {
+            if (this.progression.FileSize <= 0)
+            {
+                return 0;
+            }
+            return (this.progression.FilesSizeCopied * 100) / this.progression.FileSize;
+        }
+
         public SaveProject GetInfo()
         {
             return this;
@@ -267,7 +345,7 @@ namespace ProjetMVC.Model
             return size;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return this.name + " " + this.PathSource + " " + this.PathTarget + " " + this.SaveType;
         }
@@ -275,15 +353,34 @@ namespace ProjetMVC.Model
         // Generate active state log
         public void GenerateStateLog(string state)
         {
-            this.stateLog.setFileAmount(this.progression.FileAmount);
-            this.stateLog.setSize(this.progression.FileSize.ToString());
+            /*this.name, this.pathSource, this.pathTarget*/
+            this.stateLog.name = this.name;
+            this.stateLog.pathSource = this.pathSource;
+            this.stateLog.pathTarget = this.pathTarget;
+            this.stateLog.fileAmount = this.progression.FileAmount;
+            this.stateLog.size = this.progression.FileSize.ToString();
+            this.stateLog.priorityExtension = this.priorityExtension;
+            this.stateLog.progression = getPercentage();
             this.stateLog.setState(state);
+            if (this.stateLog.state == ModelLogState.STATE_ACTIVE)
+            {
+                this.stateLog.setTime((this.logStart - DateTime.Now).ToString());
+            }
+            else
+            {
+                this.stateLog.setTime(DateTime.Now.ToString());
+            }
+
             this.stateLog.save();
         }
 
         public void GenerateDailyLog()
         {
-            this.dailyLog.setSize(this.progression.FileSize.ToString());
+            this.dailyLog.name = this.name;
+            this.dailyLog.pathSource = this.pathSource;
+            this.dailyLog.pathTarget = this.pathTarget;
+            this.dailyLog.size = this.progression.FileSize.ToString();
+            this.dailyLog.setTime();
             this.dailyLog.save();
         }
 
@@ -296,5 +393,20 @@ namespace ProjetMVC.Model
             if (thread != null) thread.Suspend();
         }
         public void DeleteThread() => thread.Abort();
+
+        public bool RemovePriorityExtension(string extension)
+        {
+            return this.priorityExtension.Remove(extension);
+        }
+        public void AddPriorityExtension(string extension)
+        {
+            this.priorityExtension.Add(extension);
+        }
+
+        public List<string> GetPriorityExtension()
+        {
+            return this.priorityExtension;
+        }
+
     }
 }

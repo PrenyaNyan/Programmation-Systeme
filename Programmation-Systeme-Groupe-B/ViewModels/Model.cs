@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Text.Json;
-using ProjetMVC.Model.Langage;
+using Programmation_Systeme_Groupe_B.ViewModels.Langage;
 
-namespace ProjetMVC.Model
+namespace Programmation_Systeme_Groupe_B.ViewModels
 {
     class ModelClass
     {
@@ -16,16 +13,17 @@ namespace ProjetMVC.Model
         public ModelSave ModelSave = new();
         public ModelClass()
         {
-            
+
         }
         public void CheckSetting()
         {
-            string setfile = "setting.json";
+            string setfile = "settings.json";
             if (!File.Exists(setfile))
             {
                 var file = File.Create(setfile);
                 file.Close();
                 string lang = "";
+                string logType = "";
                 while (true)
                 {
                     Console.WriteLine("Choissez votre langue entre fr et en\nChoose your langage between fr and en");
@@ -40,7 +38,30 @@ namespace ProjetMVC.Model
                     }
 
                 }
-                var texte = new { Langue = lang };
+                while (true)
+                {
+                    if (lang == "fr")
+                    {
+                        Console.WriteLine("Choissez votre format de log entre json et xml");
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Choose your log format between json and xml");
+                    }
+                    logType = Console.ReadLine();
+                    if (logType == "json" || logType == "xml")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Erreur!\nError!\nRecommencez !\nTry again !");
+                    }
+
+                }
+
+                var texte = new { Langue = lang, logType = logType };
                 File.WriteAllText(setfile, JsonSerializer.Serialize(texte));
                 file.Close();
             }
@@ -62,7 +83,7 @@ namespace ProjetMVC.Model
         public bool CheckNumProject()
         {
             int count = this.ModelSave.Projects.Count();
-            return 0<=count & count<5;
+            return 0 <= count & count < 5;
         }
         public string GetProjectList()
         {

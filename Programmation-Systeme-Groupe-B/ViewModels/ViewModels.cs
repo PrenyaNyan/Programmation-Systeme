@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Forms;
 using Programmation_Systeme_Groupe_B.Model.Specific;
 using Programmation_Systeme_Groupe_B.View;
-using ProjetMVC.Model;
+using Programmation_Systeme_Groupe_B.ViewModels;
 using System.Xml.Linq;
 
 
@@ -30,6 +30,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private WindowCreateSave windowCreateSave;
         private CloseWindow closeWindow;
         private CreateProject createProject;
+        private SaveAllProject saveAllProject;
         private Button annulbouton;
         #endregion
         #region Private Fields Lang
@@ -38,7 +39,9 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         #endregion
 
         private SaveProject saveproject;
+        private readonly List<SaveProject> saveProjects;
         ModelClass modelClass = new();
+
         public ViewModel()
         {
             openFileBrowser = new OpenFileBrowser(this);
@@ -47,8 +50,10 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             closeWindow = new(this);
             getProjects = new(this);
             createProject = new(this);
+            saveAllProject = new(this);
             changeLanguage = new ChangeLanguage(this);
             buttonImageString = "/View/Drapeau-France.png";
+            saveProjects = modelClass.ModelSave.Projects;
             Langue = true;
         }
         #region Public Properties
@@ -309,6 +314,20 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             }
         }
 
+        public ICommand SaveAllProject
+        {
+            get
+            {
+                return saveAllProject;
+            }
+        }
+        public ICommand GetProject
+        {
+            get
+            {
+                return getProjects;
+            }
+        }
         #endregion
 
         #region Method
@@ -398,7 +417,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             {
                 saveproject = new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType);
                 modelClass.ModelSave.addProject(saveproject);
-                windowCreateSave.Close();
+                saveProjects.Add(saveproject);
             }
             else
             {
@@ -406,11 +425,29 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             }
         }
 
+        public void SaveProject()
+        {
+            int index = 0;
+            SaveProject selectedProject = modelClass.ModelSave.Projects[index];
+            selectedProject.Save();
+            selectedProject.GenerateStateLog(ModelLogState.STATE_END);
+        }
+
+        public void SaveAll() {
+            foreach (SaveProject project in this.modelClass.ModelSave.Projects)
+            {
+                project.Save();
+            }
+        }
+
         internal void GetProjectsCommand()
         {
 
         }
-
+        public List<SaveProject> SaveProjects
+        {
+            get { return this.saveProjects; }
+        }
 
         #endregion
     }

@@ -49,6 +49,24 @@
                     <ImageBrush ImageSource="{Binding BoutonImagePath}"/>
                 </Button.Background>
             </Button>
+            <ListView Name="ListViewProjects" ItemsSource="{Binding SaveProjects}" Grid.Column="1" Margin="0,16,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                            <Button Grid.Column="0" Grid.Row="1" Content="Sauvegarder"></Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
     </Viewbox>
 </Window>
