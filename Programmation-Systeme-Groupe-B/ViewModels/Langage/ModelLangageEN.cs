@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace ProjetMVC.Model.Langage
+namespace Programmation_Systeme_Groupe_B.ViewModels.Langage
 {
     class ModelLangageEN : ModelLangage
     {

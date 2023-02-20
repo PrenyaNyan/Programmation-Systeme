@@ -22,7 +22,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Créer une Sauvegarde" Margin="42,174,42,85" FontSize="8" Command="{Binding OpenWindow}">
+            <Button Content="{Binding BoutonCreate}" Margin="42,174,42,85" FontSize="8" Command="{Binding OpenWindow}">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -32,7 +32,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content="Lancer toutes les sauvegardes" Margin="29,206,29,53" FontSize="8">
+            <Button Content="{Binding BoutonLancerSave}" Margin="29,206,29,53" Command="{Binding SaveAllProject}" FontSize="8">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -62,7 +62,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <TextBlock Text="{Binding Name}"></TextBlock>
-                            <Button Grid.Column="0" Grid.Row="1" Content="Sauvegarder" ></Button>
+                            <Button Grid.Column="0" Grid.Row="1" Content="Sauvegarder" Command="{Binding ElementName=ListViewProjects, Path=ViewModel.SaveOneProject}"></Button>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
