@@ -30,6 +30,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private WindowCreateSave windowCreateSave;
         private CloseWindow closeWindow;
         private CreateProject createProject;
+        private SaveAllProject saveAllProject;
         private Button annulbouton;
         #endregion
         #region Private Fields Lang
@@ -49,6 +50,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             closeWindow = new(this);
             getProjects = new(this);
             createProject = new(this);
+            saveAllProject = new(this);
             changeLanguage = new ChangeLanguage(this);
             buttonImageString = "/View/Drapeau-France.png";
             saveProjects = modelClass.ModelSave.Projects;
@@ -311,6 +313,14 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 return createProject;
             }
         }
+
+        public ICommand SaveAllProject
+        {
+            get
+            {
+                return saveAllProject;
+            }
+        }
         public ICommand GetProject
         {
             get
@@ -421,6 +431,13 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             SaveProject selectedProject = modelClass.ModelSave.Projects[index];
             selectedProject.Save();
             selectedProject.GenerateStateLog(ModelLogState.STATE_END);
+        }
+
+        public void SaveAll() {
+            foreach (SaveProject project in this.modelClass.ModelSave.Projects)
+            {
+                project.Save();
+            }
         }
 
         internal void GetProjectsCommand()
