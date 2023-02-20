@@ -22,7 +22,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Créer une Sauvegarde" Margin="42,174,42,85" FontSize="8" Command="{Binding OpenWindow}">
+            <Button Content="{Binding BoutonCreate}" Margin="42,174,42,85" FontSize="8" Command="{Binding OpenWindow}">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -32,7 +32,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content="Lancer toutes les sauvegardes" Margin="29,206,29,53" Click="Button_Click_1" FontSize="8">
+            <Button Content="{Binding BoutonLancerSave}" Margin="29,206,29,53" Click="Button_Click_1" FontSize="8">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -49,7 +49,6 @@
                     <ImageBrush ImageSource="{Binding BoutonImagePath}"/>
                 </Button.Background>
             </Button>
-
         </Grid>
     </Viewbox>
 </Window>
