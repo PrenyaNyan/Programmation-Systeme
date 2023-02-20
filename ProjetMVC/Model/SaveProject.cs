@@ -97,6 +97,8 @@ namespace ProjetMVC.Model
         // Uncounted copied files
         private long uncountedCopiedSizeFiles;
 
+        private long tempPrioritySizeFile;
+
 
 
 
@@ -123,6 +125,7 @@ namespace ProjetMVC.Model
                 this.progression.FilesSizeCopied = 0;
                 this.progression.CopiedFiles = 0;
                 this.uncountedCopiedSizeFiles = 0;
+                this.tempPrioritySizeFile = 0;
                 this.progression.FileSize = DirSize(new DirectoryInfo(this.pathSource));
                 this.progression.FileAmount = Directory.GetFiles(this.pathSource, "*", SearchOption.AllDirectories).Length;
                 this.logStart = DateTime.Now;
@@ -150,8 +153,6 @@ namespace ProjetMVC.Model
                                 CompleteSave(this.pathSource, this.pathTarget, this.progression, extension);
 
                             }
-                            this.progression.FilesSizeCopied -= this.progression.FilesSizeCopied;
-                            this.progression.CopiedFiles -= this.progression.CopiedFiles;
                             CompleteSave(this.pathSource, this.pathTarget, this.progression, "");
 
                         }
@@ -185,8 +186,6 @@ namespace ProjetMVC.Model
                                 DifferentialSave(this.pathSource, this.pathTarget, this.progression, extension);
 
                             }
-                            this.progression.FilesSizeCopied -= this.progression.FilesSizeCopied;
-                            this.progression.CopiedFiles -= this.progression.CopiedFiles;
                             DifferentialSave(this.pathSource, this.pathTarget, this.progression, "");
 
                         }
@@ -245,6 +244,10 @@ namespace ProjetMVC.Model
                     progression.CopiedFiles += 1;
                     progression.FilesSizeCopied += file.Length;
 
+                }
+                else
+                {
+                    this.tempPrioritySizeFile++;
                 }
                 /*Percentage*/
 
@@ -308,6 +311,10 @@ namespace ProjetMVC.Model
                             progression.CopiedFiles += 1;
                             progression.FilesSizeCopied += file.Length;
                         }
+                        else
+                        {
+                            this.tempPrioritySizeFile++;
+                        }
 
                     }
                     else
@@ -323,6 +330,10 @@ namespace ProjetMVC.Model
                                 progression.CopiedFiles += 1;
                                 progression.FilesSizeCopied += file.Length;
                             }
+                        }
+                        else
+                        {
+                            this.tempPrioritySizeFile++;
                         }
 
                     }
@@ -354,7 +365,7 @@ namespace ProjetMVC.Model
             {
                 return 0;
             }
-            return ((this.progression.FilesSizeCopied - this.uncountedCopiedSizeFiles) * 100) / this.progression.FileSize;
+            return ((this.progression.FilesSizeCopied - this.uncountedCopiedSizeFiles) * 100) / this.progression.FileSize - this.tempPrioritySizeFile;
         }
 
         public SaveProject GetInfo()

@@ -97,6 +97,8 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         // Uncounted copied files
         private long uncountedCopiedSizeFiles;
 
+        private long tempPrioritySizeFile;
+
 
 
 
@@ -123,6 +125,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 this.progression.FilesSizeCopied = 0;
                 this.progression.CopiedFiles = 0;
                 this.uncountedCopiedSizeFiles = 0;
+                this.tempPrioritySizeFile = 0;
                 this.progression.FileSize = DirSize(new DirectoryInfo(this.pathSource));
                 this.progression.FileAmount = Directory.GetFiles(this.pathSource, "*", SearchOption.AllDirectories).Length;
                 this.logStart = DateTime.Now;
@@ -150,8 +153,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                                 CompleteSave(this.pathSource, this.pathTarget, this.progression, extension);
 
                             }
-                            this.progression.FilesSizeCopied -= this.progression.FilesSizeCopied;
-                            this.progression.CopiedFiles -= this.progression.CopiedFiles;
                             CompleteSave(this.pathSource, this.pathTarget, this.progression, "");
 
                         }
@@ -185,8 +186,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                                 DifferentialSave(this.pathSource, this.pathTarget, this.progression, extension);
 
                             }
-                            this.progression.FilesSizeCopied -= this.progression.FilesSizeCopied;
-                            this.progression.CopiedFiles -= this.progression.CopiedFiles;
                             DifferentialSave(this.pathSource, this.pathTarget, this.progression, "");
 
                         }
@@ -245,6 +244,10 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     progression.CopiedFiles += 1;
                     progression.FilesSizeCopied += file.Length;
 
+                }
+                else
+                {
+                    this.tempPrioritySizeFile++;
                 }
                 /*Percentage*/
 
@@ -308,6 +311,10 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                             progression.CopiedFiles += 1;
                             progression.FilesSizeCopied += file.Length;
                         }
+                        else
+                        {
+                            this.tempPrioritySizeFile++;
+                        }
 
                     }
                     else
@@ -323,6 +330,10 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                                 progression.CopiedFiles += 1;
                                 progression.FilesSizeCopied += file.Length;
                             }
+                        }
+                        else
+                        {
+                            this.tempPrioritySizeFile++;
                         }
 
                     }
@@ -354,7 +365,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             {
                 return 0;
             }
-            return ((this.progression.FilesSizeCopied - this.uncountedCopiedSizeFiles) * 100) / this.progression.FileSize;
+            return ((this.progression.FilesSizeCopied - this.uncountedCopiedSizeFiles) * 100) / this.progression.FileSize - this.tempPrioritySizeFile;
         }
 
         public SaveProject GetInfo()
