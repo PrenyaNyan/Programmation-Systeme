@@ -32,7 +32,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content="{Binding BoutonLancerSave}" Margin="29,206,29,53" Click="Button_Click_1" FontSize="8">
+            <Button Content="{Binding BoutonLancerSave}" Margin="29,206,29,53" Command="{Binding SaveAllProject}" FontSize="8">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
