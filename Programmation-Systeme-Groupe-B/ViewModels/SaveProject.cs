@@ -100,8 +100,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             this.stateLog = ModelLogState.GetInstance();
             this.dailyLog = ModelLogDaily.GetInstance();
             this.state = ModelLogState.STATE_CREATED;
-            this.priorityExtension.Add(".bat");
-
         }
 
         // TODO: Méthode pour démarrer le processus de sauvegarde, définir : fileSize et la progression 
