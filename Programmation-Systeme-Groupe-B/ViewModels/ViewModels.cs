@@ -417,7 +417,8 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
         public void SaveProject()
         {
-            SaveProject selectedProject = modelClass.ModelSave.Projects[savenum];
+            int index = 0;
+            SaveProject selectedProject = modelClass.ModelSave.Projects[index];
             selectedProject.Save();
             selectedProject.GenerateStateLog(ModelLogState.STATE_END);
         }
