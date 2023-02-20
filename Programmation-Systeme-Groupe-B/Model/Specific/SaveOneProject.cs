@@ -25,7 +25,7 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
 
         public void Execute(object parameter)
         {
-            viewModel.SaveProject();
+            viewModel.SaveProject(parameter);
         }
         public event EventHandler CanExecuteChanged;
     }
