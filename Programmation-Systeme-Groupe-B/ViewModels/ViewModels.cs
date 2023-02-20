@@ -10,6 +10,8 @@ using Programmation_Systeme_Groupe_B.Model.Specific;
 using Programmation_Systeme_Groupe_B.View;
 using Programmation_Systeme_Groupe_B.ViewModels;
 using System.Xml.Linq;
+using System.IO;
+using System.Text.Json;
 using System.Collections.ObjectModel;
 
 namespace Programmation_Systeme_Groupe_B.ViewModels
@@ -51,6 +53,15 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
         public ViewModel()
         {
+            string setfile = "settings.json";
+            if (!File.Exists(setfile))
+            {
+                var file = File.Create(setfile);
+                file.Close();
+                var texte = new { logType = "json" };
+                File.WriteAllText(setfile, JsonSerializer.Serialize(texte));
+                file.Close();
+            }
             openFileBrowser = new OpenFileBrowser(this);
             openFolderDirectory = new(this);
             openWindow = new(this);
