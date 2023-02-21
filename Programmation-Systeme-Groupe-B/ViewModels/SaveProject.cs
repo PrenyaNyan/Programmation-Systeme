@@ -114,7 +114,13 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private long tempPrioritySizeFile;
 
         //Work program
+        //Work program
         private string workProgram;
+        public string WorkProgram
+        {
+            get { return workProgram; }
+            set { workProgram = value; }
+        }
 
 
 

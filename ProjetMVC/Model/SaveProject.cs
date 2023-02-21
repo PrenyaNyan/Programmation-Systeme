@@ -92,6 +92,11 @@ namespace ProjetMVC.Model
 
         // Priority files
         private List<string> priorityExtension;
+        public List<string> PriorityExtension
+        {
+            get { return priorityExtension; }
+            set { priorityExtension = value; }
+        }
 
         // Max file Size
         private long maxFileSize;
@@ -109,6 +114,11 @@ namespace ProjetMVC.Model
 
         //Work program
         private string workProgram;
+        public string WorkProgram
+        {
+            get { return workProgram; }
+            set { workProgram = value; }
+        }
 
 
 
