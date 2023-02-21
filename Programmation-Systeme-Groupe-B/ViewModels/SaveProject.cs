@@ -232,13 +232,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
             // Get the file contents of the directory to copy.
             FileInfo[] files = mainDirectory.GetFiles();
-            #region ProcessEncryptInit
-            Process encrypt = new Process();
-            string solutionpath = $"{Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent}";
-            encrypt.StartInfo.FileName = $"{solutionpath}\\Cryptosoft\\bin\\Debug\\net5.0\\Cryptosoft.exe";
-            encrypt.StartInfo.UseShellExecute = true;
-            int exitcode;
-            #endregion ProcessEncryptInit
+
 
             foreach (FileInfo file in files)
             {
@@ -251,14 +245,8 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     if (file.Length * 1024 < this.maxFileSize)
                     {
                         //file.CopyTo(temppath, true);
-                        
-                        encrypt.StartInfo.Arguments = $"\"{Path.Combine(file.DirectoryName,file.Name)}\" \"{file.Name}\" \"{temppath}\"";
-                        encrypt.Start();
-                        // A modifier pour avoir un handler qui renvoie l'exit code directement
-                        while (!encrypt.HasExited) ;
-                        exitcode = encrypt.ExitCode;
-                        Trace.WriteLine(exitcode);
-                        // Ajouter le log de l'encryptage
+                        Encrypt(file, temppath);
+
                     }
                     else
                     {
@@ -292,7 +280,25 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 CompleteSave(subdir.FullName, temppath, progression, extension);
             }
         }
+        private void Encrypt(FileInfo file, string outpath)
+        {
+            #region ProcessEncryptInit
+            Process encrypt = new Process();
+            string solutionpath = $"{Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent}";
+            encrypt.StartInfo.FileName = $"{solutionpath}\\Cryptosoft\\bin\\Debug\\net5.0\\Cryptosoft.exe";
+            encrypt.StartInfo.UseShellExecute = true;
+            int exitcode;
+            #endregion ProcessEncryptInit
 
+            encrypt.StartInfo.Arguments = $"\"{Path.Combine(file.DirectoryName, file.Name)}\" \"{file.Name}\" \"{outpath}\"";
+            encrypt.Start();
+            // A modifier pour avoir un handler qui renvoie l'exit code directement
+            while (!encrypt.HasExited) ;
+            exitcode = encrypt.ExitCode;
+            Trace.WriteLine(exitcode);
+            //GenerateDailyLog();
+            // Ajouter le log de l'encryptage
+        }
         private void DifferentialSave(string source, string target, Progression progression, string extension)
         {
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
@@ -320,7 +326,8 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                         // Copy the file.
                         if (extension.Equals("") || extension.Equals(file.Extension))
                         {
-                            file.CopyTo(temppath, false);
+                            //file.CopyTo(temppath, false);
+                            Encrypt(file, temppath);
                             progression.CopiedFiles += 1;
                             progression.FilesSizeCopied += file.Length;
                         }
@@ -339,7 +346,8 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                             DateTime fileTargetDate = fileInfoSource.CreationTime;
                             if (fileSourceDate.CompareTo(fileTargetDate) < 0)
                             {
-                                file.CopyTo(temppath, true);
+                                //file.CopyTo(temppath, true);
+                                Encrypt(file, temppath);
                                 progression.CopiedFiles += 1;
                                 progression.FilesSizeCopied += file.Length;
                             }
