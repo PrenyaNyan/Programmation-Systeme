@@ -25,6 +25,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private string newSourcePath;
         private string newTargetPath;
         private string newFileName;
+        private string newExtension;
         private int newSaveType;
         private OpenFolderDirectory openFolderDirectory;
         private OpenWindow openWindow;
@@ -37,7 +38,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         #endregion
         #region Private Fields Lang
         private bool langue;//if true then french
-        private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave;
+        private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave, textSaveTypeExtension;
         #endregion
 
         private SaveProject saveproject;
@@ -96,6 +97,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     textPathSCreateSave = "Chemin d'entrée :";
                     textPathTCreateSave = "Chemin de sortie :";
                     textSaveTypeCreateSave = "Type de sauvegarde :";
+                    textSaveTypeExtension = "Extension prioritaire";
                     textTypeDCreateSave = "Différentiel";
                     textTypeCCreateSave = "Complète";
                     buttonAnnulCreateSave = "Annuler";
@@ -109,6 +111,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     textNameCreateSave = "Name :";
                     textPathSCreateSave = "Input Path :";
                     textPathTCreateSave = "Output Path :";
+                    textSaveTypeExtension = "Prioritized expansion";
                     textSaveTypeCreateSave = "Type of Save :";
                     textTypeDCreateSave = "Differential";
                     textTypeCCreateSave = "Full";
@@ -126,6 +129,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 OnPropertyChanged("TextTypeCCreateSave");
                 OnPropertyChanged("ButtonAnnulCreateSave");
                 OnPropertyChanged("ButtonCreateCreateSave");
+                OnPropertyChanged("TextSaveTypeExtension");
             }
         }
         public string BoutonLancerSave
@@ -175,6 +179,14 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             get
             {
                 return textSaveTypeCreateSave;
+            }
+        }
+
+        public string TextSaveTypeExtension
+        {
+            get
+            {
+                return textSaveTypeExtension;
             }
         }
         public string TextTypeDCreateSave
@@ -263,6 +275,19 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             set
             {
                 newFileName = value;
+                OnPropertyChanged("NewFileName");
+            }
+        }
+
+        public string NewExtension
+        {
+            get
+            {
+                return newExtension;
+            }
+            set
+            {
+                newExtension = value;
                 OnPropertyChanged("NewFileName");
             }
         }
@@ -431,6 +456,10 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             if (NewFileName != null && NewSourcePath != null && NewTargetPath != null)
             {
                 saveproject = new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType);
+                foreach (string extension in newExtension.Split(";"))
+                {
+                    saveproject.AddPriorityExtension(extension);
+                }
                 modelClass.ModelSave.addProject(saveproject);
                 saveProjects.Add(new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType));
                 App.Current.Windows[1].Close();
