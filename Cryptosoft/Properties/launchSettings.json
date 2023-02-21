@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Cryptosoft": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Users\\lucie\\Desktop\\b\\a.txt\" \"oui\" \"C:\\Users\\lucie\\Desktop\\b\\a.txt\""
+    }
+  }
+}

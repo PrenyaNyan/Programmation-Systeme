@@ -35,17 +35,13 @@ namespace WksProsit5
             {
                 return -1;
             }
-            if (args.Length > 1)
+            if (args.Length > 2)
             {
                 outdata = XOR(data, args[1]);
-            }
-            else if (args.Length > 0)
-            {
-                string key = "ThisIsATest";
-                outdata = XOR(data, key);
+
             }
             else { return -1; }
-            using (var writer = new StreamWriter(args[0]))
+            using (var writer = new StreamWriter(args[2]))
             {
                 writer.Write(outdata);
             }

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Programmation_Systeme_Groupe_B.ViewModels
 {
@@ -230,6 +232,13 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
             // Get the file contents of the directory to copy.
             FileInfo[] files = mainDirectory.GetFiles();
+            #region ProcessEncryptInit
+            Process encrypt = new Process();
+            string solutionpath = $"{Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent}";
+            encrypt.StartInfo.FileName = $"{solutionpath}\\Cryptosoft\\bin\\Debug\\net5.0\\Cryptosoft.exe";
+            encrypt.StartInfo.UseShellExecute = true;
+            int exitcode;
+            #endregion ProcessEncryptInit
 
             foreach (FileInfo file in files)
             {
@@ -241,7 +250,15 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 {
                     if (file.Length * 1024 < this.maxFileSize)
                     {
-                        file.CopyTo(temppath, true);
+                        //file.CopyTo(temppath, true);
+                        
+                        encrypt.StartInfo.Arguments = $"\"{Path.Combine(file.DirectoryName,file.Name)}\" \"{file.Name}\" \"{temppath}\"";
+                        encrypt.Start();
+                        // A modifier pour avoir un handler qui renvoie l'exit code directement
+                        while (!encrypt.HasExited) ;
+                        exitcode = encrypt.ExitCode;
+                        Trace.WriteLine(exitcode);
+                        // Ajouter le log de l'encryptage
                     }
                     else
                     {
@@ -275,7 +292,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 CompleteSave(subdir.FullName, temppath, progression, extension);
             }
         }
-
 
         private void DifferentialSave(string source, string target, Progression progression, string extension)
         {
