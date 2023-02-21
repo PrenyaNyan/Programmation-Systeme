@@ -381,16 +381,11 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             }
 
         }
-        internal void OpenWindowCommand()
+        public void OpenWindowCommand()
         {
             windowCreateSave = new WindowCreateSave();
             annulbouton = new Button();
             windowCreateSave.Show();
-            if (!windowCreateSave.IsActive)
-            {
-                windowCreateSave.Close();
-            }
-
         }
         internal void ChangeLanguageCommand()
         {
@@ -409,9 +404,9 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         }
         internal void CloseWindowCommand()
         {
-
+            windowCreateSave.Close();
         }
-
+        
         public void NewProject()
         {
             SaveTypeEnum saveType;
@@ -433,6 +428,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 saveproject = new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType);
                 modelClass.ModelSave.addProject(saveproject);
                 saveProjects.Add(new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType));
+                App.Current.Windows[2].Close();
             }
             else
             {
