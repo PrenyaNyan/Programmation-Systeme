@@ -6,6 +6,8 @@
     <RootNamespace>Programmation_Systeme_Groupe_B</RootNamespace>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
+	<StartupObject>Programmation_Systeme_Groupe_B.Program</StartupObject>
+
   </PropertyGroup>
 
   <ItemGroup>

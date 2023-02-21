@@ -433,6 +433,9 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 saveproject = new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType);
                 modelClass.ModelSave.addProject(saveproject);
                 saveProjects.Add(new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType));
+                App.Current.Windows[1].Close();
+                MessageBox.Show("Projet créé");
+                
             }
             else
             {
