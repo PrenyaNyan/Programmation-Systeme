@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -90,7 +91,7 @@ namespace ProjetMVC.Model
         }
 
         // Priority files
-        private List<string> priorityExtension = new() { };
+        private List<string> priorityExtension;
 
         // Max file Size
         private long maxFileSize;
@@ -105,6 +106,10 @@ namespace ProjetMVC.Model
 
         // Uncounted copied files (priority extension)
         private long tempPrioritySizeFile;
+
+        //Work program
+        private string workProgram;
+
 
 
 
@@ -121,12 +126,23 @@ namespace ProjetMVC.Model
             this.dailyLog = ModelLogDaily.GetInstance();
             this.state = ModelLogState.STATE_CREATED;
             this.maxFileSize = 99999999999999999;
+            this.workProgram = "";
+            this.priorityExtension = new() { };
+
         }
 
         public void Save()
         {
             if (this.state != ModelLogState.STATE_ACTIVE)
             {
+                if (this.workProgram != "")
+                {
+                    Process[] process = Process.GetProcessesByName(this.workProgram);
+                    if (process.Length > 0)
+                    {
+                        process[0].WaitForExit();
+                    }
+                }
 
                 this.progression.FilesSizeCopied = 0;
                 this.progression.CopiedFiles = 0;
@@ -402,6 +418,7 @@ namespace ProjetMVC.Model
             this.stateLog.fileAmount = this.progression.FileAmount;
             this.stateLog.size = this.progression.FileSize.ToString();
             this.stateLog.priorityExtension = this.priorityExtension;
+            this.stateLog.workProgram = this.workProgram;
             this.stateLog.maxFileSize = this.maxFileSize;
             this.stateLog.progression = getPercentage();
             this.stateLog.setState(state);
@@ -453,6 +470,11 @@ namespace ProjetMVC.Model
         {
             return this.priorityExtension;
         }
+        public void AddWorkProgram(string name)
+        {
+            this.workProgram = name;
+        }
+
 
     }
 }
