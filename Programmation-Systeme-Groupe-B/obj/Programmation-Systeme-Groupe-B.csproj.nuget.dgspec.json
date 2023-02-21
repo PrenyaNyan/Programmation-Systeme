@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alexa\\Source\\Repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj": {}
+    "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alexa\\Source\\Repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj": {
+    "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alexa\\Source\\Repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj",
+        "projectUniqueName": "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj",
         "projectName": "Programmation-Systeme-Groupe-B",
-        "projectPath": "C:\\Users\\alexa\\Source\\Repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj",
-        "packagesPath": "C:\\Users\\alexa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alexa\\Source\\Repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\obj\\",
+        "projectPath": "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj",
+        "packagesPath": "C:\\Users\\lucie\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\alexa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lucie\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0-windows"
+          "net5.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -51,8 +51,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -64,7 +63,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
         }
       }
     }
