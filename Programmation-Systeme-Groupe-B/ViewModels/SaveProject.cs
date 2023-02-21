@@ -286,19 +286,34 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             Process encrypt = new Process();
             string solutionpath = $"{Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent}";
             encrypt.StartInfo.FileName = $"{solutionpath}\\Cryptosoft\\bin\\Debug\\net5.0\\Cryptosoft.exe";
-            encrypt.StartInfo.UseShellExecute = true;
-            int exitcode;
+            encrypt.StartInfo.UseShellExecute = false;
+            encrypt.StartInfo.CreateNoWindow = true;
+            encrypt.Exited += Encrypt_Exited;
             #endregion ProcessEncryptInit
 
             encrypt.StartInfo.Arguments = $"\"{Path.Combine(file.DirectoryName, file.Name)}\" \"{file.Name}\" \"{outpath}\"";
             encrypt.Start();
-            // A modifier pour avoir un handler qui renvoie l'exit code directement
-            while (!encrypt.HasExited) ;
-            exitcode = encrypt.ExitCode;
-            Trace.WriteLine(exitcode);
+            while (!encrypt.HasExited) 
+            { 
+                encrypt.WaitForExit(); 
+            }
             //GenerateDailyLog();
             // Ajouter le log de l'encryptage
         }
+
+        private void Encrypt_Exited(object sender, EventArgs e)
+        {
+            var process = sender as Process;
+            Trace.WriteLine("HEYYYYY");
+            if (process != null)
+            {
+                var exitcode = process.ExitCode;
+                Trace.WriteLine(exitcode);
+                dailyLog.encrypttime = $"{exitcode}";
+                GenerateDailyLog();
+            }
+        }
+
         private void DifferentialSave(string source, string target, Progression progression, string extension)
         {
             DirectoryInfo mainDirectory = new DirectoryInfo(source);

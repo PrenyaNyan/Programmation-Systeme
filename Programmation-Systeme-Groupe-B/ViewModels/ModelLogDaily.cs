@@ -16,7 +16,8 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
     {
         public string time { get; set; }
         public string size { get; set; }
-
+        
+        public string encrypttime { get; set; }
         private ModelLogDaily()
         {
             this.logPath = DateTime.Now.ToString("dd-MM-yyyy");
