@@ -439,6 +439,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
         public void NewProject()
         {
+            
             SaveTypeEnum saveType;
             switch (NewSaveType)
             {
@@ -461,10 +462,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     saveproject.AddPriorityExtension(extension);
                 }
                 modelClass.ModelSave.addProject(saveproject);
-                saveProjects.Add(new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType));
-                App.Current.Windows[1].Close();
-                MessageBox.Show("Projet créé");
-                
+                saveProjects.Add(new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType));                
             }
             else
             {
