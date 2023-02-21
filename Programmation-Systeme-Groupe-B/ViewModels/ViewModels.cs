@@ -24,6 +24,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private string buttonImageString;
         private string newSourcePath;
         private string newTargetPath;
+        private string newBusinessWorker;
         private string newFileName;
         private string newExtension;
         private int newSaveType;
@@ -38,7 +39,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         #endregion
         #region Private Fields Lang
         private bool langue;//if true then french
-        private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave, textSaveTypeExtension;
+        private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave, textSaveTypeExtension, textSaveTypeMetier;
         #endregion
 
         private SaveProject saveproject;
@@ -100,6 +101,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     textSaveTypeExtension = "Extension prioritaire";
                     textTypeDCreateSave = "Différentiel";
                     textTypeCCreateSave = "Complète";
+                    textSaveTypeMetier = "Logiciel metier ?";
                     buttonAnnulCreateSave = "Annuler";
                     buttonCreateCreateSave = "Valider";
                 }
@@ -115,6 +117,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     textSaveTypeCreateSave = "Type of Save :";
                     textTypeDCreateSave = "Differential";
                     textTypeCCreateSave = "Full";
+                    textSaveTypeMetier = "Business software ?";
                     buttonAnnulCreateSave = "Cancel";
                     buttonCreateCreateSave = "Accept";
                 }
@@ -130,6 +133,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 OnPropertyChanged("ButtonAnnulCreateSave");
                 OnPropertyChanged("ButtonCreateCreateSave");
                 OnPropertyChanged("TextSaveTypeExtension");
+                OnPropertyChanged("TextSaveTypeMetier");
             }
         }
         public string BoutonLancerSave
@@ -181,6 +185,16 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 return textSaveTypeCreateSave;
             }
         }
+
+        public string TextSaveTypeMetier
+        {
+            get
+            {
+                return textSaveTypeMetier;
+            }
+        }
+
+
 
         public string TextSaveTypeExtension
         {
@@ -261,6 +275,21 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 OnPropertyChanged("NewTargetPath");
             }
         }
+
+        public string NewBusinessWorker
+        {
+            get
+            {
+                return newBusinessWorker;
+            }
+            set
+            {
+                newBusinessWorker = value;
+                OnPropertyChanged("NewBusinessWorker");
+            }
+        }
+
+
 
         #endregion
         #region Model
@@ -461,12 +490,17 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             if (NewFileName != null && NewSourcePath != null && NewTargetPath != null)
             {
                 saveproject = new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType);
-                foreach (string extension in newExtension.Split(";"))
+                if (newExtension != null)
                 {
-                    saveproject.AddPriorityExtension(extension);
+                    foreach (string extension in newExtension.Split(";"))
+                    {
+                        saveproject.AddPriorityExtension(extension);
+                    }
                 }
+
+                saveproject.WorkProgram = NewBusinessWorker;
                 modelClass.ModelSave.addProject(saveproject);
-                saveProjects.Add(new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType));                
+                saveProjects.Add(new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType));
             }
             else
             {
@@ -486,7 +520,8 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             MessageBox.Show("Sauvegarde effectuée");
         }
 
-        public void SaveAll() {
+        public void SaveAll()
+        {
             foreach (SaveProject project in this.modelClass.ModelSave.Projects)
             {
                 project.Save();

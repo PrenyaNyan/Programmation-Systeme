@@ -140,6 +140,8 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             this.maxFileSize = 99999999999999999;
             this.priorityExtension = new() { };
             this.workProgram = "";
+            this.uncountedCopiedSizeFiles = 0;
+            this.tempPrioritySizeFile = 0;
         }
 
         public void Save()
@@ -151,6 +153,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     Process[] process = Process.GetProcessesByName(this.workProgram);
                     if (process.Length > 0)
                     {
+                        MessageBox.Show("Un logiciel metier est en cours d'utilisation");
                         process[0].WaitForExit();
                     }
                 }
@@ -280,13 +283,13 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     }
                     progression.CopiedFiles += 1;
                     progression.FilesSizeCopied += file.Length;
+                    /*Percentage*/
 
                 }
                 else
                 {
                     this.tempPrioritySizeFile++;
                 }
-                /*Percentage*/
 
                 if (getPercentage() > this.stateLog.progression && getPercentage() < 100)
                 {
@@ -319,9 +322,9 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
             encrypt.StartInfo.Arguments = $"\"{Path.Combine(file.DirectoryName, file.Name)}\" \"{file.Name}\" \"{outpath}\"";
             encrypt.Start();
-            while (!encrypt.HasExited) 
-            { 
-                encrypt.WaitForExit(); 
+            while (!encrypt.HasExited)
+            {
+                encrypt.WaitForExit();
             }
             //GenerateDailyLog();
             // Ajouter le log de l'encryptage
@@ -399,16 +402,16 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                         }
 
                     }
+                    /*Percentage*/
+
+                    if (getPercentage() > this.stateLog.progression && getPercentage() < 100)
+                    {
+                        GenerateStateLog(ModelLogState.STATE_ACTIVE);
+                    }
                 }
                 else
                 {
                     this.uncountedCopiedSizeFiles += file.Length;
-                }
-
-
-                if (getPercentage() > this.stateLog.progression && getPercentage() < 100)
-                {
-                    GenerateStateLog(ModelLogState.STATE_ACTIVE);
                 }
             }
 
@@ -520,10 +523,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         {
             return this.priorityExtension;
         }
-        public void AddWorkProgram(string name)
-        {
-            this.workProgram = name;
-        }
+
 
 
     }

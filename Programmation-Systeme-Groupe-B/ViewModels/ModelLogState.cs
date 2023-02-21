@@ -27,7 +27,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
         private ModelLogState()
         {
-            this.logPath = "Statesave";
+            this.logPath = "StateSave";
             setLogType();
             setTime(DateTime.Now.ToString());
         }
