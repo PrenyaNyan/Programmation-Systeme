@@ -439,7 +439,11 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
         public void NewProject()
         {
-            
+            if (saveProjects.Where(x => x.Name == NewFileName).Count() > 1)
+            {
+                MessageBox.Show("Nom de projet déjà existant");
+                return;
+            }
             SaveTypeEnum saveType;
             switch (NewSaveType)
             {
