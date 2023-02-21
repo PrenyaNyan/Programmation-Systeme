@@ -108,6 +108,9 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         // Uncounted copied files (priority extension)
         private long tempPrioritySizeFile;
 
+        //Work program
+        private string workProgram;
+
 
 
 
@@ -123,12 +126,21 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             this.dailyLog = ModelLogDaily.GetInstance();
             this.state = ModelLogState.STATE_CREATED;
             this.maxFileSize = 99999999999999999;
+            this.workProgram = "";
         }
 
         public void Save()
         {
             if (this.state != ModelLogState.STATE_ACTIVE)
             {
+                if (this.workProgram != "")
+                {
+                    Process[] process = Process.GetProcessesByName(this.workProgram);
+                    if (process.Length > 0)
+                    {
+                        process[0].WaitForExit();
+                    }
+                }
 
                 this.progression.FilesSizeCopied = 0;
                 this.progression.CopiedFiles = 0;
@@ -443,6 +455,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             this.stateLog.size = this.progression.FileSize.ToString();
             this.stateLog.priorityExtension = this.priorityExtension;
             this.stateLog.maxFileSize = this.maxFileSize;
+            this.stateLog.workProgram = this.workProgram
             this.stateLog.progression = getPercentage();
             this.stateLog.setState(state);
             if (this.stateLog.state == ModelLogState.STATE_ACTIVE)
@@ -492,6 +505,11 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         public List<string> GetPriorityExtension()
         {
             return this.priorityExtension;
+        }
+
+        public void AddWorkProgram(string name)
+        {
+            this.workProgram = name;
         }
 
     }
