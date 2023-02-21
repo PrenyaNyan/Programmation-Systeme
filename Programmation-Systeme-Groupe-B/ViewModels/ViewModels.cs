@@ -234,7 +234,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             set
             {
                 buttonImageString = value;
-                OnPropertyChanged("ButtonImageString");
+                OnPropertyChanged("BoutonImagePath");
             }
         }
         public string NewSourcePath
@@ -423,7 +423,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             if (BoutonImagePath == "/View/Drapeau-France.png")
             {
                 BoutonImagePath = "/View/DrapeauR-U.png";
-                Console.WriteLine("OUI");
+                Trace.WriteLine("oui");
             }
             else
             {
