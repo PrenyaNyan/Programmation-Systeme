@@ -100,9 +100,10 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             set { maxFileSize = value; }
         }
 
-        // Uncounted copied files
+        // Uncounted copied files (maxSize)
         private long uncountedCopiedSizeFiles;
 
+        // Uncounted copied files (priority extension)
         private long tempPrioritySizeFile;
 
 
@@ -122,7 +123,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             this.maxFileSize = 99999999999999999;
         }
 
-        // TODO: Méthode pour démarrer le processus de sauvegarde, définir : fileSize et la progression 
         public void Save()
         {
             if (this.state != ModelLogState.STATE_ACTIVE)
@@ -135,6 +135,16 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 this.progression.FileSize = DirSize(new DirectoryInfo(this.pathSource));
                 this.progression.FileAmount = Directory.GetFiles(this.pathSource, "*", SearchOption.AllDirectories).Length;
                 this.logStart = DateTime.Now;
+
+                DirectoryInfo mainDirectory = new DirectoryInfo(this.pathSource);
+
+                // If the source directory does not exist, throw an exception. 
+                if (!mainDirectory.Exists)
+                {
+                    throw new DirectoryNotFoundException(
+                        "Source directory does not exist or could not be found: "
+                        + this.pathSource);
+                }
                 GenerateStateLog(ModelLogState.STATE_START);
 
 
@@ -211,16 +221,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
             DirectoryInfo[] subDirectory = mainDirectory.GetDirectories();
 
-
-
-            // If the source directory does not exist, throw an exception. //TODO Message d'erreur
-            if (!mainDirectory.Exists)
-            {
-                throw new DirectoryNotFoundException(
-                    "Source directory does not exist or could not be found: "
-                    + source);
-            }
-
             // If the destination directory does not exist, create it.
             if (!Directory.Exists(target))
             {
@@ -281,15 +281,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         {
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
             DirectoryInfo[] subDirectory = mainDirectory.GetDirectories();
-
-
-            // If the source directory does not exist, throw an exception. //TODO Message d'erreur
-            if (!mainDirectory.Exists)
-            {
-                throw new DirectoryNotFoundException(
-                    "Source directory does not exist or could not be found: "
-                    + source);
-            }
 
             // If the destination directory does not exist, create it.
             if (!Directory.Exists(target))
@@ -371,7 +362,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             {
                 return 0;
             }
-            return ((this.progression.FilesSizeCopied - this.uncountedCopiedSizeFiles) * 100) / this.progression.FileSize - this.tempPrioritySizeFile;
+            return (this.progression.FilesSizeCopied - this.uncountedCopiedSizeFiles) * 100 / this.progression.FileSize - this.tempPrioritySizeFile;
         }
 
         public SaveProject GetInfo()
@@ -411,8 +402,8 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             this.stateLog.pathTarget = this.pathTarget;
             this.stateLog.fileAmount = this.progression.FileAmount;
             this.stateLog.size = this.progression.FileSize.ToString();
-            this.stateLog.maxFileSize = this.maxFileSize;
             this.stateLog.priorityExtension = this.priorityExtension;
+            this.stateLog.maxFileSize = this.maxFileSize;
             this.stateLog.progression = getPercentage();
             this.stateLog.setState(state);
             if (this.stateLog.state == ModelLogState.STATE_ACTIVE)
@@ -445,7 +436,10 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         {
             if (thread != null) thread.Suspend();
         }
-        public void DeleteThread() => thread.Abort();
+        public void DeleteThread()
+        {
+            if (thread != null) thread.Abort();
+        }
 
         public bool RemovePriorityExtension(string extension)
         {
