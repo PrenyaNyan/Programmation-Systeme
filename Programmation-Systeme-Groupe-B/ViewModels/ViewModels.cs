@@ -458,20 +458,24 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     break;
             }
 
-            if (NewFileName != null && NewSourcePath != null && NewTargetPath != null)
+            if (NewFileName == null | NewSourcePath == null | NewTargetPath == null)
             {
-                saveproject = new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType);
+                // Add Translation
+                MessageBox.Show("Veuillez remplir tous les champs");
+                return;
+            }
+            saveproject = new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType);
+            // Append specifics priority extension if there is
+            if (newExtension is not null)
+            {
                 foreach (string extension in newExtension.Split(";"))
                 {
                     saveproject.AddPriorityExtension(extension);
                 }
-                modelClass.ModelSave.addProject(saveproject);
-                saveProjects.Add(new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType));                
             }
-            else
-            {
-                MessageBox.Show("Veuillez remplir tous les champs");
-            }
+            // Add differents projects to the modelSave for saving, and saveProjects for visual feedback
+            modelClass.ModelSave.addProject(saveproject);
+            saveProjects.Add(saveproject);
         }
 
         public void SaveProject(object parameter)
@@ -483,6 +487,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     project.Save();
                 }
             }
+                // Add Translation
             MessageBox.Show("Sauvegarde effectuée");
         }
 
@@ -491,12 +496,8 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             {
                 project.Save();
             }
+                // Add Translation
             MessageBox.Show("Sauvegarde effectuée");
-        }
-
-        internal void GetProjectsCommand()
-        {
-
         }
         public ObservableCollection<SaveProject> SaveProjects
         {
