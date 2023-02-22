@@ -35,7 +35,7 @@ namespace Programmation_Systeme_Groupe_B.Model
         public string PercentProgression
         {
             get { return percentProgression; }
-            set 
+            set
             {
                 percentProgression = value;
             }
@@ -172,9 +172,6 @@ namespace Programmation_Systeme_Groupe_B.Model
                 this.progression.CopiedFiles = 0;
                 this.uncountedCopiedSizeFiles = 0;
                 this.tempPrioritySizeFile = 0;
-                this.progression.FileSize = DirSize(new DirectoryInfo(this.pathSource));
-                this.progression.FileAmount = Directory.GetFiles(this.pathSource, "*", SearchOption.AllDirectories).Length;
-                this.logStart = DateTime.Now;
 
                 DirectoryInfo mainDirectory = new DirectoryInfo(this.pathSource);
 
@@ -185,6 +182,11 @@ namespace Programmation_Systeme_Groupe_B.Model
                         "Source directory does not exist or could not be found: "
                         + this.pathSource);
                 }
+                this.progression.FileSize = DirSize(new DirectoryInfo(this.pathSource));
+                this.progression.FileAmount = Directory.GetFiles(this.pathSource, "*", SearchOption.AllDirectories).Length;
+                this.logStart = DateTime.Now;
+
+               
                 GenerateStateLog(ModelLogState.STATE_START);
 
 
@@ -217,7 +219,8 @@ namespace Programmation_Systeme_Groupe_B.Model
 
 
                     });
-                    thread.Name = this.Name;
+                    this.thread = thread;
+
                     thread.Start();
 
 
@@ -250,7 +253,7 @@ namespace Programmation_Systeme_Groupe_B.Model
                         GenerateStateLog(ModelLogState.STATE_END);
 
                     });
-                    thread.Name = this.Name;
+                    this.thread = thread;
                     thread.Start();
 
                 }
@@ -535,35 +538,30 @@ namespace Programmation_Systeme_Groupe_B.Model
 
         public void ResumeThread(string name)
         {
-            ProcessThreadCollection threads = Process.GetCurrentProcess().Threads;
-            foreach (Thread thread in threads)
-            {
-                if (thread.Name == name)
-                {
-                    thread.Resume();
-                    this.state = ModelLogState.STATE_ACTIVE;
 
-                }
+            if (this.thread != null)
+            {
+                this.thread.Resume();
+                this.state = ModelLogState.STATE_ACTIVE;
+
             }
+
         }
         public void PauseThread(string name)
         {
-            ProcessThreadCollection threads = Process.GetCurrentProcess().Threads;
-            foreach (Thread thread in threads)
+
+            if (this.thread != null)
             {
-                if (thread.Name == name)
-                {
-                    thread.Suspend();
-                    this.state = ModelLogState.STATE_PAUSE;
-                }
+                this.thread.Suspend();
+                this.state = ModelLogState.STATE_PAUSE;
             }
+
         }
         public void DeleteThread(string name)
         {
-            ProcessThreadCollection threads = Process.GetCurrentProcess().Threads;
-            foreach (Thread thread in threads)
+            if (this.thread != null)
             {
-                if (thread.Name == name) thread.Abort();
+                this.thread.Abort();
             }
         }
 
