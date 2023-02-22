@@ -99,17 +99,17 @@
                                     <ImageBrush ImageSource="save.png"/>
                                 </Button.Background>
                             </Button>
-                            <Button Grid.Column="2" Grid.Row="1"  Command="{Binding ElementName=ListViewProjects, Path=DataContext.PauseThread}" CommandParameter="{Binding Name}" Width="20" Height="20" Style="{StaticResource MyButton}">
+                            <Button Grid.Column="2" Grid.Row="1"  Command="{Binding ElementName=ListViewProjects, Path=DataContext.PauseSave}" CommandParameter="{Binding Name}" Width="20" Height="20" Style="{StaticResource MyButton}">
                                 <Button.Background>
                                     <ImageBrush ImageSource="pause.png"/>
                                 </Button.Background>
                             </Button>
-                            <Button Grid.Column="4" Grid.Row="1"  Command="{Binding ElementName=ListViewProjects, Path=DataContext.DeleteThread}" CommandParameter="{Binding Name}" Width="20" Height="20" Style="{StaticResource MyButton}">
+                            <Button Grid.Column="4" Grid.Row="1"  Command="{Binding ElementName=ListViewProjects, Path=DataContext.StopSave}" CommandParameter="{Binding Name}" Width="20" Height="20" Style="{StaticResource MyButton}">
                                 <Button.Background>
                                     <ImageBrush ImageSource="stop.png"/>
                                 </Button.Background>
                             </Button>
-                            <Button Grid.Column="6" Grid.Row="1"  Command="{Binding ElementName=ListViewProjects, Path=DataContext.ResumeThread}" CommandParameter="{Binding Name}" Width="20" Height="20" Style="{StaticResource MyButton}">
+                            <Button Grid.Column="6" Grid.Row="1"  Command="{Binding ElementName=ListViewProjects, Path=DataContext.ResumeSave}" CommandParameter="{Binding Name}" Width="20" Height="20" Style="{StaticResource MyButton}">
                                 <Button.Background>
                                     <ImageBrush ImageSource="start.png"/>
                                 </Button.Background>

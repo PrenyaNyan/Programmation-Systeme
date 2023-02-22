@@ -29,6 +29,9 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private int newSaveType;
         private OpenFolderDirectory openFolderDirectory;
         private CreateProject createProject;
+        private PauseSave pauseSave;
+        private StopSave stopSave;
+        private ResumeSave resumeSave;
         private SaveAllProject saveAllProject;
         private SaveOneProject saveOneProject;
         private Button annulbouton;
@@ -64,6 +67,9 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             createProject = new(this);
             saveAllProject = new(this);
             saveOneProject = new(this);
+            pauseSave = new(this);
+            stopSave = new(this);
+            resumeSave = new(this);
             changeLanguage = new ChangeLanguage(this);
             buttonImageString = "/View/Drapeau-France.png";
             foreach (var item in modelClass.ModelSave.Projects)
@@ -366,6 +372,30 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             get
             {
                 return createProject;
+            }
+        }
+
+        public ICommand PauseSave
+        {
+            get
+            {
+                return pauseSave;
+            }
+        }
+
+        public ICommand StopSave
+        {
+            get
+            {
+                return stopSave;
+            }
+        }
+
+        public ICommand ResumeSave
+        {
+            get
+            {
+                return resumeSave;
             }
         }
 

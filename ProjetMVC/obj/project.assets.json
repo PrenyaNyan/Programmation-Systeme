@@ -51,24 +51,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\thefr\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\leroc\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\thefr\\Source\\Repos\\Programmation-Systeme-Groupe-B\\ProjetMVC\\ProjetMVC.csproj",
+      "projectUniqueName": "C:\\Users\\leroc\\Source\\Repos\\Programmation-Systeme-Groupe-B\\ProjetMVC\\ProjetMVC.csproj",
       "projectName": "ProjetMVC",
-      "projectPath": "C:\\Users\\thefr\\Source\\Repos\\Programmation-Systeme-Groupe-B\\ProjetMVC\\ProjetMVC.csproj",
-      "packagesPath": "C:\\Users\\thefr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\thefr\\Source\\Repos\\Programmation-Systeme-Groupe-B\\ProjetMVC\\obj\\",
+      "projectPath": "C:\\Users\\leroc\\Source\\Repos\\Programmation-Systeme-Groupe-B\\ProjetMVC\\ProjetMVC.csproj",
+      "packagesPath": "C:\\Users\\leroc\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\leroc\\Source\\Repos\\Programmation-Systeme-Groupe-B\\ProjetMVC\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\thefr\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\leroc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

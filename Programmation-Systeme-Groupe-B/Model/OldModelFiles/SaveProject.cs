@@ -565,7 +565,7 @@ namespace Programmation_Systeme_Groupe_B.Model
             }
 
         }
-        public void DeleteThread(string name)
+        public void DeleteThread()
         {
             if (this.thread != null)
             {
