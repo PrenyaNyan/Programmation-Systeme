@@ -297,6 +297,7 @@ namespace Programmation_Systeme_Groupe_B.Model
                 {
                     GenerateStateLog(ModelLogState.STATE_PAUSE);
                     mrse.WaitOne();
+                    if (!this.active) return;
                 }
 
                 // Create the path to the new copy of the file.
@@ -408,6 +409,8 @@ namespace Programmation_Systeme_Groupe_B.Model
                 {
                     GenerateStateLog(ModelLogState.STATE_PAUSE);
                     mrse.WaitOne();
+                    if (!this.active) return;
+
                 }
                 // Create the path to the new copy of the file.
                 string temppath = Path.Combine(target, file.Name);
