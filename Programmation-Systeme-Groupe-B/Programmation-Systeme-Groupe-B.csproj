@@ -15,6 +15,10 @@
     <None Remove="View\Drapeau-France.png" />
     <None Remove="View\DrapeauR-U.png" />
     <None Remove="View\Fifi.png" />
+    <None Remove="View\pause.png" />
+    <None Remove="View\save.png" />
+    <None Remove="View\start.png" />
+    <None Remove="View\stop.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +30,10 @@
     <Resource Include="View\DrapeauR-U.png" />
     <Resource Include="View\Fifi.png" />
     <Resource Include="View\fondMiA.jpg" />
+    <Resource Include="View\pause.png" />
+    <Resource Include="View\save.png" />
+    <Resource Include="View\start.png" />
+    <Resource Include="View\stop.png" />
   </ItemGroup>
 
 </Project>
