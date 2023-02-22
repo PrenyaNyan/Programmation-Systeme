@@ -2,18 +2,27 @@
 using System.Linq;
 using System.IO;
 using System.Text.Json;
-using Programmation_Systeme_Groupe_B.ViewModels.Langage;
+using Programmation_Systeme_Groupe_B.Model.Langage;
 
-namespace Programmation_Systeme_Groupe_B.ViewModels
+namespace Programmation_Systeme_Groupe_B.Model
 {
     class ModelClass
     {
         Setting setting;
         public ModelLangage modelLangage;
         public ModelSave ModelSave = new();
-        public ModelClass()
+        private ModelClass()
         {
 
+        }
+        private static ModelClass modelClass;
+        public static ModelClass GetModelClass()
+        {
+            if (modelClass is null)
+            {
+                modelClass = new();
+            }
+            return modelClass;
         }
         public void CheckSetting()
         {

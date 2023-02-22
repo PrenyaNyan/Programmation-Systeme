@@ -25,8 +25,20 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
 
         public void Execute(object parameter)
         {
-            viewModel.SaveProject(parameter);
+            SaveProject(parameter);
         }
         public event EventHandler CanExecuteChanged;
+        public void SaveProject(object parameter)
+        {
+            foreach (SaveProject project in ModelClass.GetModelClass().ModelSave.Projects)
+            {
+                if (project.Name == parameter.ToString())
+                {
+                    project.Save();
+                }
+            }
+            // Add Translation
+            viewModel.ShowMsgBox("Sauvegarde effectuée");
+        }
     }
 }

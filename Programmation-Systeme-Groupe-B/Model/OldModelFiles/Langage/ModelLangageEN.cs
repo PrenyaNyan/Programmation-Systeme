@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace Programmation_Systeme_Groupe_B.ViewModels.Langage
+namespace Programmation_Systeme_Groupe_B.Model.Langage
 {
     class ModelLangageEN : ModelLangage
     {

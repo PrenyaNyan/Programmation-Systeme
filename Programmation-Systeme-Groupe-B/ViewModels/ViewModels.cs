@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Forms;
 using Programmation_Systeme_Groupe_B.Model.Specific;
 using Programmation_Systeme_Groupe_B.View;
-using Programmation_Systeme_Groupe_B.ViewModels;
+using Programmation_Systeme_Groupe_B.Model;
 using System.Xml.Linq;
 using System.IO;
 using System.Text.Json;
@@ -19,7 +19,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
     class ViewModel : ViewModelBase
     {
         #region Private Fields
-        private OpenFileBrowser openFileBrowser;
         private ChangeLanguage changeLanguage;
         private string buttonImageString;
         private string newSourcePath;
@@ -29,9 +28,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private string newExtension;
         private int newSaveType;
         private OpenFolderDirectory openFolderDirectory;
-        private OpenWindow openWindow;
-        private WindowCreateSave windowCreateSave;
-        private CloseWindow closeWindow;
         private CreateProject createProject;
         private SaveAllProject saveAllProject;
         private SaveOneProject saveOneProject;
@@ -42,7 +38,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave, textSaveTypeExtension, textSaveTypeMetier,boutonSave;
         #endregion
 
-        private SaveProject saveproject;
+        public SaveProject saveproject;
         private ObservableCollection<SaveProject> _saveProjects = new ObservableCollection<SaveProject>();
         public ObservableCollection<SaveProject> saveProjects
         {
@@ -51,7 +47,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 return this._saveProjects;
             }
         }
-        ModelClass modelClass = new();
+        ModelClass modelClass = ModelClass.GetModelClass();
 
         public ViewModel()
         {
@@ -64,10 +60,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 File.WriteAllText(setfile, JsonSerializer.Serialize(texte));
                 file.Close();
             }
-            openFileBrowser = new OpenFileBrowser(this);
             openFolderDirectory = new(this);
-            openWindow = new(this);
-            closeWindow = new(this);
             createProject = new(this);
             saveAllProject = new(this);
             saveOneProject = new(this);
@@ -145,6 +138,11 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             {
                 return boutonSave;
             }
+        }
+
+        public ObservableCollection<SaveProject> SaveProjects
+        {
+            get { return this.saveProjects; }
         }
         public string BoutonLancerSave
         {
@@ -346,13 +344,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
         #endregion
         #region Model
-        public ICommand OpenBrowser
-        {
-            get
-            {
-                return openFileBrowser;
-            }
-        }
 
         public ICommand ChangeLanguage
         {
@@ -361,25 +352,11 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 return changeLanguage;
             }
         }
-        public ICommand OpenFile
+        public ICommand OpenFolderDirectory
         {
             get
             {
                 return openFolderDirectory;
-            }
-        }
-        public ICommand OpenWindow
-        {
-            get
-            {
-                return openWindow;
-            }
-        }
-        public ICommand CloseWindow
-        {
-            get
-            {
-                return closeWindow;
             }
         }
 
@@ -410,146 +387,12 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         #endregion
 
         #region Method
-        #region Method
-        internal void OpenFileBrowserCommand()
+
+
+        public void ShowMsgBox(string msg)
         {
-            var dialog = new Microsoft.Win32.OpenFileDialog();
-            dialog.FileName = "Document"; // Default file name
-            dialog.DefaultExt = ".txt"; // Default file extension
-            dialog.Filter = "Text documents (.txt)|*.txt";
-            // Show open file dialog box
-            bool? result = dialog.ShowDialog();
-
-            // Process open file dialog box results
-            if (result == true)
-            {
-                // Open document
-                string filename = dialog.FileName;
-            }
+            MessageBox.Show(msg);
         }
-
-        internal void OpenFolderDirectoryCommand(object parameter)
-        {
-            var dialog = new FolderBrowserDialog();
-            string value = parameter.ToString();
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                if (value == "Source")
-                {
-                    NewSourcePath = dialog.SelectedPath.ToString();
-                }
-                if (value == "Target")
-                {
-                    NewTargetPath = dialog.SelectedPath.ToString();
-                }
-            }
-
-        }
-        internal void OpenWindowCommand()
-        {
-            windowCreateSave = new WindowCreateSave();
-            annulbouton = new Button();
-            windowCreateSave.Show();
-            if (!windowCreateSave.IsActive)
-            {
-                windowCreateSave.Close();
-            }
-
-        }
-        internal void ChangeLanguageCommand()
-        {
-            Langue = !Langue;
-            if (BoutonImagePath == "/View/Drapeau-France.png")
-            {
-                BoutonImagePath = "/View/DrapeauR-U.png";
-                Console.WriteLine("OUI");
-            }
-            else
-            {
-
-                BoutonImagePath = "/View/Drapeau-France.png";
-            }
-            Console.WriteLine("NON");
-        }
-        internal void CloseWindowCommand()
-        {
-
-        }
-
-        public void NewProject()
-        {
-            if (saveProjects.Where(x => x.Name == NewFileName).Count() > 1)
-            {
-                MessageBox.Show("Nom de projet déjà existant");
-                return;
-            }
-            SaveTypeEnum saveType;
-            switch (NewSaveType)
-            {
-                case 0:
-                    saveType = SaveTypeEnum.Complete;
-                    break;
-                case 1:
-                    saveType = SaveTypeEnum.Differential;
-                    break;
-                default:
-                    saveType = SaveTypeEnum.Complete;
-                    break;
-            }
-
-            if (NewFileName != null && NewSourcePath != null && NewTargetPath != null)
-            {
-                saveproject = new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType);
-                if (newExtension != null)
-                {
-                    foreach (string extension in newExtension.Split(";"))
-                    {
-                        saveproject.AddPriorityExtension(extension);
-                    }
-                }
-
-                saveproject.WorkProgram = NewBusinessWorker;
-                modelClass.ModelSave.addProject(saveproject);
-                saveProjects.Add(new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType));
-            }
-            else
-            {
-                MessageBox.Show("Veuillez remplir tous les champs");
-            }
-        }
-
-        public void SaveProject(object parameter)
-        {
-            foreach (SaveProject project in this.modelClass.ModelSave.Projects)
-            {
-                if (project.Name == parameter.ToString())
-                {
-                    project.Save();
-                }
-            }
-            MessageBox.Show("Sauvegarde effectuée");
-        }
-
-        public void SaveAll()
-        {
-            foreach (SaveProject project in this.modelClass.ModelSave.Projects)
-            {
-                project.Save();
-            }
-            MessageBox.Show("Sauvegarde effectuée");
-        }
-
-        internal void GetProjectsCommand()
-        {
-
-        }
-        public ObservableCollection<SaveProject> SaveProjects
-        {
-            get { return this.saveProjects; }
-        }
-
         #endregion
     }
-
-    #endregion
 }
