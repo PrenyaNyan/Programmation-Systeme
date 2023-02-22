@@ -464,10 +464,17 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 MessageBox.Show("Veuillez remplir tous les champs");
                 return;
             }
+            if (modelClass.ModelSave.NameAlreadyExist(NewFileName))
+            {
+                // Add Translation
+                MessageBox.Show("Le nom de projet existe déjà, veuillez le renommer");
+                return;
+            }
             saveproject = new SaveProject(NewFileName, NewSourcePath, NewTargetPath, saveType);
             // Append specifics priority extension if there is
             if (newExtension is not null)
             {
+                // Every extensions needs to be separated by a semicolon
                 foreach (string extension in newExtension.Split(";"))
                 {
                     saveproject.AddPriorityExtension(extension);

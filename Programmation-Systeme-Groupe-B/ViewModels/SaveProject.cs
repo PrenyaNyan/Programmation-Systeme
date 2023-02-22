@@ -31,11 +31,13 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             get { return state; }
             set { state = value; }
         }
+        private string percentProgression;
         public string PercentProgression
         {
-            get
+            get { return percentProgression; }
+            set 
             {
-                return $"{getPercentage()}";
+                percentProgression = value;
             }
         }
         // Project repertory source
@@ -84,7 +86,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         }
 
         // Save Thread 
-        private static Thread thread;
+        private Thread thread;
         public Thread Thread
         {
             get { return thread; }
@@ -179,6 +181,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
 
                     });
+                    thread.Name = this.Name;
                     thread.Start();
 
 
@@ -211,6 +214,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                         GenerateStateLog(ModelLogState.STATE_END);
 
                     });
+                    thread.Name = this.Name;
                     thread.Start();
 
                 }
@@ -264,6 +268,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
                 if (getPercentage() > this.stateLog.progression && getPercentage() < 100)
                 {
+                    PercentProgression = getPercentage().ToString();
                     GenerateStateLog(ModelLogState.STATE_ACTIVE);
                 }
 
@@ -382,6 +387,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
                 if (getPercentage() > this.stateLog.progression && getPercentage() < 100)
                 {
+                    PercentProgression = getPercentage().ToString();
                     GenerateStateLog(ModelLogState.STATE_ACTIVE);
                 }
             }
@@ -467,17 +473,29 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             this.dailyLog.save();
         }
 
-        public void ResumeThread()
+        public static void ResumeThread(string name)
         {
-            if (thread != null) thread.Resume();
+            ProcessThreadCollection threads = Process.GetCurrentProcess().Threads;
+            foreach (Thread thread in threads)
+            {
+                if (thread.Name == name) thread.Resume();
+            }
         }
-        public void PauseThread()
+        public static void PauseThread(string name)
         {
-            if (thread != null) thread.Suspend();
+            ProcessThreadCollection threads = Process.GetCurrentProcess().Threads;
+            foreach (Thread thread in threads)
+            {
+                if (thread.Name == name) thread.Suspend();
+            }
         }
-        public void DeleteThread()
+        public static void DeleteThread(string name)
         {
-            if (thread != null) thread.Abort();
+            ProcessThreadCollection threads = Process.GetCurrentProcess().Threads;
+            foreach (Thread thread in threads)
+            {
+                if (thread.Name == name) thread.Abort();
+            }
         }
 
         public bool RemovePriorityExtension(string extension)

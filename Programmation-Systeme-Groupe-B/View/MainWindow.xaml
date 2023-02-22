@@ -66,14 +66,25 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <TextBlock Text="{Binding Name}"/>
-                            <TextBlock Text="{Binding PercentProgression}" Grid.Column="1" Grid.Row="0"/>
+                            <TextBlock Text="{Binding PercentProgression,Mode=TwoWay}" Grid.Column="2" Grid.Row="0"/>
+                            <TextBlock Text="    " Grid.Column="1" Grid.Row="1"/>
+                            <TextBlock Text="    " Grid.Column="3" Grid.Row="1"/>
+                            <TextBlock Text="    " Grid.Column="5" Grid.Row="1"/>
                             <Button Grid.Column="0" Grid.Row="1" Content="Sauvegarder" Command="{Binding ElementName=ListViewProjects, Path=DataContext.SaveOneProject}" CommandParameter="{Binding Name}"></Button>
+                            <Button Grid.Column="2" Grid.Row="1" Content="Pause" Command="{Binding ElementName=ListViewProjects, Path=DataContext.PauseThread}" CommandParameter="{Binding Name}"/>
+                            <Button Grid.Column="4" Grid.Row="1" Content="Arrêter" Command="{Binding ElementName=ListViewProjects, Path=DataContext.DeleteThread}" CommandParameter="{Binding Name}"/>
+                            <Button Grid.Column="6" Grid.Row="1" Content="Reprendre" Command="{Binding ElementName=ListViewProjects, Path=DataContext.ResumeThread}" CommandParameter="{Binding Name}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
