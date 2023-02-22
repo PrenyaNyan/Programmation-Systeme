@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:Programmation_Systeme_Groupe_B.ViewModels"
         mc:Ignorable="d"
         HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch">
+        VerticalAlignment="Stretch" ResizeMode="NoResize">
     <Window.Resources>
         <vm:ViewModel x:Key="VM"/>
         <Style x:Key="MyButton" TargetType="Button">
@@ -59,12 +59,12 @@
 
             <Label Content="{Binding TextSaveTypeMetier}" HorizontalAlignment="Left" Margin="11,221,0,0" VerticalAlignment="Top" Height="20" Width="91" FontSize="8"/>
             <Rectangle Height="16" Stroke="Black" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Fill="#FFA0A0A0" Margin="0,0,0,258"/>
-            <TextBox HorizontalAlignment="Right" Margin="0,241,48,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Height="21" Text="{Binding NewBusinessWorker, Mode=TwoWay}" FontSize="9"/>
+            <TextBox HorizontalAlignment="Right" Margin="0,241,47,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Height="21" Text="{Binding NewBusinessWorker, Mode=TwoWay}" FontSize="9"/>
 
 
 
 
-            <Image Height="35" Margin="6,21,119,0" VerticalAlignment="Top" OpacityMask="White" Source="/View/Fifi.png" RenderTransformOrigin="0.559,0.546"/>
+            <Image Height="35" Margin="117,16,9,0" VerticalAlignment="Top" OpacityMask="White" Source="/View/Fifi.png" RenderTransformOrigin="0.559,0.546"/>
             <Rectangle Height="16" Stroke="Black" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Fill="#FFA0A0A0" Margin="0,0,0,258"/>
             <Button  Command="{Binding ChangeLanguage}"   Grid.Column="1" HorizontalAlignment="Left" Height="14" Margin="312,1,0,0" VerticalAlignment="Top" Width="23" FontSize="9" FontFamily="Candara" BorderThickness="0,0,0,0" AutomationProperties.Name="BoutonLangue" Style="{StaticResource MyButton}">
                 <Button.Background>
