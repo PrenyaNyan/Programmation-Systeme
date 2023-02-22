@@ -392,8 +392,11 @@ namespace Programmation_Systeme_Groupe_B.Model
                         // Copy the file.
                         if (extension.Equals("") || extension.Equals(fileExtension))
                         {
-                            //file.CopyTo(temppath, false);
-                            Encrypt(file, temppath);
+                            if (this.encryptExtension.Contains(fileExtension)) Encrypt(file, temppath);
+                            else
+                            {
+                                file.CopyTo(temppath, true);
+                            }
                             progression.CopiedFiles += 1;
                             progression.FilesSizeCopied += file.Length;
                         }
