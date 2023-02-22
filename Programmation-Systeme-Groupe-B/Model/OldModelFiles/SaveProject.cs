@@ -133,6 +133,8 @@ namespace Programmation_Systeme_Groupe_B.Model
         }
         private ManualResetEvent mrse;
         private bool pause;
+        private bool active;
+
 
 
 
@@ -159,6 +161,7 @@ namespace Programmation_Systeme_Groupe_B.Model
         {
             if (this.state != ModelLogState.STATE_ACTIVE)
             {
+                this.active = true;
                 if (this.workProgram != "")
                 {
                     Process[] process = Process.GetProcessesByName(this.workProgram);
@@ -216,8 +219,11 @@ namespace Programmation_Systeme_Groupe_B.Model
                             CompleteSave(this.pathSource, this.pathTarget, this.progression, "");
 
                         }
-                        state = ModelLogState.STATE_END;
-                        GenerateStateLog(ModelLogState.STATE_END);
+                        if (this.active)
+                        {
+                            state = ModelLogState.STATE_END;
+                            GenerateStateLog(ModelLogState.STATE_END);
+                        }
 
 
                     });
@@ -251,8 +257,12 @@ namespace Programmation_Systeme_Groupe_B.Model
                             DifferentialSave(this.pathSource, this.pathTarget, this.progression, "");
 
                         }
-                        state = ModelLogState.STATE_END;
-                        GenerateStateLog(ModelLogState.STATE_END);
+                        if (this.active)
+                        {
+                            state = ModelLogState.STATE_END;
+                            GenerateStateLog(ModelLogState.STATE_END);
+                        }
+                       
 
                     });
                     this.thread = thread;
@@ -265,6 +275,7 @@ namespace Programmation_Systeme_Groupe_B.Model
 
         private void CompleteSave(string source, string target, Progression progression, string extension)
         {
+            if (!this.active) return;
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
             DirectoryInfo[] subDirectory = mainDirectory.GetDirectories();
 
@@ -374,6 +385,8 @@ namespace Programmation_Systeme_Groupe_B.Model
 
         private void DifferentialSave(string source, string target, Progression progression, string extension)
         {
+            if (!this.active) return;
+
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
             DirectoryInfo[] subDirectory = mainDirectory.GetDirectories();
 
@@ -575,9 +588,10 @@ namespace Programmation_Systeme_Groupe_B.Model
         }
         public void DeleteThread()
         {
-            if (this.thread != null)
+            if (this.thread != null && this.active)
             {
-                this.thread.Abort();
+                this.active = false;
+                GenerateStateLog(ModelLogState.STATE_REMOVED);
             }
         }
 

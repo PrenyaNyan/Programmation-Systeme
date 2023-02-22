@@ -25,6 +25,8 @@ namespace Programmation_Systeme_Groupe_B.Model
         public const string STATE_CREATED = "CREATED";
         public const string STATE_START = "START";
         public const string STATE_PAUSE = "PAUSE";
+        public const string STATE_REMOVED = "REMOVED";
+
 
 
         private ModelLogState()
