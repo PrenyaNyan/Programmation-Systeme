@@ -39,7 +39,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         #endregion
         #region Private Fields Lang
         private bool langue;//if true then french
-        private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave, textSaveTypeExtension, textSaveTypeMetier;
+        private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave, textSaveTypeExtension, textSaveTypeMetier,boutonSave;
         #endregion
 
         private SaveProject saveproject;
@@ -104,6 +104,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     textSaveTypeMetier = "Logiciel metier ?";
                     buttonAnnulCreateSave = "Annuler";
                     buttonCreateCreateSave = "Valider";
+                    boutonSave = "Sauvegarder";
                 }
                 else // He's not FR like us
                 {
@@ -120,6 +121,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     textSaveTypeMetier = "Business software ?";
                     buttonAnnulCreateSave = "Cancel";
                     buttonCreateCreateSave = "Accept";
+                    boutonSave = "Save";
                 }
                 OnPropertyChanged("BoutonLancerSave");
                 OnPropertyChanged("BoutonCreate");
@@ -134,6 +136,14 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 OnPropertyChanged("ButtonCreateCreateSave");
                 OnPropertyChanged("TextSaveTypeExtension");
                 OnPropertyChanged("TextSaveTypeMetier");
+                OnPropertyChanged("BoutonSave");
+            }
+        }
+        public string BoutonSave
+        {
+            get
+            {
+                return boutonSave;
             }
         }
         public string BoutonLancerSave
