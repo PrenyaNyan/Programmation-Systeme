@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Programmation_Systeme_Groupe_B.ViewModels
+namespace Programmation_Systeme_Groupe_B.Model
 {
     class SaveProject
     {
