@@ -281,7 +281,11 @@ namespace Programmation_Systeme_Groupe_B.Model
 
             foreach (FileInfo file in files)
             {
-                if (this.pause) mrse.WaitOne();
+                if (this.pause)
+                {
+                    GenerateStateLog(ModelLogState.STATE_PAUSE);
+                    mrse.WaitOne();
+                }
 
                 // Create the path to the new copy of the file.
                 string temppath = Path.Combine(target, file.Name);
@@ -386,7 +390,11 @@ namespace Programmation_Systeme_Groupe_B.Model
             foreach (FileInfo file in files)
             {
 
-                if (this.pause) mrse.WaitOne();
+                if (this.pause)
+                {
+                    GenerateStateLog(ModelLogState.STATE_PAUSE);
+                    mrse.WaitOne();
+                }
                 // Create the path to the new copy of the file.
                 string temppath = Path.Combine(target, file.Name);
 
