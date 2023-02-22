@@ -545,7 +545,7 @@ namespace Programmation_Systeme_Groupe_B.Model
         public void ResumeThread()
         {
 
-            if (this.thread != null)
+            if (this.thread != null && this.pause)
             {
                 this.pause = false;
                 this.mrse.Set();
@@ -557,7 +557,7 @@ namespace Programmation_Systeme_Groupe_B.Model
         public void PauseThread()
         {
 
-            if (this.thread != null)
+            if (this.thread != null && !this.pause)
             {
                 this.pause = true;
                 this.mrse.Reset();
