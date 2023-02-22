@@ -131,7 +131,8 @@ namespace Programmation_Systeme_Groupe_B.Model
             get { return workProgram; }
             set { workProgram = value; }
         }
-
+        private ManualResetEvent mrse;
+        private bool pause;
 
 
 
@@ -151,6 +152,7 @@ namespace Programmation_Systeme_Groupe_B.Model
             this.priorityExtension = new() { };
             this.encryptExtension = new() { };
             this.workProgram = "";
+            this.mrse = new ManualResetEvent(false);
         }
 
         public void Save()
@@ -279,6 +281,8 @@ namespace Programmation_Systeme_Groupe_B.Model
 
             foreach (FileInfo file in files)
             {
+                if (this.pause) mrse.WaitOne();
+
                 // Create the path to the new copy of the file.
                 string temppath = Path.Combine(target, file.Name);
 
@@ -381,6 +385,8 @@ namespace Programmation_Systeme_Groupe_B.Model
 
             foreach (FileInfo file in files)
             {
+
+                if (this.pause) mrse.WaitOne();
                 // Create the path to the new copy of the file.
                 string temppath = Path.Combine(target, file.Name);
 
@@ -536,23 +542,25 @@ namespace Programmation_Systeme_Groupe_B.Model
             this.dailyLog.save();
         }
 
-        public void ResumeThread(string name)
+        public void ResumeThread()
         {
 
             if (this.thread != null)
             {
-                this.thread.Resume();
+                this.pause = false;
+                this.mrse.Set();
                 this.state = ModelLogState.STATE_ACTIVE;
 
             }
 
         }
-        public void PauseThread(string name)
+        public void PauseThread()
         {
 
             if (this.thread != null)
             {
-                this.thread.Suspend();
+                this.pause = true;
+                this.mrse.Reset();
                 this.state = ModelLogState.STATE_PAUSE;
             }
 
