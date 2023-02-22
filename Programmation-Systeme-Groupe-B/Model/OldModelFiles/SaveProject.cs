@@ -101,6 +101,14 @@ namespace Programmation_Systeme_Groupe_B.Model
             set { priorityExtension = value; }
         }
 
+        // Encrypt extension files
+        private List<string> encryptExtension;
+        public List<string> EncryptExtension
+        {
+            get { return encryptExtension; }
+            set { encryptExtension = value; }
+        }
+
         // Max file Size
         private long maxFileSize;
         public long MaxFileSize
@@ -141,9 +149,8 @@ namespace Programmation_Systeme_Groupe_B.Model
             this.state = ModelLogState.STATE_CREATED;
             this.maxFileSize = 99999999999999999;
             this.priorityExtension = new() { };
+            this.encryptExtension = new() { };
             this.workProgram = "";
-            this.uncountedCopiedSizeFiles = 0;
-            this.tempPrioritySizeFile = 0;
         }
 
         public void Save()
@@ -272,13 +279,19 @@ namespace Programmation_Systeme_Groupe_B.Model
                 // Create the path to the new copy of the file.
                 string temppath = Path.Combine(target, file.Name);
 
+                // File extension
+                string fileExtension = file.Extension;
+
                 // Copy the file.
-                if (extension.Equals("") || extension.Equals(file.Extension))
+                if (extension.Equals("") || extension.Equals(fileExtension))
                 {
                     if (file.Length * 1024 < this.maxFileSize)
                     {
-                        //file.CopyTo(temppath, true);
-                        Encrypt(file, temppath);
+                        if (this.encryptExtension.Contains(fileExtension)) Encrypt(file, temppath);
+                        else
+                        {
+                            file.CopyTo(temppath, true);
+                        }
 
                     }
                     else
@@ -367,13 +380,17 @@ namespace Programmation_Systeme_Groupe_B.Model
             {
                 // Create the path to the new copy of the file.
                 string temppath = Path.Combine(target, file.Name);
+
+                // File extension
+                string fileExtension = file.Extension;
+
                 if (file.Length * 1024 < this.maxFileSize)
                 {
                     // Copy the file. If it already exists, keep the most recent one.
                     if (!File.Exists(temppath))
                     {
                         // Copy the file.
-                        if (extension.Equals("") || extension.Equals(file.Extension))
+                        if (extension.Equals("") || extension.Equals(fileExtension))
                         {
                             //file.CopyTo(temppath, false);
                             Encrypt(file, temppath);
@@ -395,8 +412,11 @@ namespace Programmation_Systeme_Groupe_B.Model
                             DateTime fileTargetDate = fileInfoSource.CreationTime;
                             if (fileSourceDate.CompareTo(fileTargetDate) < 0)
                             {
-                                //file.CopyTo(temppath, true);
-                                Encrypt(file, temppath);
+                                if (this.encryptExtension.Contains(fileExtension)) Encrypt(file, temppath);
+                                else
+                                {
+                                    file.CopyTo(temppath, true);
+                                }
                                 progression.CopiedFiles += 1;
                                 progression.FilesSizeCopied += file.Length;
                             }
@@ -483,6 +503,7 @@ namespace Programmation_Systeme_Groupe_B.Model
             this.stateLog.fileAmount = this.progression.FileAmount;
             this.stateLog.size = this.progression.FileSize.ToString();
             this.stateLog.priorityExtension = this.priorityExtension;
+            this.stateLog.encryptExtension = this.encryptExtension;
             this.stateLog.workProgram = this.workProgram;
             this.stateLog.maxFileSize = this.maxFileSize;
             this.stateLog.progression = getPercentage();
@@ -509,23 +530,32 @@ namespace Programmation_Systeme_Groupe_B.Model
             this.dailyLog.save();
         }
 
-        public static void ResumeThread(string name)
+        public void ResumeThread(string name)
         {
             ProcessThreadCollection threads = Process.GetCurrentProcess().Threads;
             foreach (Thread thread in threads)
             {
-                if (thread.Name == name) thread.Resume();
+                if (thread.Name == name)
+                {
+                    thread.Resume();
+                    this.state = ModelLogState.STATE_ACTIVE;
+
+                }
             }
         }
-        public static void PauseThread(string name)
+        public void PauseThread(string name)
         {
             ProcessThreadCollection threads = Process.GetCurrentProcess().Threads;
             foreach (Thread thread in threads)
             {
-                if (thread.Name == name) thread.Suspend();
+                if (thread.Name == name)
+                {
+                    thread.Suspend();
+                    this.state = ModelLogState.STATE_PAUSE;
+                }
             }
         }
-        public static void DeleteThread(string name)
+        public void DeleteThread(string name)
         {
             ProcessThreadCollection threads = Process.GetCurrentProcess().Threads;
             foreach (Thread thread in threads)
@@ -548,6 +578,14 @@ namespace Programmation_Systeme_Groupe_B.Model
             return this.priorityExtension;
         }
 
+        public bool RemoveEncryptExtension(string extension)
+        {
+            return this.encryptExtension.Remove(extension);
+        }
+        public void AddEncryptExtension(string extension)
+        {
+            this.encryptExtension.Add(extension);
+        }
 
 
     }

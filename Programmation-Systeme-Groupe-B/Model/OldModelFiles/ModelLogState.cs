@@ -14,6 +14,7 @@ namespace Programmation_Systeme_Groupe_B.Model
         public string state { get; set; }
         public int fileAmount { get; set; }
         public List<string> priorityExtension { get; set; }
+        public List<string> encryptExtension { get; set; }
         public long maxFileSize { get; set; }
         public string workProgram { get; set; }
 
@@ -23,6 +24,7 @@ namespace Programmation_Systeme_Groupe_B.Model
         public const string STATE_ERROR = "ERROR";
         public const string STATE_CREATED = "CREATED";
         public const string STATE_START = "START";
+        public const string STATE_PAUSE = "PAUSE";
 
 
         private ModelLogState()
