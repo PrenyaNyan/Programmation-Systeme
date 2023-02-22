@@ -275,7 +275,6 @@ namespace Programmation_Systeme_Groupe_B.Model
 
         private void CompleteSave(string source, string target, Progression progression, string extension)
         {
-            if (!this.active) return;
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
             DirectoryInfo[] subDirectory = mainDirectory.GetDirectories();
 
@@ -292,6 +291,8 @@ namespace Programmation_Systeme_Groupe_B.Model
 
             foreach (FileInfo file in files)
             {
+                if (!this.active) return;
+
                 if (this.pause)
                 {
                     GenerateStateLog(ModelLogState.STATE_PAUSE);
@@ -385,7 +386,6 @@ namespace Programmation_Systeme_Groupe_B.Model
 
         private void DifferentialSave(string source, string target, Progression progression, string extension)
         {
-            if (!this.active) return;
 
             DirectoryInfo mainDirectory = new DirectoryInfo(source);
             DirectoryInfo[] subDirectory = mainDirectory.GetDirectories();
@@ -402,6 +402,7 @@ namespace Programmation_Systeme_Groupe_B.Model
 
             foreach (FileInfo file in files)
             {
+                if (!this.active) return;
 
                 if (this.pause)
                 {
