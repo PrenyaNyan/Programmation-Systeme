@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using Programmation_Systeme_Groupe_B.ViewModels;
+using Programmation_Systeme_Groupe_B.Model;
 
-namespace Programmation_Systeme_Groupe_B.ViewModels
+namespace Programmation_Systeme_Groupe_B.Model.Langage
 {
     abstract class ModelLangage
     {

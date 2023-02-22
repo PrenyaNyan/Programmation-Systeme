@@ -25,8 +25,23 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
 
         public void Execute(object parameter)
         {
-            viewModel.ChangeLanguageCommand();
+            ChangeLanguageCommand();
         }
         public event EventHandler CanExecuteChanged;
+        internal void ChangeLanguageCommand()
+        {
+            viewModel.Langue = !viewModel.Langue;
+            if (viewModel.BoutonImagePath == "/View/Drapeau-France.png")
+            {
+                viewModel.BoutonImagePath = "/View/DrapeauR-U.png";
+                Console.WriteLine("OUI");
+            }
+            else
+            {
+
+                viewModel.BoutonImagePath = "/View/Drapeau-France.png";
+            }
+            Console.WriteLine("NON");
+        }
     }
 }

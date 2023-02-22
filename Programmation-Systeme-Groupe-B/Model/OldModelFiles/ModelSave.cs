@@ -2,10 +2,10 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
-using Programmation_Systeme_Groupe_B.ViewModels;
+using Programmation_Systeme_Groupe_B.Model;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace Programmation_Systeme_Groupe_B.ViewModels
+namespace Programmation_Systeme_Groupe_B.Model
 {
     class ModelSave
     {
