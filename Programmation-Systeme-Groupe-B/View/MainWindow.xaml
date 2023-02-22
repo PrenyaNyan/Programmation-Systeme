@@ -46,7 +46,7 @@
             <TextBox HorizontalAlignment="Right" Margin="0,91,42,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="115" Height="20" Text="{Binding NewSourcePath, Mode=TwoWay}" FontSize="9" />
             <Label Content="{Binding TextPathTCreateSave}" HorizontalAlignment="Left" Margin="11,108,0,0" VerticalAlignment="Top" Height="20" Width="84" FontSize="9"/>
             <Button Command="{Binding OpenFolderDirectory}" CommandParameter="Source" Content="..." HorizontalAlignment="Right" Margin="0,91,18,0" VerticalAlignment="Top" Height="20" Width="24" RenderTransformOrigin="0.621,0.562"/>
-            <TextBox  HorizontalAlignment="Left" Margin="11,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="115" Height="18" Text="{Binding NewTargetPath, Mode=TwoWay}" FontSize="9"/>
+            <TextBox  HorizontalAlignment="Left" Margin="11,0,0,0" TextWrapping="NoWrap" VerticalAlignment="Center" Width="115" Height="18" Text="{Binding NewTargetPath, Mode=TwoWay}" FontSize="9"/>
             <Label Content="{Binding TextSaveTypeCreateSave}" HorizontalAlignment="Left" Margin="11,142,0,0" VerticalAlignment="Top" Height="20" Width="96" FontSize="9"/>
             <Button Command="{Binding OpenFolderDirectory}" CommandParameter="Target" Content="..." HorizontalAlignment="Left" Margin="126,0,0,0" VerticalAlignment="Center" Height="18" Width="24" RenderTransformOrigin="0.444,-0.027"/>
             <ComboBox x:Name = "comboBox" SelectedIndex="{Binding NewSaveType}" HorizontalAlignment="Right" Margin="0,162,18,0" VerticalAlignment="Top" Height="19" Width="139" FontSize="9">
@@ -94,22 +94,22 @@
                             <TextBlock Text="    " Grid.Column="1" Grid.Row="1"/>
                             <TextBlock Text="    " Grid.Column="3" Grid.Row="1"/>
                             <TextBlock Text="    " Grid.Column="5" Grid.Row="1"/>
-                            <Button Grid.Column="0" Grid.Row="1"  Command="{Binding ElementName=ListViewProjects, Path=DataContext.SaveOneProject}" CommandParameter="{Binding Name}" Width="20" Height="20">
+                            <Button Grid.Column="0" Grid.Row="1"  Command="{Binding ElementName=ListViewProjects, Path=DataContext.SaveOneProject}" CommandParameter="{Binding Name}" Width="20" Height="20" Style="{StaticResource MyButton}">
                                 <Button.Background>
                                     <ImageBrush ImageSource="save.png"/>
                                 </Button.Background>
                             </Button>
-                            <Button Grid.Column="2" Grid.Row="1"  Command="{Binding ElementName=ListViewProjects, Path=DataContext.PauseThread}" CommandParameter="{Binding Name}" Width="20" Height="20">
+                            <Button Grid.Column="2" Grid.Row="1"  Command="{Binding ElementName=ListViewProjects, Path=DataContext.PauseThread}" CommandParameter="{Binding Name}" Width="20" Height="20" Style="{StaticResource MyButton}">
                                 <Button.Background>
                                     <ImageBrush ImageSource="pause.png"/>
                                 </Button.Background>
                             </Button>
-                            <Button Grid.Column="4" Grid.Row="1"  Command="{Binding ElementName=ListViewProjects, Path=DataContext.DeleteThread}" CommandParameter="{Binding Name}" Width="20" Height="20">
+                            <Button Grid.Column="4" Grid.Row="1"  Command="{Binding ElementName=ListViewProjects, Path=DataContext.DeleteThread}" CommandParameter="{Binding Name}" Width="20" Height="20" Style="{StaticResource MyButton}">
                                 <Button.Background>
                                     <ImageBrush ImageSource="stop.png"/>
                                 </Button.Background>
                             </Button>
-                            <Button Grid.Column="6" Grid.Row="1"  Command="{Binding ElementName=ListViewProjects, Path=DataContext.ResumeThread}" CommandParameter="{Binding Name}" Width="20" Height="20">
+                            <Button Grid.Column="6" Grid.Row="1"  Command="{Binding ElementName=ListViewProjects, Path=DataContext.ResumeThread}" CommandParameter="{Binding Name}" Width="20" Height="20" Style="{StaticResource MyButton}">
                                 <Button.Background>
                                     <ImageBrush ImageSource="start.png"/>
                                 </Button.Background>
