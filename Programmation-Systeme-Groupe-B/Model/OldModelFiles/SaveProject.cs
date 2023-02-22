@@ -152,7 +152,7 @@ namespace Programmation_Systeme_Groupe_B.Model
             this.priorityExtension = new() { };
             this.encryptExtension = new() { };
             this.workProgram = "";
-            this.mrse = new ManualResetEvent(false);
+            this.mrse = new ManualResetEvent(true);
         }
 
         public void Save()
