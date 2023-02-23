@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Programmation_Systeme_Groupe_B.ViewModels;
 using System.Windows.Input;
+using System.Windows;
 
 namespace Programmation_Systeme_Groupe_B.Model.Specific
 {
@@ -71,6 +72,12 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
                     viewModel.saveproject.AddPriorityExtension(extension);
                 }
             }
+
+            if (viewModel.NewSizeLimit != 0) 
+            {
+                viewModel.saveproject.MaxFileSize = viewModel.NewSizeLimit;
+            }
+
             // Add differents projects to the modelSave for saving, and saveProjects for visual feedback
             ModelClass.GetModelClass().ModelSave.addProject(viewModel.saveproject);
             viewModel.saveProjects.Add(viewModel.saveproject);

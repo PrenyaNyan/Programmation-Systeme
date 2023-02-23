@@ -117,8 +117,6 @@ namespace Programmation_Systeme_Groupe_B.Model
             set { maxFileSize = value; }
         }
 
-        // Uncounted copied files (maxSize)
-        private long uncountedCopiedSizeFiles;
 
         // Uncounted copied files (priority extension)
         private long tempPrioritySizeFile;
@@ -175,7 +173,6 @@ namespace Programmation_Systeme_Groupe_B.Model
 
                 this.progression.FilesSizeCopied = 0;
                 this.progression.CopiedFiles = 0;
-                this.uncountedCopiedSizeFiles = 0;
                 this.tempPrioritySizeFile = 0;
 
                 DirectoryInfo mainDirectory = new DirectoryInfo(this.pathSource);
@@ -318,10 +315,7 @@ namespace Programmation_Systeme_Groupe_B.Model
                         }
 
                     }
-                    else
-                    {
-                        this.uncountedCopiedSizeFiles += file.Length;
-                    }
+                   
                     progression.CopiedFiles += 1;
                     progression.FilesSizeCopied += file.Length;
                     /*Percentage*/
@@ -478,10 +472,7 @@ namespace Programmation_Systeme_Groupe_B.Model
                         GenerateStateLog(ModelLogState.STATE_ACTIVE);
                     }
                 }
-                else
-                {
-                    this.uncountedCopiedSizeFiles += file.Length;
-                }
+        
 
 
                 if (getPercentage() > this.stateLog.progression && getPercentage() < 100)
@@ -506,7 +497,7 @@ namespace Programmation_Systeme_Groupe_B.Model
             {
                 return 0;
             }
-            return (this.progression.FilesSizeCopied - this.uncountedCopiedSizeFiles) * 100 / this.progression.FileSize - this.tempPrioritySizeFile;
+            return this.progression.FilesSizeCopied  * 100 / this.progression.FileSize - this.tempPrioritySizeFile;
         }
 
         public SaveProject GetInfo()

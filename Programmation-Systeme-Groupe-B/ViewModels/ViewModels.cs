@@ -24,6 +24,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private string newSourcePath;
         private string newTargetPath;
         private string newBusinessWorker;
+        private int newSizeLimit;
         private string newFileName;
         private string newExtension;
         private int newSaveType;
@@ -38,7 +39,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         #endregion
         #region Private Fields Lang
         private bool langue;//if true then french
-        private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave, textSaveTypeExtension, textSaveTypeMetier,boutonSave;
+        private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave, textSaveTypeExtension, textSaveTypeMetier, boutonSave, textSaveSize;
         #endregion
 
         public SaveProject saveproject;
@@ -101,6 +102,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     textTypeDCreateSave = "Différentiel";
                     textTypeCCreateSave = "Complète";
                     textSaveTypeMetier = "Logiciel metier ?";
+                    textSaveSize = "Taille ( ko )";
                     buttonAnnulCreateSave = "Annuler";
                     buttonCreateCreateSave = "Valider";
                     boutonSave = "Sauvegarder";
@@ -118,6 +120,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     textTypeDCreateSave = "Differential";
                     textTypeCCreateSave = "Full";
                     textSaveTypeMetier = "Business software ?";
+                    textSaveSize = "Size ( kb )";
                     buttonAnnulCreateSave = "Cancel";
                     buttonCreateCreateSave = "Accept";
                     boutonSave = "Save";
@@ -136,6 +139,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 OnPropertyChanged("TextSaveTypeExtension");
                 OnPropertyChanged("TextSaveTypeMetier");
                 OnPropertyChanged("BoutonSave");
+                OnPropertyChanged("TextSaveSize");
             }
         }
         public string BoutonSave
@@ -208,8 +212,14 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             }
         }
 
-
-
+        public string TextSaveSize
+        {
+            get
+            {
+                return textSaveSize;
+            }
+        }
+        
         public string TextSaveTypeExtension
         {
             get
@@ -300,6 +310,19 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             {
                 newBusinessWorker = value;
                 OnPropertyChanged("NewBusinessWorker");
+            }
+        }
+
+        public int NewSizeLimit
+        {
+            get
+            {
+                return newSizeLimit;
+            }
+            set
+            {
+                newSizeLimit = value;
+                OnPropertyChanged("NewSizeLimit");
             }
         }
 
