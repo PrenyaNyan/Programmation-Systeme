@@ -41,19 +41,10 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         #region Private Fields Lang
         private bool langue;//if true then french
         private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave, textSaveTypeExtension, textSaveTypeMetier, boutonSave, textSaveSize;
-        #endregion
-        private string logType;
-
-        public SaveProject saveproject;
         private ObservableCollection<SaveProject> _saveProjects = new ObservableCollection<SaveProject>();
-        public ObservableCollection<SaveProject> saveProjects
-        {
-            get
-            {
-                return this._saveProjects;
-            }
-        }
-        ModelClass modelClass = ModelClass.GetModelClass();
+        private string logType;
+        #endregion
+        
 
         public ViewModel()
         {
@@ -87,6 +78,16 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 OnPropertyChanged("LogType");
             }
         }
+
+        public SaveProject saveproject;
+        public ObservableCollection<SaveProject> saveProjects
+        {
+            get
+            {
+                return this._saveProjects;
+            }
+        }
+        public ModelClass modelClass = ModelClass.GetModelClass();
         public bool Langue
         {
             get
@@ -262,7 +263,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 return buttonCreateCreateSave;
             }
         }
-        #region Public Properties
+
         public Button AnnulButton
         {
             get
@@ -378,8 +379,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             }
         }
 
-        #endregion
-        #region Model
 
         public ICommand ChangeLanguage
         {
@@ -396,7 +395,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             }
         }
 
-        #endregion
         public ICommand ChangeLogType
         {
             get
