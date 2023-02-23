@@ -350,6 +350,7 @@ namespace Programmation_Systeme_Groupe_B.Model
                 // Copy the subdirectories.
                 CompleteSave(subdir.FullName, temppath, progression, extension);
             }
+            GenerateDailyLog();
         }
         private void Encrypt(FileInfo file, string outpath)
         {
@@ -380,8 +381,14 @@ namespace Programmation_Systeme_Groupe_B.Model
             {
                 var exitcode = process.ExitCode;
                 Trace.WriteLine(exitcode);
-                dailyLog.encrypttime = $"{exitcode}";
-                GenerateDailyLog();
+                if (dailyLog.encrypttime is null) 
+                { 
+                    dailyLog.encrypttime = $"{exitcode}";
+                    return;
+                };
+                dailyLog.encrypttime = $"{exitcode + int.Parse(dailyLog.encrypttime)}";
+                
+                //GenerateDailyLog();
             }
         }
 
