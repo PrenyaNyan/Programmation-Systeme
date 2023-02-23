@@ -41,6 +41,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private bool langue;//if true then french
         private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave, textSaveTypeExtension, textSaveTypeMetier, boutonSave, textSaveSize;
         #endregion
+        public string logType { get; set; }
 
         public SaveProject saveproject;
         private ObservableCollection<SaveProject> _saveProjects = new ObservableCollection<SaveProject>();
@@ -55,15 +56,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
         public ViewModel()
         {
-            string setfile = "settings.json";
-            if (!File.Exists(setfile))
-            {
-                var file = File.Create(setfile);
-                file.Close();
-                var texte = new { logType = "json" };
-                File.WriteAllText(setfile, JsonSerializer.Serialize(texte));
-                file.Close();
-            }
+            logType = "xml";
             openFolderDirectory = new(this);
             createProject = new(this);
             saveAllProject = new(this);

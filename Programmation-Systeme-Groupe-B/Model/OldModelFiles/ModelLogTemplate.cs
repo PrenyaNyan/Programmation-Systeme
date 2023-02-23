@@ -26,10 +26,10 @@ namespace Programmation_Systeme_Groupe_B.Model
             File.WriteAllText(path, content);
         }
 
-        public void setLogType()
+        public void setLogType(string logtype = "json")
         {
-            Setting setting = JsonSerializer.Deserialize<Setting>(File.ReadAllText("settings.json"));
-            switch (setting.logType)
+            
+            switch (logtype)
             {
                 case "json":
                     this.logType = JSONLOG;
