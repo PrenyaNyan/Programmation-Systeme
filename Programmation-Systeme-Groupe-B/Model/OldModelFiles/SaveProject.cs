@@ -17,6 +17,7 @@ namespace Programmation_Systeme_Groupe_B.Model
         public ModelLogState stateLog;
         public ModelLogDaily dailyLog;
         public DateTime logStart;
+        public string logType;
         // Project Name
         private string name;
         public string Name
@@ -543,6 +544,7 @@ namespace Programmation_Systeme_Groupe_B.Model
             this.stateLog.maxFileSize = this.maxFileSize;
             this.stateLog.progression = getPercentage();
             this.stateLog.setState(state);
+            this.stateLog.setLogType(this.logType);
             if (this.stateLog.state == ModelLogState.STATE_ACTIVE)
             {
                 this.stateLog.setTime((this.logStart - DateTime.Now).ToString());
@@ -561,6 +563,7 @@ namespace Programmation_Systeme_Groupe_B.Model
             this.dailyLog.pathSource = this.pathSource;
             this.dailyLog.pathTarget = this.pathTarget;
             this.dailyLog.size = this.progression.FileSize.ToString();
+            this.dailyLog.setLogType(this.logType);
             this.dailyLog.setTime();
             this.dailyLog.save();
         }

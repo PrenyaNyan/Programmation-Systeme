@@ -34,6 +34,7 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
             {
                 if (project.Name == parameter.ToString())
                 {
+                    project.logType = viewModel.logType;
                     project.Save();
                 }
             }
