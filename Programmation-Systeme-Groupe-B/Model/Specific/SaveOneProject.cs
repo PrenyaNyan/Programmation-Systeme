@@ -38,8 +38,12 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
                     project.Save();
                 }
             }
-            // Add Translation
-            viewModel.ShowMsgBox("Sauvegarde effectuée");
+            if (viewModel.Langue)
+            {
+                viewModel.ShowMsgBox("Sauvegarde effectuée");
+                return;
+            }
+            viewModel.ShowMsgBox("Save done !");
         }
     }
 }

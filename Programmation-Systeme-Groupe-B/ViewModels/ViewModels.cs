@@ -44,7 +44,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private ObservableCollection<SaveProject> _saveProjects = new ObservableCollection<SaveProject>();
         private string logType;
         #endregion
-        
+
 
         public ViewModel()
         {
@@ -66,6 +66,8 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             Langue = true;
         }
         #region Public Properties
+        public ModelClass modelClass = ModelClass.GetModelClass();
+
         public string LogType
         {
             get
@@ -87,7 +89,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 return this._saveProjects;
             }
         }
-        public ModelClass modelClass = ModelClass.GetModelClass();
         public bool Langue
         {
             get
@@ -97,7 +98,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             set
             {
                 langue = value;
-                if (langue) // If FR bro he is like us
+                if (langue) // FR
                 {
                     boutonLancerSave = "Lancer toutes les sauvegardes";
                     boutonCreate = "Créer une sauvegarde";
@@ -115,7 +116,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                     buttonCreateCreateSave = "Valider";
                     boutonSave = "Sauvegarder";
                 }
-                else // He's not FR like us
+                else // EN
                 {
                     boutonLancerSave = "Start all save";
                     boutonCreate = "Create a new save";
@@ -333,9 +334,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
                 OnPropertyChanged("NewSizeLimit");
             }
         }
-
-
-
         #endregion
         #region Model
 

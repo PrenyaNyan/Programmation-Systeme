@@ -10,7 +10,7 @@ namespace Programmation_Systeme_Groupe_B.Model
     class ModelSave
     {
         private List<SaveProject> projects;
-        private ModelLogState stateLog;
+        //private ModelLogState stateLog;
         private string saveFilePath = "projects.json";
         public List<SaveProject> Projects
         {
@@ -21,6 +21,7 @@ namespace Programmation_Systeme_Groupe_B.Model
         {
             this.projects.Add(project);
             // Ajout du projet au fichier de config
+            // Add the project to config file
             SaveProjectToFile(project, this.saveFilePath);
 
             //Log creation
@@ -31,12 +32,14 @@ namespace Programmation_Systeme_Groupe_B.Model
         public void RetrieveProject(string path)
         {
             // Lire l'objet associé avec le nom et le charger;
+            // Read the object with associated name and load it
             string jsonPath = File.ReadAllText(path);
             this.projects = JsonConvert.DeserializeObject<List<SaveProject>>(jsonPath);
         }
 
         private void SaveProjectToFile(SaveProject project, string path)
         {
+            // Save the project into a file
             string jsonPath = File.ReadAllText(path);
             var json = JsonConvert.DeserializeObject<JArray>(jsonPath);
             var objectContent = JsonBuilder(project);
@@ -47,15 +50,15 @@ namespace Programmation_Systeme_Groupe_B.Model
         public void InitializeJsonFile(string path)
         {
             if (!File.Exists(path))
+                // Create a project file if it doesn't exist
             {
                 File.Create(path).Close();
                 File.WriteAllText(path, "[]");
                 this.projects = new List<SaveProject>();
+                return;
             }
-            else
-            {
-                RetrieveProject(path);
-            }
+            // Recover all SaveProjects that are saved into the .json file
+            RetrieveProject(path);
         }
 
         public static JObject JsonBuilder(object obj)

@@ -37,7 +37,11 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
                     project.ResumeThread();
                 }
             }
-            // Add Translation
+            if (viewModel.Langue)
+            {
+                viewModel.ShowMsgBox("Reprise !");
+                return;
+            }
             viewModel.ShowMsgBox("Resume !");
         }
     }

@@ -31,11 +31,6 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
         public event EventHandler CanExecuteChanged;
         public void NewProject()
         {
-            if (viewModel.saveProjects.Where(x => x.Name == viewModel.NewFileName).Count() > 1)
-            {
-                viewModel.ShowMsgBox("Nom de projet déjà existant");
-                return;
-            }
             SaveTypeEnum saveType;
             switch (viewModel.NewSaveType)
             {
@@ -52,14 +47,22 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
 
             if (viewModel.NewFileName == null | viewModel.NewSourcePath == null | viewModel.NewTargetPath == null)
             {
-                // Add Translation
-                viewModel.ShowMsgBox("Veuillez remplir tous les champs");
+                if (viewModel.Langue)
+                {
+                    viewModel.ShowMsgBox("Veuillez remplir tous les champs");
+                    return;
+                }
+                viewModel.ShowMsgBox("Please fill all the fields");
                 return;
             }
             if (ModelClass.GetModelClass().ModelSave.NameAlreadyExist(viewModel.NewFileName))
             {
-                // Add Translation
-                viewModel.ShowMsgBox("Le nom de projet existe déjà, veuillez le renommer");
+                if (viewModel.Langue)
+                {
+                    viewModel.ShowMsgBox("Le nom de projet existe déjà, veuillez le renommer");
+                    return;
+                }
+                viewModel.ShowMsgBox("This project name is already used, select another one");
                 return;
             }
             viewModel.saveproject = new SaveProject(viewModel.NewFileName, viewModel.NewSourcePath, viewModel.NewTargetPath, saveType);

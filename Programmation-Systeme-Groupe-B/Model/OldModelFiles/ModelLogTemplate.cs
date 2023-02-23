@@ -41,7 +41,7 @@ namespace Programmation_Systeme_Groupe_B.Model
                     break;
             }
         }
-
+        // update log file, whether it is json or xml file
         public void update(string path, Object obj)
         {
             if (this.logType == JSONLOG)
@@ -63,14 +63,14 @@ namespace Programmation_Systeme_Groupe_B.Model
                 }
             }
         }
-
+        // Get content of json file
         public JArray load(string path)
         {
             string Stringjson = File.ReadAllText(path);
             var json = JsonConvert.DeserializeObject<JArray>(Stringjson);
             return json;
         }
-
+        // Create empty jsonfile
         public void createJsonFile(string path)
         {
             if (!File.Exists(path))
@@ -79,7 +79,7 @@ namespace Programmation_Systeme_Groupe_B.Model
                 File.WriteAllText(path, "[]");
             }
         }
-
+        // Build into Json Format
         public object jsonBuilder(object obj)
         {
             string StringObjectContent = JsonSerializer.Serialize(obj);

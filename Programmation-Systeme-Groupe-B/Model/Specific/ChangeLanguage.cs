@@ -28,6 +28,7 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
             ChangeLanguageCommand();
         }
         public event EventHandler CanExecuteChanged;
+        // Change flag and language display
         internal void ChangeLanguageCommand()
         {
             viewModel.Langue = !viewModel.Langue;

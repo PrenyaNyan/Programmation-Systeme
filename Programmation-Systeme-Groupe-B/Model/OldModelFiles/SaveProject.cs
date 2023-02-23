@@ -155,7 +155,7 @@ namespace Programmation_Systeme_Groupe_B.Model
             this.workProgram = "";
             this.mrse = new ManualResetEvent(true);
         }
-
+        #region Method
         public void Save()
         {
             if (this.state != ModelLogState.STATE_ACTIVE)
@@ -562,12 +562,12 @@ namespace Programmation_Systeme_Groupe_B.Model
             this.dailyLog.name = this.name;
             this.dailyLog.pathSource = this.pathSource;
             this.dailyLog.pathTarget = this.pathTarget;
-            this.dailyLog.size = this.progression.FileSize.ToString();
+            this.dailyLog.size = this.progression.ToString();
             this.dailyLog.setLogType(this.logType);
             this.dailyLog.setTime();
             this.dailyLog.save();
         }
-
+       
         public void ResumeThread()
         {
 
@@ -622,7 +622,7 @@ namespace Programmation_Systeme_Groupe_B.Model
         {
             this.encryptExtension.Add(extension);
         }
-
+        #endregion
 
     }
 }

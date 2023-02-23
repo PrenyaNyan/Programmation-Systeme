@@ -14,9 +14,11 @@ namespace Programmation_Systeme_Groupe_B.Model
 {
     public class ModelLogDaily : ModelLogTemplate
     {
+        // Tranfer time
         public string time { get; set; }
+        // Total size of files
         public string size { get; set; }
-        
+        // Time for encrypting the file
         public string encrypttime { get; set; }
         private ModelLogDaily()
         {
@@ -24,9 +26,9 @@ namespace Programmation_Systeme_Groupe_B.Model
             setLogType();
             setTime();
         }
-
+        // Used as a singleton
         private static ModelLogDaily instance;
-
+        // function to get the instance of ModelLogDaily
         public static ModelLogDaily GetInstance()
         {
             if (instance == null)
@@ -35,13 +37,16 @@ namespace Programmation_Systeme_Groupe_B.Model
             }
             return instance;
         }
+        #region accessors 
 
-
+        // update time
         public void setTime()
         {
             this.time = DateTime.Now.ToString();
         }
 
+        #endregion
+        // Add new values to the dailylog
         public void save()
         {
             update(this.logPath, this);

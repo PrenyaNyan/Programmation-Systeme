@@ -9,13 +9,21 @@ namespace Programmation_Systeme_Groupe_B.Model
 {
     public class ModelLogState : ModelLogTemplate
     {
+        // Tranfer time
         public string time { get; set; }
+        // Total size of files
         public string size { get; set; }
+        // State to know if the save started, is running or has finished
         public string state { get; set; }
+        // Amount of files
         public int fileAmount { get; set; }
+        // List of files extension that will be prioritized
         public List<string> priorityExtension { get; set; }
+        // List of files extension that will be encrypted
         public List<string> encryptExtension { get; set; }
+        // Maximum file size to tranfer
         public long maxFileSize { get; set; }
+        // Business softwares
         public string workProgram { get; set; }
 
         /* States const */
@@ -35,9 +43,10 @@ namespace Programmation_Systeme_Groupe_B.Model
             setLogType();
             setTime(DateTime.Now.ToString());
         }
-
+        // Singleton class
         private static ModelLogState instance;
 
+        // function to get the instance of ModelLogState
         public static ModelLogState GetInstance()
         {
             if (instance == null)
@@ -47,7 +56,7 @@ namespace Programmation_Systeme_Groupe_B.Model
             return instance;
         }
 
-
+        #region accessors 
         public void setTime(string time)
         {
             this.time = time;
@@ -67,10 +76,11 @@ namespace Programmation_Systeme_Groupe_B.Model
         {
             this.fileAmount = fileAmount;
         }
-
+        #endregion
         public void save()
         {
             update(this.logPath, this);
         }
+
     }
 }

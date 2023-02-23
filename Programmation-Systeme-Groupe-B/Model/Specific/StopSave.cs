@@ -37,7 +37,6 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
                     project.DeleteThread();
                 }
             }
-            // Add Translation
             viewModel.ShowMsgBox("Stop !");
         }
     }
