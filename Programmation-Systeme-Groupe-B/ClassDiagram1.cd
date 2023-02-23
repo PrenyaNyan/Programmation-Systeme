@@ -49,13 +49,13 @@
   <Class Name="Programmation_Systeme_Groupe_B.Model.SaveProject">
     <Position X="20.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>4QCACsEEAUVAFBFFxRAgAIUAIQQVQEAEgEEAJgEAIAA=</HashCode>
+      <HashCode>4QCACsEEAUVAFBFFxRIgAIUAIQQVQEAEgEEAJgEAIAA=</HashCode>
       <FileName>Model\OldModelFiles\SaveProject.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="progression" />
-      <Field Name="dailyLog" />
       <Field Name="stateLog" />
+      <Field Name="dailyLog" />
+      <Field Name="progression" />
       <Field Name="saveType" />
     </ShowAsAssociation>
   </Class>
@@ -66,15 +66,13 @@
       <FileName>Model\OldModelFiles\Setting.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Programmation_Systeme_Groupe_B.Model.Specific.ChangeLanguage" BaseTypeListCollapsed="true">
+  <Class Name="Programmation_Systeme_Groupe_B.Model.Specific.ChangeLog" BaseTypeListCollapsed="true">
     <Position X="18.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAACAAQAAEAQAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
-      <FileName>Model\Specific\ChangeLanguage.cs</FileName>
+      <HashCode>AAAAAAAAAAACAAQAAEAQAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Model\Specific\ChangeLog.cs</FileName>
+      <NewMemberFileName>Model\Specific\ChangeLanguage.cs</NewMemberFileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="viewModel" />
-    </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Programmation_Systeme_Groupe_B.Model.Specific.CreateProject" BaseTypeListCollapsed="true">
@@ -173,7 +171,7 @@
   <Class Name="Programmation_Systeme_Groupe_B.ViewModels.ViewModel">
     <Position X="14.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CwgJATE4OooMIEgkh4BDBIEgYgAMIiBACYYAAgkACCA=</HashCode>
+      <HashCode>CwoJATE4OqoMIEgkh5JDBIEgYgAMIiBACZYAAgkECCA=</HashCode>
       <FileName>ViewModels\ViewModels.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

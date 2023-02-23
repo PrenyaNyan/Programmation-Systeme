@@ -36,12 +36,13 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         private SaveAllProject saveAllProject;
         private SaveOneProject saveOneProject;
         private Button annulbouton;
+        private ChangeLog changeLog;
         #endregion
         #region Private Fields Lang
         private bool langue;//if true then french
         private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave, textSaveTypeExtension, textSaveTypeMetier, boutonSave, textSaveSize;
         #endregion
-        public string logType { get; set; }
+        private string logType;
 
         public SaveProject saveproject;
         private ObservableCollection<SaveProject> _saveProjects = new ObservableCollection<SaveProject>();
@@ -56,7 +57,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
 
         public ViewModel()
         {
-            logType = "xml";
+            logType = "json";
             openFolderDirectory = new(this);
             createProject = new(this);
             saveAllProject = new(this);
@@ -64,6 +65,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             pauseSave = new(this);
             stopSave = new(this);
             resumeSave = new(this);
+            changeLog = new(this);
             changeLanguage = new ChangeLanguage(this);
             buttonImageString = "/View/Drapeau-France.png";
             foreach (var item in modelClass.ModelSave.Projects)
@@ -73,6 +75,18 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             Langue = true;
         }
         #region Public Properties
+        public string LogType
+        {
+            get
+            {
+                return logType;
+            }
+            set
+            {
+                logType = value;
+                OnPropertyChanged("LogType");
+            }
+        }
         public bool Langue
         {
             get
@@ -383,6 +397,13 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         }
 
         #endregion
+        public ICommand ChangeLogType
+        {
+            get
+            {
+                return changeLog;
+            }
+        }
         public ICommand CreateProject
         {
             get

@@ -32,7 +32,7 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
         {
             foreach (SaveProject project in ModelClass.GetModelClass().ModelSave.Projects)
             {
-                project.logType = viewModel.logType;
+                project.logType = viewModel.LogType;
                 project.Save();
             }
             // Add Translation

@@ -8,11 +8,11 @@ using System.Windows.Input;
 
 namespace Programmation_Systeme_Groupe_B.Model.Specific
 {
-    class SaveOneProject : ICommand
+    class ChangeLog : ICommand
     {
         private ViewModel viewModel;
 
-        public SaveOneProject(ViewModel vm)
+        public ChangeLog(ViewModel vm)
         {
             viewModel = vm;
 
@@ -25,21 +25,20 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
 
         public void Execute(object parameter)
         {
-            SaveProject(parameter);
+            ChangeLogCommand();
         }
         public event EventHandler CanExecuteChanged;
-        public void SaveProject(object parameter)
+        internal void ChangeLogCommand()
         {
-            foreach (SaveProject project in ModelClass.GetModelClass().ModelSave.Projects)
+            if (viewModel.LogType == "json")
             {
-                if (project.Name == parameter.ToString())
-                {
-                    project.logType = viewModel.LogType;
-                    project.Save();
-                }
+                viewModel.LogType = "xml";
             }
-            // Add Translation
-            viewModel.ShowMsgBox("Sauvegarde effectuée");
+            else
+            {
+
+                viewModel.LogType = "json";
+            }
         }
     }
 }
