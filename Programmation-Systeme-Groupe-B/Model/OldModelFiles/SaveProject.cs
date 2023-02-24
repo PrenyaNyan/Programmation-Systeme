@@ -134,6 +134,8 @@ namespace Programmation_Systeme_Groupe_B.Model
         private bool pause;
         private bool active;
 
+        private List<FileInfo> listFile = new () { };
+
 
 
 
@@ -214,6 +216,7 @@ namespace Programmation_Systeme_Groupe_B.Model
                                 CompleteSave(this.pathSource, this.pathTarget, this.progression, extension);
 
                             }
+                            this.listFile = new List<FileInfo>() { };
                             CompleteSave(this.pathSource, this.pathTarget, this.progression, "");
 
                         }
@@ -307,6 +310,8 @@ namespace Programmation_Systeme_Groupe_B.Model
                 // Copy the file.
                 if (extension.Equals("") || extension.Equals(fileExtension))
                 {
+                    if (listFile.Contains(file)) return;
+                    if (extension.Equals(fileExtension)) this.listFile.Add(file);
                     if (file.Length * 1024 < this.maxFileSize)
                     {
                         if (this.encryptExtension.Contains(fileExtension)) Encrypt(file, temppath);
