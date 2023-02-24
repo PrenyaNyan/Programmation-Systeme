@@ -41,10 +41,9 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         #region Private Fields Lang
         private bool langue;//if true then french
         private string boutonCreate, boutonLancerSave, titleCreateSave, textNameCreateSave, textPathSCreateSave, textPathTCreateSave, textSaveTypeCreateSave, textTypeDCreateSave, textTypeCCreateSave, buttonAnnulCreateSave, buttonCreateCreateSave, textSaveTypeExtension, textSaveTypeMetier, boutonSave, textSaveSize;
-        private ObservableCollection<SaveProject> _saveProjects = new ObservableCollection<SaveProject>();
+        //private ObservableCollection<SaveProject> _saveProjects = new ObservableCollection<SaveProject>();
         private string logType;
         #endregion
-
 
         public ViewModel()
         {
@@ -59,10 +58,10 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             changeLog = new(this);
             changeLanguage = new ChangeLanguage(this);
             buttonImageString = "/View/Drapeau-France.png";
-            foreach (var item in modelClass.ModelSave.Projects)
-            {
-                saveProjects.Add(item);
-            }
+            //foreach (var item in modelClass.ModelSave.Projects)
+            //{
+            //    saveProjects.Add(item);
+            //}
             Langue = true;
         }
         #region Public Properties
@@ -86,7 +85,7 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
         {
             get
             {
-                return this._saveProjects;
+                return this.modelClass.ModelSave.Projects;
             }
         }
         public bool Langue

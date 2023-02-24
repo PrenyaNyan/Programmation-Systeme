@@ -39,6 +39,7 @@ namespace Programmation_Systeme_Groupe_B.Model
             set
             {
                 percentProgression = value;
+
             }
         }
         // Project repertory source
@@ -553,7 +554,6 @@ namespace Programmation_Systeme_Groupe_B.Model
             {
                 this.stateLog.setTime(DateTime.Now.ToString());
             }
-
             this.stateLog.save();
         }
 

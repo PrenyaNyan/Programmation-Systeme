@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.IO;
 using Programmation_Systeme_Groupe_B.Model;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using System.Collections.ObjectModel;
 
 namespace Programmation_Systeme_Groupe_B.Model
 {
     class ModelSave
     {
-        private List<SaveProject> projects;
+        private ObservableCollection<SaveProject> projects = new ObservableCollection<SaveProject>();
         //private ModelLogState stateLog;
         private string saveFilePath = "projects.json";
-        public List<SaveProject> Projects
+        public ObservableCollection<SaveProject> Projects
         {
             get { return projects; }
         }
@@ -34,7 +35,7 @@ namespace Programmation_Systeme_Groupe_B.Model
             // Lire l'objet associé avec le nom et le charger;
             // Read the object with associated name and load it
             string jsonPath = File.ReadAllText(path);
-            this.projects = JsonConvert.DeserializeObject<List<SaveProject>>(jsonPath);
+            this.projects = JsonConvert.DeserializeObject<ObservableCollection<SaveProject>>(jsonPath);
         }
 
         private void SaveProjectToFile(SaveProject project, string path)
@@ -54,7 +55,7 @@ namespace Programmation_Systeme_Groupe_B.Model
             {
                 File.Create(path).Close();
                 File.WriteAllText(path, "[]");
-                this.projects = new List<SaveProject>();
+                this.projects = new ObservableCollection<SaveProject>();
                 return;
             }
             // Recover all SaveProjects that are saved into the .json file
