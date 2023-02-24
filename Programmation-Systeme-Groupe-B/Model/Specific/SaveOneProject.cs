@@ -40,10 +40,10 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
             }
             if (viewModel.Langue)
             {
-                viewModel.ShowMsgBox("Sauvegarde effectuée");
+                viewModel.ShowMsgBox("Sauvegarde lancée");
                 return;
             }
-            viewModel.ShowMsgBox("Save done !");
+            viewModel.ShowMsgBox("Save launched !");
         }
     }
 }

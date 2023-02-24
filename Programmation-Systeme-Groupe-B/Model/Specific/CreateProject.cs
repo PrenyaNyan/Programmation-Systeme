@@ -81,6 +81,8 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
                 viewModel.saveproject.MaxFileSize = viewModel.NewSizeLimit;
             }
 
+            viewModel.saveproject.WorkProgram = viewModel.NewBusinessWorker;
+
             // Add differents projects to the modelSave for saving, and saveProjects for visual feedback
             ModelClass.GetModelClass().ModelSave.addProject(viewModel.saveproject);
             viewModel.saveProjects.Add(viewModel.saveproject);
