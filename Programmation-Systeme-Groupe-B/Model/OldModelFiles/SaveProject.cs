@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -10,9 +11,16 @@ using System.Windows.Forms;
 
 namespace Programmation_Systeme_Groupe_B.Model
 {
+    [Serializable]
+    class MiniProject
+    {
+        public string name { get; set; }
+        public string progression { get; set; }
+        public string state { get; set; }
+    }
     class SaveProject
     {
-
+        public List<MiniProject> miniProjects = new List<MiniProject>();
         // State log object
         public ModelLogState stateLog;
         public ModelLogDaily dailyLog;
@@ -86,7 +94,6 @@ namespace Programmation_Systeme_Groupe_B.Model
             get { return saveType; }
             set { saveType = value; }
         }
-
         // Save Thread 
         private Thread thread;
         public Thread Thread
@@ -555,8 +562,17 @@ namespace Programmation_Systeme_Groupe_B.Model
                 this.stateLog.setTime(DateTime.Now.ToString());
             }
             this.stateLog.save();
+            MakeMiniProjects();
+            Server.SendMessage(new MiniProject { name = this.name, progression = this.PercentProgression, state = this.state });
         }
-
+        public void MakeMiniProjects()
+        {
+            miniProjects.Clear();
+            foreach (SaveProject saveProject in ModelClass.GetModelClass().ModelSave.Projects)
+            {
+                miniProjects.Add(new MiniProject { name = saveProject.name, progression = saveProject.PercentProgression, state = saveProject.state });
+            }
+        }
         public void GenerateDailyLog()
         {
             this.dailyLog.name = this.name;

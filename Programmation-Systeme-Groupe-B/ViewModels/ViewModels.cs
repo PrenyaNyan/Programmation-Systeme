@@ -58,10 +58,6 @@ namespace Programmation_Systeme_Groupe_B.ViewModels
             changeLog = new(this);
             changeLanguage = new ChangeLanguage(this);
             buttonImageString = "/View/Drapeau-France.png";
-            //foreach (var item in modelClass.ModelSave.Projects)
-            //{
-            //    saveProjects.Add(item);
-            //}
             Langue = true;
         }
         #region Public Properties
