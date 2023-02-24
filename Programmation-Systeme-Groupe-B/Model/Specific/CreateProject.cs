@@ -65,6 +65,8 @@ namespace Programmation_Systeme_Groupe_B.Model.Specific
                 viewModel.ShowMsgBox("This project name is already used, select another one");
                 return;
             }
+
+            if (viewModel.NewSourcePath.Equals(viewModel.NewTargetPath)) return;
             viewModel.saveproject = new SaveProject(viewModel.NewFileName, viewModel.NewSourcePath, viewModel.NewTargetPath, saveType);
             // Append specifics priority extension if there is
             if (viewModel.NewExtension is not null)
