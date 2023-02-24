@@ -51,19 +51,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lucie\\.nuget\\packages\\": {}
+    "C:\\Users\\leroc\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj",
+      "projectUniqueName": "C:\\Users\\leroc\\Source\\Repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj",
       "projectName": "Programmation-Systeme-Groupe-B",
-      "projectPath": "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj",
-      "packagesPath": "C:\\Users\\lucie\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lucie\\source\\repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\obj\\",
+      "projectPath": "C:\\Users\\leroc\\Source\\Repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B.csproj",
+      "packagesPath": "C:\\Users\\leroc\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\leroc\\Source\\Repos\\Programmation-Systeme-Groupe-B\\Programmation-Systeme-Groupe-B\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\lucie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\leroc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

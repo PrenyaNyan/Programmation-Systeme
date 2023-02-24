@@ -216,7 +216,6 @@ namespace Programmation_Systeme_Groupe_B.Model
                                 CompleteSave(this.pathSource, this.pathTarget, this.progression, extension);
 
                             }
-                            this.listFile = new List<FileInfo>() { };
                             CompleteSave(this.pathSource, this.pathTarget, this.progression, "");
 
                         }
