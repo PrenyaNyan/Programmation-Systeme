@@ -134,7 +134,7 @@ namespace Programmation_Systeme_Groupe_B.Model
         private bool pause;
         private bool active;
 
-        private List<FileInfo> listFile = new () { };
+        private List<FileInfo> listFile = new() { };
 
 
 
@@ -191,7 +191,7 @@ namespace Programmation_Systeme_Groupe_B.Model
                 this.progression.FileAmount = Directory.GetFiles(this.pathSource, "*", SearchOption.AllDirectories).Length;
                 this.logStart = DateTime.Now;
 
-               
+
                 GenerateStateLog(ModelLogState.STATE_START);
 
 
@@ -262,7 +262,7 @@ namespace Programmation_Systeme_Groupe_B.Model
                             state = ModelLogState.STATE_END;
                             GenerateStateLog(ModelLogState.STATE_END);
                         }
-                       
+
 
                     });
                     this.thread = thread;
@@ -309,21 +309,25 @@ namespace Programmation_Systeme_Groupe_B.Model
                 // Copy the file.
                 if (extension.Equals("") || extension.Equals(fileExtension))
                 {
-                    if (listFile.Contains(file)) return;
-                    if (extension.Equals(fileExtension)) this.listFile.Add(file);
-                    if (file.Length * 1024 < this.maxFileSize)
+                    if (!listFile.Contains(file))
                     {
-                        if (this.encryptExtension.Contains(fileExtension)) Encrypt(file, temppath);
-                        else
+                        if (extension.Equals(fileExtension)) this.listFile.Add(file);
+                        if (file.Length * 1024 < this.maxFileSize)
                         {
-                            file.CopyTo(temppath, true);
+                            if (this.encryptExtension.Contains(fileExtension)) Encrypt(file, temppath);
+                            else
+                            {
+                                file.CopyTo(temppath, true);
+                            }
+
                         }
 
+                        progression.CopiedFiles += 1;
+                        progression.FilesSizeCopied += file.Length;
+                        /*Percentage*/
+
                     }
-                   
-                    progression.CopiedFiles += 1;
-                    progression.FilesSizeCopied += file.Length;
-                    /*Percentage*/
+
 
                 }
                 else
@@ -380,13 +384,13 @@ namespace Programmation_Systeme_Groupe_B.Model
             {
                 var exitcode = process.ExitCode;
                 Trace.WriteLine(exitcode);
-                if (dailyLog.encrypttime is null) 
-                { 
+                if (dailyLog.encrypttime is null)
+                {
                     dailyLog.encrypttime = $"{exitcode}";
                     return;
                 };
                 dailyLog.encrypttime = $"{exitcode + int.Parse(dailyLog.encrypttime)}";
-                
+
                 //GenerateDailyLog();
             }
         }
@@ -477,7 +481,7 @@ namespace Programmation_Systeme_Groupe_B.Model
                         GenerateStateLog(ModelLogState.STATE_ACTIVE);
                     }
                 }
-        
+
 
 
                 if (getPercentage() > this.stateLog.progression && getPercentage() < 100)
@@ -502,7 +506,7 @@ namespace Programmation_Systeme_Groupe_B.Model
             {
                 return 0;
             }
-            return this.progression.FilesSizeCopied  * 100 / this.progression.FileSize - this.tempPrioritySizeFile;
+            return this.progression.FilesSizeCopied * 100 / this.progression.FileSize - this.tempPrioritySizeFile;
         }
 
         public SaveProject GetInfo()
@@ -571,7 +575,7 @@ namespace Programmation_Systeme_Groupe_B.Model
             this.dailyLog.setTime();
             this.dailyLog.save();
         }
-       
+
         public void ResumeThread()
         {
 
